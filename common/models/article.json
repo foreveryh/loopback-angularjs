@@ -1,0 +1,35 @@
+{
+  "name": "article",
+  "plural": "articles",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "source": {
+      "type": "string"
+    },
+    "words_count": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
