@@ -1,4 +1,4 @@
-angular.module('Shu', ['ui.bootstrap','ui.utils','ui.router','ngAnimate']);
+angular.module('Shu', ['lbServices','ui.bootstrap','ui.utils','ui.router','ngAnimate']);
 
 angular.module('Shu').config(function($stateProvider, $urlRouterProvider) {
 
