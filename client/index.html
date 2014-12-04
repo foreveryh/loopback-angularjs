@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html ng-app="Shu">
+
 <head>
-  <title>爱我就留下</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
-  <link href="app.less" type="text/css" rel="stylesheet/less">
+    <title>首页 - 我爱的留下</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="mobile-agent" content="format=html5; url=">
+    <meta charset="utf-8">
+    <link href="app.less" type="text/css" rel="stylesheet/less">
 </head>
-<body>
 
-  <!-- Livereload script for development only (stripped during dist build) -->
-  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+<body class="output fluid zh cn mac reader-day-mode reader-font2">
 
-  <!-- JS from Bower Components -->
-  <script src="vendor/less.js/dist/less.min.js" data-concat="false"></script>
-  <script src="vendor/jquery/dist/jquery.min.js"></script>
-  <script src="vendor/underscore/underscore.js"></script>
-  <script src="vendor/moment/moment.js"></script>
-  <script src="vendor/angular/angular.js"></script>
-  <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="vendor/angular-animate/angular-animate.js"></script>
-  <script src="vendor/angular-resource/angular-resource.js"></script>
-  <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="vendor/angular-ui-utils/ui-utils.js"></script>
-  <script src="lb-services.js"></script>
-  <!-- Add New Bower Component JS Above -->
+    <!-- Livereload script for development only (stripped during dist build) -->
+    <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+
+    <!-- JS from Bower Components -->
+    <script src="vendor/less.js/dist/less.min.js" data-concat="false"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/underscore/underscore.js"></script>
+    <script src="vendor/moment/moment.js"></script>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendor/angular-animate/angular-animate.js"></script>
+    <script src="vendor/angular-resource/angular-resource.js"></script>
+    <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="vendor/angular-ui-utils/ui-utils.js"></script>
+    <script src="lb-services.js"></script>
+    <!-- Add New Bower Component JS Above -->
 
 
-  <!-- Main App JS -->
-  <script src="app.js"></script>
-  <!-- Add New Component JS Above -->
-
-  <div>
+    <!-- Main App JS -->
+    <script src="app.js"></script>
+    <script src="common/directives/navbar-directive/navbar-directive.js"></script>
+    <script src="common/directives/aside-directive/aside-directive.js"></script>
+    <script src="states/home/home.js"></script>
+    <script src="states/home/recommend.js"></script>
+    <script src="common/directives/article-summary-directive/article-summary-directive.js"></script>
+    <script src="common/directives/article-list-directive/article-list-directive.js"></script>
+    <script src="states/home/hottest.js"></script>
+    <!-- Add New Component JS Above -->
     <div id="content" class="container">
-      <div class="row">
-        <div ui-view>
+        <!-- Navbar-->
+        <navbar-directive></navbar-directive>
+        <!-- Recommendation-->
+        <div class="row">
+            <!-- aside -->
+            <aside-directive></aside-directive>
+            <div ng-controller="RecommendCtrl">
+                <div class="col-lg-offset-3 col-sm-7 col-md-7">
+                    <div class="page-title">
+                        <ul class="recommened-nav navigation clearfix" data-container="#list-container" data-loader=".loader-tiny" data-user-slug="">
+                            <!-- 未登录状态 -->
+                            <!-- Active: recommended notes list -->
+                            <li class="active">
+                                <a ui-sref="recommend">今日看点</a>
+                            </li>
+                            <li class="">
+                                <a ui-sref="hottest">热门文章</a>
+                            </li>
+                            <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
+                            <li class="search">
+                                <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
+                                    <div style="display:none">
+                                        <input name="utf8" type="hidden" value="✓" class="form-control">
+                                    </div>
+                                    <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ui-view></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
 </body>
+
 </html>

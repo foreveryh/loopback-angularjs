@@ -1,0 +1,27 @@
+<div id="list-container">
+    <ul class="clearfix sort-nav list-unstyled" id="collection-categories-nav" data-js-module="collection-category" data-fetch-url="/recommendations/notes">
+        <li class="active">
+            <a class="category" href="javascript:void(null);">全部</a>
+        </li>
+        <li>
+            <a class="category" data-category-id="24" href="javascript:void(null);">有话好好说</a>
+        </li>
+        <li>
+            <a class="category" data-category-id="25" href="javascript:void(null);">三思而后读</a>
+        </li>
+        <li>
+            <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
+        </li>
+    </ul>
+
+
+    <ul class="thumbnails" ng-repeat="item in articles">
+       <article-summary-directive></article-summary-directive>
+    </ul>
+
+    <div class="load-more">
+        <button class="ladda-button " data-style="slide-left" data-type="script" data-remote="" data-size="medium" data-url="/recommendations/notes?max_id=1415939529" data-color="maleskine" data-method="get">
+            <span class="ladda-label">点击查看更多</span>
+        </button>
+    </div>
+</div>

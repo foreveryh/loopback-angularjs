@@ -1,10 +1,10 @@
 {
   "generator-cg-angular": {
     "uirouter": true,
-    "partialDirectory": "partial/",
-    "directiveDirectory": "directive/",
-    "filterDirectory": "filter/",
-    "serviceDirectory": "service/",
+    "partialDirectory": "common/partials/",
+    "directiveDirectory": "common/directives/",
+    "filterDirectory": "common/filters/",
+    "serviceDirectory": "common/services/",
     "inject": {
       "js": {
         "file": "index.html",
@@ -17,6 +17,12 @@
         "marker": "/* Add Component LESS Above */",
         "template": "@import \"<%= filename %>\";"
       }
-    }
+    },
+    "modules": [
+      {
+        "name": "Shu.home",
+        "file": "states/home/home.js"
+      }
+    ]
   }
 }
