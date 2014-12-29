@@ -35,10 +35,9 @@
     <script src="common/directives/navbar-directive/navbar-directive.js"></script>
     <script src="common/directives/aside-directive/aside-directive.js"></script>
     <script src="states/home/home.js"></script>
-    <script src="states/home/recommend.js"></script>
     <script src="common/directives/article-summary-directive/article-summary-directive.js"></script>
     <script src="common/directives/article-list-directive/article-list-directive.js"></script>
-    <script src="states/home/hottest.js"></script>
+    <script src="common/directives/tabbar-directive/tabbar-directive.js"></script>
     <!-- Add New Component JS Above -->
     <div id="content" class="container">
         <!-- Navbar-->
@@ -47,35 +46,23 @@
         <div class="row">
             <!-- aside -->
             <aside-directive></aside-directive>
-            <div ng-controller="RecommendCtrl">
-                <div class="col-lg-offset-3 col-sm-7 col-md-7">
-                    <div class="page-title">
-                        <ul class="recommened-nav navigation clearfix" data-container="#list-container" data-loader=".loader-tiny" data-user-slug="">
-                            <!-- 未登录状态 -->
-                            <!-- Active: recommended notes list -->
-                            <li class="active">
-                                <a ui-sref="recommend">今日看点</a>
-                            </li>
-                            <li class="">
-                                <a ui-sref="hottest">热门文章</a>
-                            </li>
-                            <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
-                            <li class="search">
-                                <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
-                                    <div style="display:none">
-                                        <input name="utf8" type="hidden" value="✓" class="form-control">
-                                    </div>
-                                    <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <div ui-view></div>
-                </div>
-            </div>
+            <!-- tabset -->
+            <tabbar-directive>
+                <tab-directive title="今日看点" template-url="states/home/recommend.html"></tab-directive>
+                <tab-directive title="热门文章" template-url="states/home/hottest.html"></tab-directive>
+                <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
+                <li class="search">
+                    <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
+                        <div style="display:none">
+                            <input name="utf8" type="hidden" value="✓" class="form-control">
+                        </div>
+                        <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
+                    </form>
+                </li>
+            </tabbar-directive>
         </div>
+    </div>
     </div>
 
 </body>
-
 </html>
