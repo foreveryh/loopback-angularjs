@@ -1,10 +1,8 @@
-angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home']);
+angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page']);
 
 angular.module('Shu').config(function($stateProvider, $urlRouterProvider) {
 
-    /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
-
 });
 
 angular.module('Shu').run(function($rootScope) {
@@ -19,5 +17,4 @@ angular.module('Shu').run(function($rootScope) {
             this.$apply(fn);
         }
     };
-
 });

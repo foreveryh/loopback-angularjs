@@ -10,7 +10,7 @@
     <link href="app.less" type="text/css" rel="stylesheet/less">
 </head>
 
-<body class="output fluid zh cn mac reader-day-mode reader-font2">
+<body class="{{bodylayout}}">
 
     <!-- Livereload script for development only (stripped during dist build) -->
     <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
@@ -38,31 +38,13 @@
     <script src="common/directives/article-summary-directive/article-summary-directive.js"></script>
     <script src="common/directives/article-list-directive/article-list-directive.js"></script>
     <script src="common/directives/tabbar-directive/tabbar-directive.js"></script>
+    <script src="states/page/page.js"></script>
     <!-- Add New Component JS Above -->
-    <div id="content" class="container">
-        <!-- Navbar-->
-        <navbar-directive></navbar-directive>
-        <!-- Recommendation-->
-        <div class="row">
-            <!-- aside -->
-            <aside-directive></aside-directive>
-            <!-- tabset -->
-            <tabbar-directive>
-                <tab-directive title="今日看点" template-url="states/home/recommend.html"></tab-directive>
-                <tab-directive title="热门文章" template-url="states/home/hottest.html"></tab-directive>
-                <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
-                <li class="search">
-                    <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
-                        <div style="display:none">
-                            <input name="utf8" type="hidden" value="✓" class="form-control">
-                        </div>
-                        <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
-                    </form>
-                </li>
-            </tabbar-directive>
-        </div>
-    </div>
-    </div>
 
+    <!-- Navbar-->
+    <navbar-directive></navbar-directive>
+    <!-- Container-->
+    <ui-view>
 </body>
+
 </html>

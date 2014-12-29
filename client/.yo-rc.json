@@ -22,6 +22,10 @@
       {
         "name": "Shu.home",
         "file": "states/home/home.js"
+      },
+      {
+        "name": "article",
+        "file": "states/article/article.js"
       }
     ]
   }
