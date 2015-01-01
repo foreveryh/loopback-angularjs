@@ -1,0 +1,208 @@
+<div id="show-note-container" ng-controller="PageCtrl">
+
+    <div class="post-bg" id="flag">
+        <a href="" data-toggle="modal" data-target="#notebooks-menu" class="notebooks-menu-btn">
+            <i class="icon-list-ul"></i>
+        </a>
+        <div class="wrap-btn">
+            <a class="login" data-signin-link="true" data-toggle="modal" href="#login-modal">
+                <i class="icon-signin"></i> 登录或注册
+            </a>
+            <div class="btn-group editor-article">
+                <a class="daytime set-view-mode" href="javascript:void(0)"><i class="icon-moon"></i></a>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="people">
+                <a class="author name" href="/users/3a3cad6f94d8">
+                    <div class="avatar"><img alt="158fb476aa50" quality="100" src="http://upload.jianshu.io/users/upload_avatars/64125/158fb476aa50.jpg?imageMogr/thumbnail/90x90/quality/100" thumbnail="90x90">
+                    </div>
+                    <br> {{article.author}}
+                </a>
+                <div class="about">
+                    <p class="intro">Author Information</p>
+                </div>
+            </div>
+            <div class="article">
+                <div class="preview">
+                    <h1 class="title">{{article.title}}</h1>
+                    <div class="meta-top">
+                        <a href="/users/3a3cad6f94d8">
+                            <div class="avatar" style="display:inline-block;">
+                                <img alt="158fb476aa50" quality="100" src="http://upload.jianshu.io/users/upload_avatars/64125/158fb476aa50.jpg?imageMogr/thumbnail/90x90/quality/100" thumbnail="90x90">
+                            </div>
+                            <span>{{article.author}}</span>
+                        </a>
+                    </div>
+                    <div class="article-info">
+                        <p>
+                            发表于
+
+                            <a href="/notebooks/261698/latest">
+                                <i class="icon-book"></i> Notebook
+                            </a>
+                            {{article.created_at}}
+
+                            <span class="wordage">
+      字数: {{article.words_count}}
+    </span> 阅读量: 128
+                        </p>
+                    </div>
+                    <div class="show-content">
+                    {{article.content}}
+                    </div>
+                    <div id="short-abbr" class="hide"> 方某是个小花匠，经营花圃，养了几万盆兰花。真名姑隐，花名“光头”，自称“小太爷”。光头...</div>
+                </div>
+            </div>
+            <div id="further-readings" class="further-reading" data-user-slug="" data-user-nickname="">
+                <div id="further-reading-line" class="hide further-reading-line">
+                    <!--拓展阅读 -->
+                </div>
+                <ul id="further-readings-list" class="reading-list unstyled"></ul>
+                <div id="further-reading-new" class="reading-edit">
+                    <a data-signin-link="true" data-toggle="modal" href="#login-modal">
+                        <i class="icon-plus-sign"></i> 推荐拓展阅读
+                    </a>
+                    <div id="further-reading-form"></div>
+                </div>
+            </div>
+            <div class="meta-bottom clearfix" data-author-weibo="@六丑试酒" data-author-twitter="六丑试酒" data-is-self="false" data-is-signed-in="false" data-image="http://prod-jianshu-cwb.b0.upaiyun.com/notes/images/441552/weibo/image_f6f5d8f045f1.jpg">
+                <div class="like">
+                    <a class="btn like-button" data-signin-link="true" data-toggle="modal" href="#login-modal" id="like-note">
+                        <i class="icon-heart-empty"></i> 喜欢
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Functions -->
+    <div class="function">
+        <div class="comment">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#collections">入选专题</a>
+                </li>
+
+                <li class="nav-author ">
+                    <a data-toggle="tab" href="#author">作者信息</a>
+                </li>
+
+                <li class="">
+                    <a data-toggle="tab" href="#comments">0 条评论</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#like">2 个喜欢</a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div class="collections tab-pane clearfix active in" id="collections">
+                    <ul id="note-collections">
+                        <li>
+                            <a href="/collection/x8ghVy">
+                                <div class="img-broder"><img alt="D8eebab39700e24de1d7e43392a1d349" src="http://upload.jianshu.io/collections/images/63/d8eebab39700e24de1d7e43392a1d349.jpg?imageMogr/thumbnail/300x300" thumbnail="300x300">
+                                </div>
+                                <br> 玩趣
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-pane " id="author">
+                    <div class="people">
+                        <a class="author name" href="/users/3a3cad6f94d8">
+                            <div class="avatar"><img alt="158fb476aa50" quality="100" src="http://upload.jianshu.io/users/upload_avatars/64125/158fb476aa50.jpg?imageMogr/thumbnail/90x90/quality/100" thumbnail="90x90">
+                            </div>
+                            <br> 六丑试酒
+                        </a>
+                        <div class="about">
+                            <p class="intro">Miss Cat named Six-ugly tastes wine.</p>
+                        </div>
+                        <div class="sns">
+                            <a href="http://weibo.com/u/3300659131"><img alt="Weibo" src="http://static.jianshu.io/assets/social_icons/48/weibo-f867776d92e14146c8e36bfe35478acc.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-list clearfix tab-pane " id="comments">
+                    <p class="signout-comment">
+                        <a class="btn btn-info" data-signin-link="true" data-toggle="modal" href="#login-modal">
+        登录后发表评论
+</a> </p>
+                    <hr>
+
+                </div>
+
+                <div class="tab-pane clearfix like" id="like">
+                    <ul>
+                        <li id="like_item-1067148">
+                            <a class="author like-avatar" href="/users/8b165aeda8e4">
+                                <div class="pic avatar"><img alt="328590ac583a" quality="100" src="http://upload.jianshu.io/users/upload_avatars/87624/328590ac583a.jpeg?imageMogr/thumbnail/90x90/quality/100" thumbnail="90x90">
+                                </div>
+                                完整的人
+                            </a> 28 分钟前喜欢了这篇文章
+                        </li>
+
+                        <li id="like_item-1066750">
+                            <a class="author like-avatar" href="/users/5ed6f6ee2980">
+                                <div class="pic avatar"><img alt="Default avatar" src="http://static.jianshu.io/assets/default_avatar-0409f90c8150e4be46d407d391a4848e.png">
+                                </div>
+                                莎士比亚斯基
+                            </a> 大约 1 小时前喜欢了这篇文章
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <a class="after" data-container="body" data-original-title="胡先生1" data-pjax="show-note-container" data-placement="top" data-toggle="tooltip" href="/p/5342dd82d5e4" id="next-note-button">
+        下一篇<i class="icon-arrow-right"></i>
+</a> </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="share-weixin-modal" class="modal hide fade share-weixin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</h5>
+                    <img alt="82f002428566" src="http://upload.jianshu.io/notes/qrcodes/441552/qrcode/82f002428566.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="notebooks-menu" class="panel panel-default notebooks-menu modal hide fade">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+        <a href="/notebooks/261698/latest">5 男人印象</a>
+      </h4>
+        </div>
+        <ul class="list-group">
+            <a class="list-group-item active" data-note-slug="82f002428566" data-pjax="show-note-container" href="/p/82f002428566"><i class="icon-chevron-right"></i>坏蛋光头</a>
+            <a class="list-group-item" data-note-slug="5342dd82d5e4" data-pjax="show-note-container" href="/p/5342dd82d5e4"><i class="icon-chevron-right"></i>胡先生1</a>
+            <a class="list-group-item" data-note-slug="7444b4aa12ec" data-pjax="show-note-container" href="/p/7444b4aa12ec"><i class="icon-chevron-right"></i>男人C爷</a>
+            <a class="list-group-item" data-note-slug="5ad4e7cb5f0a" data-pjax="show-note-container" href="/p/5ad4e7cb5f0a"><i class="icon-chevron-right"></i>Z同学</a>
+            <a class="list-group-item" data-note-slug="291aec43f3ab" data-pjax="show-note-container" href="/p/291aec43f3ab"><i class="icon-chevron-right"></i>C爷语录</a>
+            <a class="list-group-item" data-note-slug="c9aa8e4eb6e3" data-pjax="show-note-container" href="/p/c9aa8e4eb6e3"><i class="icon-chevron-right"></i>似是故人来·哥哥</a>
+        </ul>
+    </div>
+
+
+    <!--reward-->
+
+</div>

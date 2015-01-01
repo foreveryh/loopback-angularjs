@@ -1,0 +1,18 @@
+<div class="row" ng-controller="HomeCtrl">
+    <!-- aside -->
+    <aside-directive></aside-directive>
+    <!-- tabset -->
+    <tabbar-directive>
+        <tab-directive title="今日看点" template-url="states/home/recommend.html"></tab-directive>
+        <tab-directive title="热门文章" template-url="states/home/hottest.html"></tab-directive>
+        <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
+        <li class="search">
+            <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
+                <div style="display:none">
+                    <input name="utf8" type="hidden" value="✓" class="form-control">
+                </div>
+                <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
+            </form>
+        </li>
+    </tabbar-directive>
+</div>
