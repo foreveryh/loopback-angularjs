@@ -2,30 +2,39 @@
   "name": "article",
   "plural": "articles",
   "base": "PersistedModel",
+  "idInjection": false,
   "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
     "title": {
       "type": "string",
       "required": true
     },
     "summary": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "content": {
       "type": "string",
       "required": true
     },
     "author": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "created_at": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "source": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "words_count": {
-      "type": "number"
+      "type": "number",
+      "required": false
     }
   },
   "validations": [],
