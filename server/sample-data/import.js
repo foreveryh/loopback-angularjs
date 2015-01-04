@@ -5,13 +5,13 @@
 var async = require('async');
 
 // sample data
-var aritcles = require('./articles.json');
+var articles = require('./articles.json');
 var notebooks = require('./notebooks.json');
 var authors = require('./authors.json');
 
 
 module.exports = function(app, cb) {
-  var Aritcle = app.models.aritcle;
+  var Article = app.models.article;
   var Notebook = app.models.notebook;
   var Author = app.models.author;
   var db = app.dataSources.db;
@@ -43,7 +43,7 @@ module.exports = function(app, cb) {
       db.autoupdate(cb);
     },
 
-    importData.bind(null, Aritcle, articles),
+    importData.bind(null, Article, articles),
     importData.bind(null, Notebook, notebooks),
     importData.bind(null, Author, authors)
 
