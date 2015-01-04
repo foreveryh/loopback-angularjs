@@ -1,0 +1,20 @@
+{
+  "name": "author",
+  "plural": "authors",
+  "base": "PersistedModel",
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+     "articles": {
+      "type": "hasMany",
+      "model": "article",
+      "foreignKey": "authorId"
+      }
+    },
+  "acls": [],
+  "methods": []
+}

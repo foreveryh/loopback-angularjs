@@ -38,7 +38,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "notebook": {
+      "type": "belongsTo",
+      "model": "notebook",
+      "foreignKey": ""
+    }, 
+      "author": {
+      "type": "belongsTo",
+      "model": "author",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }

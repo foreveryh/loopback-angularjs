@@ -1,19 +1,26 @@
 {
-  "name": "Notebook",
+  "name": "notebook",
+  "plural": "notebooks",
   "base": "PersistedModel",
   "idInjection": false,
   "properties": {
-  	"id": {
+    "id": {
       "type": "string",
       "id": true
     },
     "name": {
       "type": "string",
       "required": true
-  	}
+    }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "articles": {
+      "type": "hasMany",
+      "model": "article",
+      "foreignKey": "notebookId"
+    }
+  },
   "acls": [],
   "methods": []
 }

@@ -29,5 +29,13 @@
   "article": {
     "dataSource": "db",
     "public": true
+  },
+  "notebook": {
+    "dataSource": "db",
+    "public": true
+  },
+  "author": {
+    "dataSource": "db",
+    "public": true
   }
 }
