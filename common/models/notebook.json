@@ -3,6 +3,14 @@
   "plural": "notebooks",
   "base": "PersistedModel",
   "idInjection": false,
+  "options": {
+    "mysql": {
+      "table": "notebook"
+    },
+    "mongodb": {
+      "collection": "notebook"
+    }
+  },  
   "properties": {
     "id": {
       "type": "string",

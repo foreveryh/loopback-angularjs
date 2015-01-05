@@ -2,6 +2,14 @@
   "name": "author",
   "plural": "authors",
   "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "author"
+    },
+    "mongodb": {
+      "collection": "author"
+    }
+  },  
   "properties": {
     "name": {
       "type": "string"

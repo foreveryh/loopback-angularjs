@@ -3,6 +3,14 @@
   "plural": "articles",
   "base": "PersistedModel",
   "idInjection": false,
+  "options": {
+    "mysql": {
+      "table": "article"
+    },
+    "mongodb": {
+      "collection": "article"
+    }
+  },  
   "properties": {
     "id": {
       "type": "string",
