@@ -1,4 +1,4 @@
-angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page']);
+angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page', 'Shu.write']);
 
 angular.module('Shu').config(function($stateProvider, $urlRouterProvider, LoopBackResourceProvider) {
 

@@ -26,6 +26,10 @@
       {
         "name": "article",
         "file": "states/article/article.js"
+      },
+      {
+        "name": "write",
+        "file": "states/write/write.js"
       }
     ]
   }
