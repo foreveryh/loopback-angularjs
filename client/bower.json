@@ -22,6 +22,7 @@
     "moment": "~2.8",
     "less.js": "~2.1",
     "font-awesome": "~4.2",
-    "textAngular": "~1.2.2"
+    "textAngular": "~1.2.2",
+    "ocLazyLoad": "~0.5.2"
   }
 }
