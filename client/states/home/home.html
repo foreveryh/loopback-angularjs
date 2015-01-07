@@ -1,10 +1,10 @@
-<div class="row" ng-controller="HomeCtrl">
+<div class="row">
     <!-- aside -->
     <aside-directive></aside-directive>
     <!-- tabset -->
     <tabbar-directive>
-        <tab-directive title="今日看点" template-url="states/home/recommend.html"></tab-directive>
-        <tab-directive title="热门文章" template-url="states/home/hottest.html"></tab-directive>
+        <tab-directive ui-sref='recommend' title="今日看点" template-url="states/home/article-list.html"></tab-directive>
+        <tab-directive ui-sref='hottest' title="热门文章" template-url="states/home/article-list.html"></tab-directive>
         <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
         <li class="search">
             <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
