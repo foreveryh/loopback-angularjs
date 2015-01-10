@@ -1,18 +1,24 @@
-<div class="row">
-    <!-- aside -->
-    <aside-directive></aside-directive>
-    <!-- tabset -->
-    <tabbar-directive>
-        <tab-directive ui-sref='recommend' title="今日看点" template-url="states/home/article-list.html"></tab-directive>
-        <tab-directive ui-sref='hottest' title="热门文章" template-url="states/home/article-list.html"></tab-directive>
-        <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
-        <li class="search">
-            <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
-                <div style="display:none">
-                    <input name="utf8" type="hidden" value="✓" class="form-control">
-                </div>
-                <input class="input-medium search-query form-control" id="q" name="q" placeholder="搜索" type="text">
-            </form>
-        </li>
-    </tabbar-directive>
+<div class="container-fluid">
+    <div class="row">
+        <div class="recommended">
+            <!-- aside -->
+            <aside-directive></aside-directive>
+            <!-- tabset -->
+            <tabbar-directive>
+                <tab-directive ui-sref='recommend' title="今日看点" template-url="states/home/article-list.html"></tab-directive>
+                <tab-directive ui-sref='hottest' title="热门文章" template-url="states/home/article-list.html"></tab-directive>
+                <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
+                <li class="search">
+                    <form accept-charset="UTF-8" action="/search" class="search-form" method="get">
+                        <div style="display:none">
+                            <input name="utf8" type="hidden" value="✓" class="form-control">
+                        </div>
+                        <div class="col-xs-10">
+                            <input class="search-query form-control" id="q" name="q" placeholder="搜索" type="text">
+                        </div>
+                    </form>
+                </li>
+            </tabbar-directive>
+        </div>
+    </div>
 </div>

@@ -1,31 +1,6 @@
 @import "../../common/directives/article-list-directive/article-list-directive.less";
 @import "../../common/directives/article-summary-directive/article-summary-directive.less";
-.output {
-    padding-left: 45px;
-    .timeline-list {
-        min-height: 700px;
-        word-break: break-word;
-    }
-    .row-fluid {
-        .col-md-7 {
-            padding-left: 12px;
-        }
-    }
-    .load-more {
-        margin-bottom: 30px;
-        text-align: center;
-        .ladda-button {
-            margin-left: 0;
-        }
-    }
-}
-.output .article-info a.bookmark,.output .article-info a.bookmarked {
-    vertical-align: middle;
-}
-.output .article-info a,.output .article-info span,.output .article-info .date {
-    margin-right: 10px;
-    color: #999999;
-}
+
 .no-fluid {
     .page-title {
         margin: 30px 0 20px;
@@ -169,4 +144,57 @@
     cursor: not-allowed;
     border-color: #f6a497;
     background: #f6a497;
+}
+//
+.row .recommended .col-md-7 {
+    max-width: 1000px
+}
+
+.row .recommended .page-title {
+    position: fixed;
+    width: 50%;
+    background: white;
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.row .recommended .page-title li a {
+    transition: all .3s
+}
+
+.row .recommended .page-title li i {
+    display: none
+}
+
+.row .recommended .page-title .switch-default-tab i {
+    display: inline-block
+}
+
+.row .recommended .page-title .settings a {
+    cursor: move
+}
+
+.row .recommended .page-title .settings li i {
+    display: inline-block;
+    margin-left: -5px;
+    margin-right: 5px
+}
+
+.row .recommended .page-title .settings .disabled a {
+    cursor: inherit
+}
+
+.row .recommended .page-title .settings .switch-default-tab a i {
+    margin: 0
+}
+
+.row .recommended .page-title .settings i.icon-cog {
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+.row .recommended .page-title .settings i.icon-cog:before {
+    content: "\f058"
 }

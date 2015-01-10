@@ -1,16 +1,3 @@
-.row .recommended .thumbnails {
-  margin:35px 0 0;
-  padding-left:36px;
-  li {
-    position:relative;
-    width:100%;
-    margin:0 0 10px;
-    padding-bottom:15px;
-    border-bottom:1px dashed #d9d9d9;
-    word-wrap:break-word;
-    list-style-type:none;
-  }
-}
 .row .recommended .avatar {
   display:inline-block;
   width:32px;
@@ -56,6 +43,56 @@
     padding-bottom:2px;
     border-bottom:1px dashed #d9d9d9;
   }
+}
+@media (max-width: 480px) {
+    .row .recommended ul.ranking {
+        padding-left:50px
+    }
+}
+
+@media (max-width: 768px) {
+    .row .recommended .page-title {
+        position:static;
+        width: auto
+    }
+
+    .row .recommended .sort-nav {
+        margin-top: 0;
+        padding-left: 10px;
+        padding-right: 10px
+    }
+
+    .row .recommended .ranking {
+        padding-left: 65px
+    }
+
+    .row .recommended .guide-title {
+        margin-top: 10px
+    }
+
+    .row .recommended .subscribe-guide {
+        margin: 75px 0 0
+    }
+
+    .row .recommended .user-subscriptions {
+        margin-top: 15px
+    }
+}
+
+@media (max-width: 979px) {
+    .row .recommended .article .title {
+        padding-right:0
+    }
+
+    .row .recommended .article .avatar {
+        position: inherit;
+        margin-bottom: 5px;
+        display: inline-block
+    }
+
+    .row .recommended .article br {
+        display: block
+    }
 }
 .output .article-info a.bookmark,.output .article-info a.bookmarked {
     vertical-align: middle;
