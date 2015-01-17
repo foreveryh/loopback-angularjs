@@ -13,7 +13,7 @@ angular.module('Shu.page')
     controller: function($rootScope, $scope, $window, article){
     	$scope.$on('$stateChangeSuccess',function(evt, toState, toParams, fromState, fromParams){
       	$window.document.title = '——Shu';
-      	$rootScope.bodylayout = "post reader-day-mode reader-font2";
+      	$rootScope.bodylayout = "post output reader-day-mode reader-font2";
        	//do action of fetching data here is also possible
        	$scope.article = article;
     	});
