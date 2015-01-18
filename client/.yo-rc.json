@@ -30,6 +30,10 @@
       {
         "name": "write",
         "file": "states/write/write.js"
+      },
+      {
+        "name": "notebook",
+        "file": "states/notebook/notebook.js"
       }
     ]
   }

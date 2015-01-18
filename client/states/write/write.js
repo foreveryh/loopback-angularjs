@@ -15,7 +15,11 @@ angular.module('Shu.write').config(function($stateProvider) {
          });
       }
     },
-    controller: function($scope, Article){
+    controller: function($rootScope, $scope, $window, Article){
+      $scope.$on('$stateChangeSuccess',function(evt, toState, toParams, fromState, fromParams){
+        $window.document.title = '——Shu';
+        $rootScope.bodylayout = "input reader-day-mode reader-font2";
+      });
       $scope.btnTitle = "保存";
       $scope.save = function(){
         console.log($scope.htmlVariable);

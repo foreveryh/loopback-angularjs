@@ -1,5 +1,103 @@
-<div class="left-aside">
-	<text-angular ng-model="htmlVariable" class="col-xs-6"></text-angular>
-	<div ta-bind ng-model="htmlVariable" class="col-xs-6"></div>
-	<button ng-click="save()">{{btnTitle}}</button>
+<div id="writer" class="container-fluid">
+    <div class="row normal-mode">
+        <div class="col-md-2 col-sm-2 aside">
+            <div class="new-notebook"> <a href="javascript:void(0)" class="create-notebook win-text"> +新建文集 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide loader-tiny create-notebook-loader"> </a>
+                <div class="new-notebook-form hide">
+                    <form class="create-notebook-form">
+                        <input placeholder="请输入文集名..." type="text" name="name" class="input-medium notebook-input"> <a href="javascript:void(0)" class="btn cancel" data-action="cancel-create-notebook"> 取消 </a>
+                        <input class="btn btn-mainRed submit" name="commit" type="submit" value="提交" data-action="submit"> </form>
+                </div>
+            </div>
+            <ul class="nav nav-list notebooks ui-sortable">
+                <li class="one-notebook item active" data-model="notebook" data-cid="c-0"> <a href="javascript:void(0)" data-type="active" class="notebook-name"><i class="icon icon-notebook"></i><span>Diary</span></a>
+                    <a href="javascript:void(0)" data-type="edit" class="edit-notebook dropdown-toggle" data-toggle="dropdown"> <i class="icon-gear"></i> </a>
+                    <ul class="dropdown-menu arrow-top">
+                        <li>
+                            <a href="javascript:void(0)" data-action="rename-notebook" data-toggle="modal"> <i class="icon-edit"></i> 修改文集名 </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0)" data-action="delete-notebook"> <i class="icon-trash"></i> 删除文集 </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="one-notebook item" data-model="notebook" data-cid="c-1"> <a href="javascript:void(0)" data-type="active" class="notebook-name"><i class="icon icon-notebook"></i><span>Scribbles</span></a>
+                    <a href="javascript:void(0)" data-type="edit" class="edit-notebook dropdown-toggle" data-toggle="dropdown"> <i class="icon-gear"></i> </a>
+                    <ul class="dropdown-menu arrow-top">
+                        <li>
+                            <a href="javascript:void(0)" data-action="rename-notebook" data-toggle="modal"> <i class="icon-edit"></i> 修改文集名 </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0)" data-action="delete-notebook"> <i class="icon-trash"></i> 删除文集 </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="commercial">
+                <p>属于写作者的文集, 一个简洁而优雅的环境让你专注于书写。</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 middle">
+            <div id="notes-list">
+                <div id="new-note">
+                    <a href="javascript:void(0)" data-action="create-note" class="new-note-link"> <i class="icon icon-pencil"></i> <span class="win-text">+新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlt loader-tiny"></span> </a>
+                </div>
+                <ul class="nav nav-list notes ui-sortable">
+                    <li class="one-note active" data-model="note" data-cid="c-0"> <i class="icon icon-note note-icon stop-share"></i>
+                        <p class="abbreviate">你好！</p>
+                        <p class="wordage win-text">字数: 3</p> <a href="javascript:void(0)" data-type="edit" class="note-link title">你好呢</a> <a href="javascript:void(0)" data-type="share" class="share-note dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i></a>
+                        <ul class="dropdown-menu arrow-top">
+                            <li>
+                                <a href="javascript:void(0)" class="share-link" data-action="open-share-note"> <i class="icon-share-alt"></i> 直接发布 </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0)" data-action="open-move-note"> <i class="icon-folder-open"></i> 移动文章 </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-action="trigger-history-mode"> <i class="icon-time"></i> 历史版本 </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0)" data-action="delete-note"> <i class="icon-trash"></i> 删除文章 </a>
+                            </li>
+                        </ul>
+                        <!--a href='javascript:void(null)' class='delete-note'><i class="icon-trash"></i></a-->
+                    </li>
+                </ul>
+                <div class="one-note new-note-bottom"> <a href="javascript:void(0)" data-action="create-note">+在下方新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlb loader-tiny"></a> </div>
+            </div>
+            <div id="move-note-modal" tabindex="-1" aria-hidden="true" class="move-note-modal modal hide fade fullscreen">
+                <div class="modal-header"> <b>移动文章到</b> </div>
+                <div class="modal-body">
+                    <ul class="notebooks-select"> </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn cancel-button">取消</button>
+                    <input data-action="submit-move-note" class="btn btn-info" name="commit" type="submit" value="提交"> </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-sm-7 main">
+            <text-angular ng-model="htmlVariable"></text-angular>
+        </div>
+    </div>
+    <div class="publish-loading writer-splash" style="display: none;"> <img src="http://baijii-common.b0.upaiyun.com/loaders/writer.gif" %="">
+    </div>
+    <div tabindex="-1" aria-hidden="true" class="modal hide fade rename-notebook-modal fullscreen" id="rename-notebook-modal">
+        <div class="modal-header"> <b>修改文集名</b> </div>
+        <div class="modal-body">
+            <form class="modal-form" onsubmit="return false">
+                <input placeholder="新文集名" name="name" type="text" class="input-large notebook-input" size="30"> </form>
+        </div>
+        <div class="modal-footer"> <a href="javascript:void(0)" class="btn cancel-button"> 取消 </a>
+            <input class="rename-a-notebook btn btn-info" name="commit" type="submit" value="提交" data-action="submit-rename-notebook"> </div>
+    </div>
+    <div id="view-mode-modal" tabindex="-1" class="modal hide read-modal" aria-hidden="false">
+        <div class="btn-group change-background" data-toggle="buttons-radio">
+            <a class="btn btn-daytime active" href="javascript:void(null)" data-action="set-day" rel="nofollow"> <i class="icon-sun"></i> </a>
+            <a class="btn btn-nighttime " href="javascript:void(null)" data-action="set-night" rel="nofollow"> <i class="icon-moon"></i> </a>
+        </div>
+        <div class="btn-group change-font" data-toggle="buttons-radio"> <a class="btn font " href="javascript:void(null)" data-action="set-font1" rel="nofollow">宋体</a> <a class="btn font hei active" href="javascript:void(null)" data-action="set-font2" rel="nofollow">黑体</a> </div>
+    </div>
 </div>

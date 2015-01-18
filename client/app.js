@@ -1,8 +1,8 @@
-angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page', 'Shu.write']);
+angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page', 'Shu.write', 'Shu.notebook']);
 
 angular.module('Shu').config(function($stateProvider, $urlRouterProvider, LoopBackResourceProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/notebook/1');
     // Change the URL where to access the LoopBack REST API server
     LoopBackResourceProvider.setUrlBase('http://0.0.0.0:3000/api');
 });
