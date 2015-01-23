@@ -1,43 +1,8 @@
 <div id="writer" class="container-fluid">
-    <div class="row normal-mode">
-        <div class="col-md-2 col-sm-2 aside">
-            <div class="new-notebook"> <a href="javascript:void(0)" class="create-notebook win-text"> +新建文集 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide loader-tiny create-notebook-loader"> </a>
-                <div class="new-notebook-form hide">
-                    <form class="create-notebook-form">
-                        <input placeholder="请输入文集名..." type="text" name="name" class="input-medium notebook-input"> <a href="javascript:void(0)" class="btn cancel" data-action="cancel-create-notebook"> 取消 </a>
-                        <input class="btn btn-mainRed submit" name="commit" type="submit" value="提交" data-action="submit"> </form>
-                </div>
-            </div>
-            <ul class="nav nav-list notebooks ui-sortable">
-                <li class="one-notebook item active" data-model="notebook" data-cid="c-0"> <a href="javascript:void(0)" data-type="active" class="notebook-name"><i class="icon icon-notebook"></i><span>Diary</span></a>
-                    <a href="javascript:void(0)" data-type="edit" class="edit-notebook dropdown-toggle" data-toggle="dropdown"> <i class="icon-gear"></i> </a>
-                    <ul class="dropdown-menu arrow-top">
-                        <li>
-                            <a href="javascript:void(0)" data-action="rename-notebook" data-toggle="modal"> <i class="icon-edit"></i> 修改文集名 </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0)" data-action="delete-notebook"> <i class="icon-trash"></i> 删除文集 </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="one-notebook item" data-model="notebook" data-cid="c-1"> <a href="javascript:void(0)" data-type="active" class="notebook-name"><i class="icon icon-notebook"></i><span>Scribbles</span></a>
-                    <a href="javascript:void(0)" data-type="edit" class="edit-notebook dropdown-toggle" data-toggle="dropdown"> <i class="icon-gear"></i> </a>
-                    <ul class="dropdown-menu arrow-top">
-                        <li>
-                            <a href="javascript:void(0)" data-action="rename-notebook" data-toggle="modal"> <i class="icon-edit"></i> 修改文集名 </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0)" data-action="delete-notebook"> <i class="icon-trash"></i> 删除文集 </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="commercial">
-                <p>属于写作者的文集, 一个简洁而优雅的环境让你专注于书写。</p>
-            </div>
-        </div>
+    <div class="row row-no-padding normal-mode" style="padding: 45px">
+        <notebook-list-editor>
+           	<notebook-item-editor ng-repeat="item in ['a','b','c']" notebook-title='item'></notebook-item-editor>
+        </notebook-list-editor>
         <div class="col-md-3 col-sm-3 middle">
             <div id="notes-list">
                 <div id="new-note">
