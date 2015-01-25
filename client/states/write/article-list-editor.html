@@ -1,0 +1,18 @@
+<div class="col-md-3 col-sm-3 middle">
+    <div id="notes-list">
+        <div id="new-note">
+            <a href="javascript:void(0)" data-action="create-note" class="new-note-link"> <i class="icon icon-pencil"></i> <span class="win-text">+新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlt loader-tiny"></span> </a>
+        </div>
+        <ul class="nav nav-list notes ui-sortable" ng-transclude></ul>
+        <div class="one-note new-note-bottom"> <a href="javascript:void(0)" data-action="create-note">+在下方新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlb loader-tiny"></a> </div>
+    </div>
+    <div id="move-note-modal" tabindex="-1" aria-hidden="true" class="move-note-modal modal hide fade fullscreen">
+        <div class="modal-header"> <b>移动文章到</b> </div>
+        <div class="modal-body">
+            <ul class="notebooks-select"> </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn cancel-button">取消</button>
+            <input data-action="submit-move-note" class="btn btn-info" name="commit" type="submit" value="提交"> </div>
+    </div>
+</div>

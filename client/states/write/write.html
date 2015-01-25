@@ -1,48 +1,19 @@
 <div id="writer" class="container-fluid">
     <div class="row row-no-padding normal-mode" style="padding: 45px">
+    		<!-- Notebook Editor-->
         <notebook-list-editor>
-           	<notebook-item-editor ng-repeat="item in ['a','b','c']" notebook-title='item'></notebook-item-editor>
+           	<notebook-item-editor ng-repeat="notebook in notebooks" notebook-name="notebook.name">
+           	</notebook-item-editor>
         </notebook-list-editor>
-        <div class="col-md-3 col-sm-3 middle">
-            <div id="notes-list">
-                <div id="new-note">
-                    <a href="javascript:void(0)" data-action="create-note" class="new-note-link"> <i class="icon icon-pencil"></i> <span class="win-text">+新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlt loader-tiny"></span> </a>
-                </div>
-                <ul class="nav nav-list notes ui-sortable">
-                    <li class="one-note active" data-model="note" data-cid="c-0"> <i class="icon icon-note note-icon stop-share"></i>
-                        <p class="abbreviate">你好！</p>
-                        <p class="wordage win-text">字数: 3</p> <a href="javascript:void(0)" data-type="edit" class="note-link title">你好呢</a> <a href="javascript:void(0)" data-type="share" class="share-note dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i></a>
-                        <ul class="dropdown-menu arrow-top">
-                            <li>
-                                <a href="javascript:void(0)" class="share-link" data-action="open-share-note"> <i class="icon-share-alt"></i> 直接发布 </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:void(0)" data-action="open-move-note"> <i class="icon-folder-open"></i> 移动文章 </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" data-action="trigger-history-mode"> <i class="icon-time"></i> 历史版本 </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:void(0)" data-action="delete-note"> <i class="icon-trash"></i> 删除文章 </a>
-                            </li>
-                        </ul>
-                        <!--a href='javascript:void(null)' class='delete-note'><i class="icon-trash"></i></a-->
-                    </li>
-                </ul>
-                <div class="one-note new-note-bottom"> <a href="javascript:void(0)" data-action="create-note">+在下方新建文章 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide cnlb loader-tiny"></a> </div>
-            </div>
-            <div id="move-note-modal" tabindex="-1" aria-hidden="true" class="move-note-modal modal hide fade fullscreen">
-                <div class="modal-header"> <b>移动文章到</b> </div>
-                <div class="modal-body">
-                    <ul class="notebooks-select"> </ul>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn cancel-button">取消</button>
-                    <input data-action="submit-move-note" class="btn btn-info" name="commit" type="submit" value="提交"> </div>
-            </div>
-        </div>
+       	<!-- Article Editor-->
+       	<article-list-editor>
+       			<article-item-editor 
+       				ng-repeat="article in articles" 
+       				article-title="article.title" 
+       				article-text="aritcle.content">
+       			</article-item-editor>
+       	</article-list-editor>
+       	<!-- Text Editor-->
         <div class="col-md-7 col-sm-7 main">
             <text-angular ng-model="htmlVariable"></text-angular>
         </div>

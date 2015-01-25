@@ -20,6 +20,7 @@ angular.module('Shu.write').config(function($stateProvider) {
         $window.document.title = '——Shu';
         $rootScope.bodylayout = "input reader-day-mode reader-font2";
       });
+      $scope.selectedNotebook = null;
       $scope.btnTitle = "保存";
       $scope.save = function(){
         console.log($scope.htmlVariable);
@@ -37,7 +38,8 @@ angular.module('Shu.write').config(function($stateProvider) {
             console.log(errorResponse);
         });
       }
-    }
+    },
+    controllerAs: 'writeCtrl'
   });
 })
 .directive("notebookListEditor", function(){
@@ -46,8 +48,76 @@ angular.module('Shu.write').config(function($stateProvider) {
     replace: true,
     transclude: true,
     templateUrl: "states/write/notebook-list-editor.html",
-    controller: function($scope){
+    controller: function($scope, Notebook){
+     
+      var items = [];
+      this.activeOne = function(selectedActivedItem) {
+        angular.forEach(items, function(item){
+          if (selectedActivedItem != item) {
+            item.active = false;
+          }
+        });
+        $scope.$parent.selectedNotebook = selectedActivedItem.name;
+        console.log("selectedNotebook:"+ $scope.$parent.selectedNotebook);
+      };
+      this.addItem = function (item){
+        items.push(item);
+      };
+      //Notebook Items
+      $scope.notebooks = Notebook.find({
+        filter: { limit: 10 }},
+        function(list) { 
+        /* success */ 
+        },
+        function(errorResponse) { 
+        /* error */ 
+      });
+      //New Notebook Form
       $scope.isCollapsed = true;
+      $scope.newNotebook = {};
+      $scope.newNotebookForm = function(){
+        var notebookName = $scope.newNotebook.name? $scope.newNotebook.name : "无标题"; 
+        Notebook.create({
+          "name": notebookName
+        },function(result){
+            $scope.isCollapsed = true;
+            $scope.notebooks.push(result);
+        },
+          function(errorResponse){
+            alert("post failed");
+            console.log(errorResponse);
+        });
+      };
+    }
+  };
+})
+.directive("notebookItemEditor", function(){
+  return {
+    restrict: 'EA',
+    replace: true,
+    require: '^?notebookListEditor',
+    scope: { name: '=notebookName' },
+    templateUrl: "states/write/notebook-item-editor.html",
+    link: function(scope, element, attrs, parentController){
+      scope.active = false;
+      parentController.addItem(scope);
+      scope.activeMe = function(){
+        scope.active = true;
+        parentController.activeOne(scope);
+      };
+      scope.editMe = function(){
+        
+      };
+    }
+  };
+})
+.directive("articleListEditor", function(){
+   return {
+    restrict: 'EA',
+    replace: true,
+    transclude: true,
+    templateUrl: "states/write/article-list-editor.html",
+    controller: function($scope, Notebook){
       var items = [];
       this.activeOne = function(selectedActivedItem) {
         angular.forEach(items, function(item){
@@ -59,16 +129,20 @@ angular.module('Shu.write').config(function($stateProvider) {
       this.addItem = function (item){
         items.push(item);
       };
-    }
-  };
+    },
+    link: function(scope, element, attrs){
+      scope.$watch('$parent.selectedNotebook', function() {
+        alert('hey, myVar has changed!');
+      });
+    }};
 })
-.directive("notebookItemEditor", function(){
+.directive("articleItemEditor", function(){
   return {
     restrict: 'EA',
     replace: true,
-    require: '^?notebookListEditor',
-    scope: { title: '=notebookTitle' },
-    templateUrl: "states/write/notebook-item-editor.html",
+    require: '^?ArticleListEditor',
+    scope: { title: '=articleTitle', text:'=articleText' },
+    templateUrl: "states/write/article-item-editor.html",
     link: function(scope, element, attrs, parentController){
       scope.active = false;
       parentController.addItem(scope);

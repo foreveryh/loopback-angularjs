@@ -2,9 +2,11 @@
     <div class="new-notebook">
         <a href ng-click="isCollapsed=!isCollapsed" class="create-notebook win-text"> +新建文集 <img src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" class="hide loader-tiny create-notebook-loader"> </a>
         <div class="new-notebook-form" collapse="isCollapsed">
-            <form class="create-notebook-form">
-                <input placeholder="请输入文集名..." type="text" name="name" class="input-medium notebook-input"> <a href="javascript:void(0)" class="btn cancel" data-action="cancel-create-notebook"> 取消 </a>
-                <input class="btn btn-mainRed submit" name="commit" type="submit" value="提交" data-action="submit"> </form>
+            <form class="create-notebook-form" ng-submit="newNotebookForm()">
+                <input placeholder="请输入文集名..." type="text" name="name" class="input-medium notebook-input" ng-model="newNotebook.name"> 
+                <a href class="btn cancel" ng-click="isCollapsed=!isCollapsed"> 取消 </a>
+                <input class="btn btn-mainRed submit" name="commit" type="submit" value="提交">
+            </form>
         </div>
     </div>
     <ul class="nav nav-pills nav-stacked notebooks ui-sortable" ng-transclude></ul>
