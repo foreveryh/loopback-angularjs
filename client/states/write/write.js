@@ -31,9 +31,12 @@ angular.module('Shu.write').config(function($stateProvider) {
       $scope.$on('$stateChangeSuccess',function(evt, toState, toParams, fromState, fromParams){
         $window.document.title = '——Shu';
         $rootScope.bodylayout = "input reader-day-mode reader-font2";
+        //notebook data sharing
+        $scope.notebooks = notebooks;
+        $scope.allArticles = [];
+        $scope.currentArticles = [];
+        $scope.selectedNotebookId = "";
       });
-      $scope.notebooks = notebooks;
-      $scope.selectedNotebookID = "";
     },
     controllerAs: 'writeCtrl'
   });
@@ -52,12 +55,11 @@ angular.module('Shu.write').config(function($stateProvider) {
             item.active = false;
           }
         });
-        angular.forEach($scope.notebooks, function(notebook){
-          if (selectedActivedItem.name == notebook.name){
-            $scope.selectedNotebookID = notebook.id;
-          }
-        });
-        console.log($scope.selectedNotebookID);
+        //reset selected notebook
+        if($scope.selectedNotebookId != selectedActivedItem.id){
+          $scope.selectedNotebookId = selectedActivedItem.id;
+          $scope.currentArticles = [];
+        }
       };
       this.addItem = function (item){
         items.push(item);
@@ -74,7 +76,6 @@ angular.module('Shu.write').config(function($stateProvider) {
             $scope.notebooks.push(result);
         },
           function(errorResponse){
-            alert("post failed");
             console.log(errorResponse);
         });
       };
@@ -86,7 +87,7 @@ angular.module('Shu.write').config(function($stateProvider) {
     restrict: 'EA',
     replace: true,
     require: '^?notebookListEditor',
-    scope: { name: '=notebookName' },
+    scope: { name: '=notebookName', id:'=notebookId'},
     templateUrl: "states/write/notebook-item-editor.html",
     link: function(scope, element, attrs, parentController){
       scope.active = false;
@@ -101,12 +102,11 @@ angular.module('Shu.write').config(function($stateProvider) {
     }
   };
 })
-.directive("articleListEditor", function(Notebook,Article){
-   return {
+.directive("articleListEditor", function(Notebook){
+  return {
     restrict: 'EA',
     replace: true,
     transclude: true,
-    //scope: true,
     templateUrl: "states/write/article-list-editor.html",
     controller: function($scope){
       var items = [];
@@ -120,24 +120,35 @@ angular.module('Shu.write').config(function($stateProvider) {
       this.addItem = function (item){
         items.push(item);
       };
-      //
-      $scope.articles = [{title: '1', contetn: 'good'},{title: '2', contetn: 'good'},{title: '3', contetn: 'good'}];
     },
     link: function(scope, element, attrs){
-      scope.$watch('selectedNotebookID', function() {
-        console.log('reload:' + scope.selectedNotebookID);
-        scope.articles = Notebook.articles({
-          id: scope.selectedNotebookID,
-          filter: {
-            limit: 10
-          }},
-          function(response){
-            console.log(response);
-          },
-          function(errorResponse){
-            console.log(errorResponse);
+      scope.$watch('selectedNotebookId', function() {
+        var isSelectedNotebookExist = false;
+        var thisNotebookId = scope.selectedNotebookId;
+        angular.forEach(scope.allArticles, function(notebook){
+          if (notebook.notebookId == thisNotebookId){
+            scope.currentArticles = notebook.articles;
+            isSelectedNotebookExist = true;
+          }
+        });
+        if (!isSelectedNotebookExist){
+          var relatedArticles = 
+          Notebook.articles({
+            id: thisNotebookId
+            },
+            function(response){
+              console.log(response);
+            },
+            function(errorResponse){
+              console.log(errorResponse);
+            }
+          );
+          scope.allArticles.push({
+            notebookId: thisNotebookId, 
+            articles: relatedArticles
           });
-        console.log(scope.articles);
+        }
+        console.log(scope.allArticles);
       })
     }};
 })

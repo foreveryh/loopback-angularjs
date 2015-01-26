@@ -2,13 +2,16 @@
     <div class="row row-no-padding normal-mode" style="padding: 45px">
     		<!-- Notebook Editor-->
         <notebook-list-editor>
-           	<notebook-item-editor ng-repeat="notebook in notebooks" notebook-name="notebook.name">
+           	<notebook-item-editor 
+              ng-repeat="notebook in notebooks" 
+              notebook-name="notebook.name"
+              notebook-id="notebook.id">
            	</notebook-item-editor>
         </notebook-list-editor>
        	<!-- Article Editor-->
        	<article-list-editor>
        			<article-item-editor 
-       				ng-repeat="article in articles" 
+       				ng-repeat="article in currentArticles" 
        				article-title="article.title" 
        				article-text="aritcle.content">
        			</article-item-editor>
