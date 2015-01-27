@@ -35,13 +35,14 @@ angular.module('Shu.write').config(function($stateProvider) {
         $scope.notebooks = notebooks;
         $scope.allArticles = [];
         $scope.currentArticles = [];
-        $scope.selectedNotebookId = "";
+        $scope.selectedNotebookId = null;
+        $scope.selectedArticle = {};
       });
     },
     controllerAs: 'writeCtrl'
   });
 })
-.directive("notebookListEditor", function(){
+.directive("notebookListEditor", function($timeout){
   return {
     restrict: 'EA',
     replace: true,
@@ -61,9 +62,17 @@ angular.module('Shu.write').config(function($stateProvider) {
           $scope.currentArticles = [];
         }
       };
+      this.activeDefault = function(){
+        if (items.length){
+          var firstItem = items[0];
+          firstItem.active = true;
+          $scope.selectedNotebookId = firstItem.id;
+        }
+      };
       this.addItem = function (item){
         items.push(item);
       };
+      
       //New Notebook Form
       $scope.isCollapsed = true;
       $scope.newNotebook = {};
@@ -79,7 +88,12 @@ angular.module('Shu.write').config(function($stateProvider) {
             console.log(errorResponse);
         });
       };
-    }
+    },
+    link: function postLink(scope, element, attr, controller) {
+      $timeout(function(){
+        controller.activeDefault();
+      });
+    }          
   };
 })
 .directive("notebookItemEditor", function(){
@@ -89,7 +103,7 @@ angular.module('Shu.write').config(function($stateProvider) {
     require: '^?notebookListEditor',
     scope: { name: '=notebookName', id:'=notebookId'},
     templateUrl: "states/write/notebook-item-editor.html",
-    link: function(scope, element, attrs, parentController){
+    link: function(scope, element, attrs, parentController){    
       scope.active = false;
       parentController.addItem(scope);
       scope.activeMe = function(){
@@ -131,7 +145,8 @@ angular.module('Shu.write').config(function($stateProvider) {
             isSelectedNotebookExist = true;
           }
         });
-        if (!isSelectedNotebookExist){
+        console.log("this note book id:" + thisNotebookId);
+        if (!isSelectedNotebookExist && thisNotebookId != null){
           var relatedArticles = 
           Notebook.articles({
             id: thisNotebookId
@@ -147,8 +162,8 @@ angular.module('Shu.write').config(function($stateProvider) {
             notebookId: thisNotebookId, 
             articles: relatedArticles
           });
+          scope.currentArticles = relatedArticles;
         }
-        console.log(scope.allArticles);
       })
     }};
 })
