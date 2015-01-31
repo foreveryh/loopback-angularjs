@@ -13,12 +13,13 @@
        			<article-item-editor 
        				ng-repeat="article in currentArticles" 
        				article-title="article.title" 
-       				article-text="aritcle.content">
+              article-text="article.content"
+              article-id="article.id">
        			</article-item-editor>
        	</article-list-editor>
        	<!-- Text Editor-->
         <div class="col-md-7 col-sm-7 main">
-            <text-angular ng-model="htmlVariable"></text-angular>
+            <text-angular ng-model="selectedArticleText"></text-angular>
         </div>
     </div>
     <div class="publish-loading writer-splash" style="display: none;"> <img src="http://baijii-common.b0.upaiyun.com/loaders/writer.gif" %="">

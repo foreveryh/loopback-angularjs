@@ -36,13 +36,13 @@ angular.module('Shu.write').config(function($stateProvider) {
         $scope.allArticles = [];
         $scope.currentArticles = [];
         $scope.selectedNotebookId = null;
-        $scope.selectedArticle = {};
+        $scope.selectedArticleText = null;
       });
     },
     controllerAs: 'writeCtrl'
   });
 })
-.directive("notebookListEditor", function($timeout){
+.directive("notebookListEditor", function($timeout, Notebook){
   return {
     restrict: 'EA',
     replace: true,
@@ -93,49 +93,7 @@ angular.module('Shu.write').config(function($stateProvider) {
       $timeout(function(){
         controller.activeDefault();
       });
-    }          
-  };
-})
-.directive("notebookItemEditor", function(){
-  return {
-    restrict: 'EA',
-    replace: true,
-    require: '^?notebookListEditor',
-    scope: { name: '=notebookName', id:'=notebookId'},
-    templateUrl: "states/write/notebook-item-editor.html",
-    link: function(scope, element, attrs, parentController){    
-      scope.active = false;
-      parentController.addItem(scope);
-      scope.activeMe = function(){
-        scope.active = true;
-        parentController.activeOne(scope);
-      };
-      scope.editMe = function(){
-        
-      };
-    }
-  };
-})
-.directive("articleListEditor", function(Notebook){
-  return {
-    restrict: 'EA',
-    replace: true,
-    transclude: true,
-    templateUrl: "states/write/article-list-editor.html",
-    controller: function($scope){
-      var items = [];
-      this.activeOne = function(selectedActivedItem) {
-        angular.forEach(items, function(item){
-          if (selectedActivedItem != item) {
-            item.active = false;
-          }
-        });
-      };
-      this.addItem = function (item){
-        items.push(item);
-      };
-    },
-    link: function(scope, element, attrs){
+      //watch selected notebook
       scope.$watch('selectedNotebookId', function() {
         var isSelectedNotebookExist = false;
         var thisNotebookId = scope.selectedNotebookId;
@@ -164,21 +122,74 @@ angular.module('Shu.write').config(function($stateProvider) {
           });
           scope.currentArticles = relatedArticles;
         }
-      })
-    }};
+      });
+    }          
+  };
+})
+.directive("notebookItemEditor", function(){
+  return {
+    restrict: 'EA',
+    replace: true,
+    require: '^?notebookListEditor',
+    scope: { name: '=notebookName', id:'=notebookId'},
+    templateUrl: "states/write/notebook-item-editor.html",
+    link: function(scope, element, attrs, parentController){    
+      scope.active = false;
+      parentController.addItem(scope);
+      scope.activeMe = function(){
+        scope.active = true;
+        parentController.activeOne(scope);
+      };
+      scope.editMe = function(){
+        
+      };
+    }
+  };
+})
+.directive("articleListEditor", function(){
+  return {
+    restrict: 'EA',
+    replace: true,
+    transclude: true,
+    templateUrl: "states/write/article-list-editor.html",
+    controller: function($scope){
+      var items = [];
+      this.activeOne = function(selectedActivedItem) {
+        angular.forEach(items, function(item){
+          if (selectedActivedItem != item) {
+            item.active = false;
+            if (typeof(item.listener) == 'function'){
+              item.listener();
+            }
+          }
+        });
+        $scope.selectedArticleText = selectedActivedItem.text;
+      };
+      this.addItem = function (item){
+        items.push(item);
+      };
+    }
+  };
 })
 .directive("articleItemEditor", function(){
   return {
     restrict: 'EA',
     replace: true,
     require: '^?articleListEditor',
-    scope: { title: '=articleTitle', text:'=articleText' },
+    scope: { title:'=articleTitle', text:'=articleText', id:'=articleId' },
     templateUrl: "states/write/article-item-editor.html",
     link: function(scope, element, attrs, parentController){
       scope.active = false;
+      scope.listener = null;
       parentController.addItem(scope);
       scope.activeMe = function(){
         scope.active = true;
+        scope.listener = scope.$watch('$parent.selectedArticleText', function(){
+          if (scope.text != scope.$parent.selectedArticleText){
+            scope.text = scope.$parent.selectedArticleText;
+            console.log(scope.text);
+          }
+        });
         parentController.activeOne(scope);
       };
       scope.editMe = function(){

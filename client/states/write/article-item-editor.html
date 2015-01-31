@@ -1,6 +1,7 @@
-<li class="one-note active" data-model="note" data-cid="c-0"> <i class="icon icon-note note-icon stop-share"></i>
-    <p class="abbreviate">{{title}}</p>
-    <p class="wordage win-text">字数: {{word_count}}</p> <a href data-type="edit" class="note-link title">{{text}}</a>
+<li class="one-note" ng-class="active? 'active':''" ng-click="activeMe();">
+    <i class="icon icon-note note-icon stop-share"></i>
+    <p class="abbreviate">{{text}}</p>
+    <p class="wordage win-text">字数: {{word_count}}</p> <a href data-type="edit" class="note-link title">{{title}}</a>
     <div dropdown ng-show="active">
         <a href data-type="share" class="share-note dropdown-toggle" dropdown-toggle><i class="icon-gear"></i></a>
         <ul class="dropdown-menu arrow-top" role="menu">
