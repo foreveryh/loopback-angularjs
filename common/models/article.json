@@ -43,6 +43,10 @@
     "words_count": {
       "type": "number",
       "required": false
+    },
+    "is_published":{
+      "type": "boolean",
+      "required": true
     }
   },
   "validations": [],

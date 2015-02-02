@@ -36,7 +36,7 @@ angular.module('Shu.write').config(function($stateProvider) {
         $scope.allArticles = [];
         $scope.currentArticles = [];
         $scope.selectedNotebookId = null;
-        $scope.selectedArticleText = null;
+        $scope.selectedArticle = {};
       });
     },
     controllerAs: 'writeCtrl'
@@ -146,7 +146,7 @@ angular.module('Shu.write').config(function($stateProvider) {
     }
   };
 })
-.directive("articleListEditor", function(){
+.directive("articleListEditor", function(Article){
   return {
     restrict: 'EA',
     replace: true,
@@ -158,15 +158,41 @@ angular.module('Shu.write').config(function($stateProvider) {
         angular.forEach(items, function(item){
           if (selectedActivedItem != item) {
             item.active = false;
-            if (typeof(item.listener) == 'function'){
-              item.listener();
+            if (typeof(item.titleListener) == 'function'){
+              item.titleListener();
+            }
+            if (typeof(item.contentListener) == 'function'){
+              item.contentListener();
             }
           }
         });
-        $scope.selectedArticleText = selectedActivedItem.text;
+        $scope.selectedArticle = {
+          title: selectedActivedItem.title, 
+          content: selectedActivedItem.content
+        };
       };
       this.addItem = function (item){
         items.push(item);
+      };
+      //create article
+      $scope.createArticle = function(position){
+        
+        Article.create({
+          title: "无标题文章",
+          content: "无内容",
+          is_published: true,
+          notebookId: $scope.selectedNotebookId,
+          authorId: 1
+        },function(result){
+          console.log("create aritcle successfully");
+          if (position!="start"){
+            $scope.currentArticles.push(result);
+          }else{
+            $scope.currentArticles.unshift(result);
+          }
+        },function(errorResponse){
+          console.log(errorResponse);
+        });
       };
     }
   };
@@ -184,10 +210,14 @@ angular.module('Shu.write').config(function($stateProvider) {
       parentController.addItem(scope);
       scope.activeMe = function(){
         scope.active = true;
-        scope.listener = scope.$watch('$parent.selectedArticleText', function(){
-          if (scope.text != scope.$parent.selectedArticleText){
-            scope.text = scope.$parent.selectedArticleText;
-            console.log(scope.text);
+        scope.titleListener = scope.$watch('$parent.selectedArticle.title', function(){
+          if (scope.title != scope.$parent.selectedArticle.title){
+            scope.title = scope.$parent.selectedArticle.title;
+          }
+        });
+        scope.contentListener = scope.$watch('$parent.selectedArticle.content', function(){
+          if (scope.text != scope.$parent.selectedArticle.content){
+            scope.text = scope.$parent.selectedArticle.content;
           }
         });
         parentController.activeOne(scope);

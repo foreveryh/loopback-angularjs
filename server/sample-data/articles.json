@@ -9,7 +9,8 @@
   "source": "测试",
   "words_count": 2,
   "notebookId": "80",
-  "authorId": 1
+  "authorId": 1,
+  "is_published": true
 	},
 	{
   "id": "m1QW1Ksa",
@@ -21,7 +22,8 @@
   "source": "测试2",
   "words_count": 21,
   "notebookId": "81",
-  "authorId": 1
+  "authorId": 1,
+  "is_published": true
 	},
   {
   "id": "m1QW1Ksb",
@@ -33,7 +35,8 @@
   "source": "测试2",
   "words_count": 21,
   "notebookId": "80",
-  "authorId": 1
+  "authorId": 1,
+  "is_published": true
   },
   {
   "id": "m1QW1Ksx",
@@ -45,6 +48,7 @@
   "source": "测试2",
   "words_count": 21,
   "notebookId": "80",
-  "authorId": 1
+  "authorId": 1,
+  "is_published": true
   } 
 ]
