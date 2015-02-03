@@ -1,46 +1,39 @@
 <div id="writer" class="container-fluid">
-    <div class="row row-no-padding normal-mode" style="padding: 45px">
-    		<!-- Notebook Editor-->
-        <notebook-list-editor>
-           	<notebook-item-editor 
-              ng-repeat="notebook in notebooks" 
-              notebook-name="notebook.name"
-              notebook-id="notebook.id">
-           	</notebook-item-editor>
-        </notebook-list-editor>
-       	<!-- Article Editor-->
-       	<article-list-editor>
-       			<article-item-editor 
-       				ng-repeat="article in currentArticles" 
-       				article-title="article.title" 
-              article-text="article.content"
-              article-id="article.id">
-       			</article-item-editor>
-       	</article-list-editor>
-       	<!-- Text Editor-->
-        <div class="col-md-7 col-sm-7 main">
-            <form>
-              <input class="title mousetrap" name="article_title" id="article_title" ng-model="selectedArticle.title" type="text" value="无标题文章">
-            </form>
-            <text-angular ng-model="selectedArticle.content"></text-angular>
-        </div>
+  <div class="row row-no-padding normal-mode" style="padding: 45px">
+    <!-- Notebook Editor-->
+    <notebook-list-editor>
+      <notebook-item-editor ng-repeat="notebook in notebooks" notebook-name="notebook.name" notebook-id="notebook.id">
+      </notebook-item-editor>
+    </notebook-list-editor>
+    <!-- Article Editor-->
+    <article-list-editor>
+      <article-item-editor ng-repeat="article in currentArticles" article-title="article.title" article-text="article.content" article-id="article.id">
+      </article-item-editor>
+    </article-list-editor>
+    <!-- Text Editor-->
+    <div class="col-md-7 col-sm-7 main">
+      <form>
+        <input class="title mousetrap" name="article_title" id="article_title" ng-model="selectedArticle.title" type="text" value="无标题文章">
+      </form>
+      <text-angular ng-model="selectedArticle.content"></text-angular>
     </div>
-    <div class="publish-loading writer-splash" style="display: none;"> <img src="http://baijii-common.b0.upaiyun.com/loaders/writer.gif" %="">
+  </div>
+  <div class="publish-loading writer-splash" style="display: none;"> <img src="http://baijii-common.b0.upaiyun.com/loaders/writer.gif" %="">
+  </div>
+  <div tabindex="-1" aria-hidden="true" class="modal hide fade rename-notebook-modal fullscreen" id="rename-notebook-modal">
+    <div class="modal-header"> <b>修改文集名</b> </div>
+    <div class="modal-body">
+      <form class="modal-form" onsubmit="return false">
+        <input placeholder="新文集名" name="name" type="text" class="input-large notebook-input" size="30"> </form>
     </div>
-    <div tabindex="-1" aria-hidden="true" class="modal hide fade rename-notebook-modal fullscreen" id="rename-notebook-modal">
-        <div class="modal-header"> <b>修改文集名</b> </div>
-        <div class="modal-body">
-            <form class="modal-form" onsubmit="return false">
-                <input placeholder="新文集名" name="name" type="text" class="input-large notebook-input" size="30"> </form>
-        </div>
-        <div class="modal-footer"> <a href="javascript:void(0)" class="btn cancel-button"> 取消 </a>
-            <input class="rename-a-notebook btn btn-info" name="commit" type="submit" value="提交" data-action="submit-rename-notebook"> </div>
+    <div class="modal-footer"> <a href="javascript:void(0)" class="btn cancel-button"> 取消 </a>
+      <input class="rename-a-notebook btn btn-info" name="commit" type="submit" value="提交" data-action="submit-rename-notebook"> </div>
+  </div>
+  <div id="view-mode-modal" tabindex="-1" class="modal hide read-modal" aria-hidden="false">
+    <div class="btn-group change-background" data-toggle="buttons-radio">
+      <a class="btn btn-daytime active" href="javascript:void(null)" data-action="set-day" rel="nofollow"> <i class="icon-sun"></i> </a>
+      <a class="btn btn-nighttime " href="javascript:void(null)" data-action="set-night" rel="nofollow"> <i class="icon-moon"></i> </a>
     </div>
-    <div id="view-mode-modal" tabindex="-1" class="modal hide read-modal" aria-hidden="false">
-        <div class="btn-group change-background" data-toggle="buttons-radio">
-            <a class="btn btn-daytime active" href="javascript:void(null)" data-action="set-day" rel="nofollow"> <i class="icon-sun"></i> </a>
-            <a class="btn btn-nighttime " href="javascript:void(null)" data-action="set-night" rel="nofollow"> <i class="icon-moon"></i> </a>
-        </div>
-        <div class="btn-group change-font" data-toggle="buttons-radio"> <a class="btn font " href="javascript:void(null)" data-action="set-font1" rel="nofollow">宋体</a> <a class="btn font hei active" href="javascript:void(null)" data-action="set-font2" rel="nofollow">黑体</a> </div>
-    </div>
+    <div class="btn-group change-font" data-toggle="buttons-radio"> <a class="btn font " href="javascript:void(null)" data-action="set-font1" rel="nofollow">宋体</a> <a class="btn font hei active" href="javascript:void(null)" data-action="set-font2" rel="nofollow">黑体</a> </div>
+  </div>
 </div>

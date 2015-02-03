@@ -24,15 +24,15 @@
         "file": "states/home/home.js"
       },
       {
-        "name": "article",
+        "name": "Shu.article",
         "file": "states/article/article.js"
       },
       {
-        "name": "write",
+        "name": "Shu.write",
         "file": "states/write/write.js"
       },
       {
-        "name": "notebook",
+        "name": "Shu.notebook",
         "file": "states/notebook/notebook.js"
       }
     ]

@@ -1,24 +1,24 @@
 <li class="one-note" ng-class="active? 'active':''" ng-click="activeMe();">
-    <i class="icon icon-note note-icon stop-share"></i>
-    <p class="abbreviate">{{text}}</p>
-    <p class="wordage win-text">字数: {{word_count}}</p> <a href data-type="edit" class="note-link title">{{title}}</a>
-    <div dropdown ng-show="active">
-        <a href data-type="share" class="share-note dropdown-toggle" dropdown-toggle><i class="icon-gear"></i></a>
-        <ul class="dropdown-menu arrow-top" role="menu">
-            <li>
-                <a href class="share-link" data-action="open-share-note"> <i class="icon-share-alt"></i> 直接发布 </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href data-action="open-move-note"> <i class="icon-folder-open"></i> 移动文章 </a>
-            </li>
-            <li>
-                <a href data-action="trigger-history-mode"> <i class="icon-time"></i> 历史版本 </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href data-action="delete-note"> <i class="icon-trash"></i> 删除文章 </a>
-            </li>
-        </ul>
-    </div>
+  <i class="icon icon-note note-icon stop-share"></i>
+  <p class="abbreviate">{{text}}</p>
+  <p class="wordage win-text">字数: {{word_count}}</p> <a href data-type="edit" class="note-link title">{{title}}</a>
+  <div dropdown ng-show="active">
+    <a href data-type="share" class="share-note dropdown-toggle" dropdown-toggle><i class="icon-gear"></i></a>
+    <ul class="dropdown-menu arrow-top" role="menu">
+      <li>
+        <a href class="share-link" data-action="open-share-note"> <i class="icon-share-alt"></i> 直接发布 </a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href data-action="open-move-note"> <i class="icon-folder-open"></i> 移动文章 </a>
+      </li>
+      <li>
+        <a href data-action="trigger-history-mode"> <i class="icon-time"></i> 历史版本 </a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href data-action="delete-note"> <i class="icon-trash"></i> 删除文章 </a>
+      </li>
+    </ul>
+  </div>
 </li>

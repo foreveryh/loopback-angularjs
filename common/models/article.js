@@ -1,10 +1,8 @@
 module.exports = function(Article) {
 	Article.beforeValidate = function(next, article){
-		console.log("beforeValidate");
 		next();
 	};
 	Article.beforeCreate = function(next, article){
-		console.log("beforeCreate");
 		//Short ID
 	  var shortId = require('shortid');
 	  article.id = shortId.generate();
