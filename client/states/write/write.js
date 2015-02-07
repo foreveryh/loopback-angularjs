@@ -206,7 +206,7 @@ angular.module('Shu.write')
       }
     };
   })
-  .directive("articleItemEditor", function(utility) {
+  .directive("articleItemEditor", function(utility, $modal) {
     return {
       restrict: 'EA',
       replace: true,
@@ -217,6 +217,21 @@ angular.module('Shu.write')
         id: '=articleId'
       },
       templateUrl: "states/write/article-item-editor.html",
+      controller: function($scope) {
+        $scope.publishArticle = function() {
+
+        };
+        $scope.deleteArticle = function() {
+          var modalInstance = $modal.open({
+            templateUrl: 'RemoveAritcleModal.html',
+            controller: 'ReoveModalInstanceCtrl',
+            size: "sm"
+          });
+        };
+        $scope.moveArticle = function() {
+
+        };
+      },
       link: function(scope, element, attrs, parentController) {
         scope.active = false;
         scope.listener = null;
@@ -231,16 +246,22 @@ angular.module('Shu.write')
           });
           scope.contentListener = scope.$watch('$parent.selectedArticle.content', function() {
             var contentText = scope.$parent.selectedArticle.content;
-            var contentText = contentText?utility.strip_tags(contentText):false;
+            var contentText = contentText ? utility.strip_tags(contentText) : false;
             if (contentText && scope.text != contentText) {
               scope.text = contentText;
             }
           });
           parentController.activeOne(scope);
         };
-        scope.editMe = function() {
-
-        };
       }
     };
-  });
+  }).
+controller("ReoveModalInstanceCtrl", function($scope, $modalInstance) {
+  $scope.ok = function() {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss('cancel');
+  };
+});

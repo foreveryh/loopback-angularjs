@@ -36,4 +36,16 @@
     </div>
     <div class="btn-group change-font" data-toggle="buttons-radio"> <a class="btn font " href="javascript:void(null)" data-action="set-font1" rel="nofollow">宋体</a> <a class="btn font hei active" href="javascript:void(null)" data-action="set-font2" rel="nofollow">黑体</a> </div>
   </div>
+  <script type="text/ng-template" id="RemoveAritcleModal.html">
+    <div class="modal-header">
+      <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+     请确认删除此文章，该操作不可逆。
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
 </div>
