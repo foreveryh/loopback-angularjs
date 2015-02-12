@@ -74,6 +74,9 @@ angular.module('Shu.write')
           sharedData.currentArticles.splice(index, 1);
         }
       });
+      if (sharedData.selectedArticle.id == articleId) {
+        sharedData.setSelectedArticle({});
+      }
       $rootScope.$broadcast('articles:changed');
     };
     sharedData.setSelectedArticle = function(article) {
@@ -84,7 +87,7 @@ angular.module('Shu.write')
       console.log("Title: " + sharedData.selectedArticle.title);
       return sharedData.selectedArticle;
     };
-    sharedData._deselectArticle = function(){
+    sharedData._deselectArticle = function() {
       sharedData.selectedArticle = {};
     }
     return sharedData;
@@ -228,6 +231,7 @@ angular.module('Shu.write')
           });
           //set data to writer 
           var activeActicle = {
+            id: selectedActivedItem.id,
             title: selectedActivedItem.title,
             content: selectedActivedItem.text
           };
@@ -259,7 +263,7 @@ angular.module('Shu.write')
       }
     };
   })
-  .directive("articleItemEditor", function(utility, sharedData, $modal) {
+  .directive("articleItemEditor", function($modal, utility, sharedData, Article) {
     return {
       restrict: 'EA',
       replace: true,
@@ -272,7 +276,13 @@ angular.module('Shu.write')
       templateUrl: "states/write/article-item-editor.html",
       controller: function($scope) {
         $scope.publishArticle = function() {
-
+          Article.upsert({
+              id: $scope.id,
+              is_published: true
+            },
+            function(ok) {
+              console.log(ok);
+            });
         };
         $scope.deleteArticle = function() {
           var modalInstance = $modal.open({
