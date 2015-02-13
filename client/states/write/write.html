@@ -1,5 +1,6 @@
 <div id="writer" class="container-fluid">
-  <div class="row row-no-padding normal-mode" style="padding: 45px">
+  <div class="row row-no-padding normal-mode" style="padding:0 45px">
+    <alert type="{{alert.type}}" close="alert.open=false">{{alert.msg}}</alert>
     <!-- Notebook Editor-->
     <notebook-list-editor>
       <notebook-item-editor ng-repeat="notebook in notebooks" notebook-name="notebook.name" notebook-id="notebook.id">
@@ -19,6 +20,7 @@
     </div>
   </div>
   <div class="publish-loading writer-splash" style="display: none;"> <img src="http://baijii-common.b0.upaiyun.com/loaders/writer.gif" %="">
+  <!-- Additional Page-->
   </div>
   <div tabindex="-1" aria-hidden="true" class="modal hide fade rename-notebook-modal fullscreen" id="rename-notebook-modal">
     <div class="modal-header"> <b>修改文集名</b> </div>

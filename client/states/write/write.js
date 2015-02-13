@@ -40,17 +40,23 @@ angular.module('Shu.write')
         $scope.$on('selectedArticle:changed', function(event) {
           $scope.selectedArticle = sharedData.getSelectedArticle();
         });
+        //define alert
+        $scope.alert = sharedData.getAlert(); 
+        $scope.$on('alert:changed', function(event) {
+          $scope.alert = sharedData.getAlert(); 
+        });
       },
       controllerAs: 'writeCtrl'
     });
   })
-  .factory('sharedData', function($rootScope) {
+  .factory('sharedData', function($rootScope, $timeout) {
     var sharedData = {
       notebooks: [],
       allArticles: [],
       currentArticles: [],
       selectedNotebookId: null,
-      selectedArticle: {}
+      selectedArticle: {},
+      alert: {type: "success", msg: "状态栏"}
     };
 
     sharedData.selectedNotebookIdChanged = function(notebookId) {
@@ -89,7 +95,21 @@ angular.module('Shu.write')
     };
     sharedData._deselectArticle = function() {
       sharedData.selectedArticle = {};
-    }
+    };
+    sharedData.openAlert = function(type, msg, timeout){
+      sharedData.alert = {type: type, msg: msg, open: true};
+      if (timeout){
+        $timeout(function(){
+          sharedData.alert = {type: "success", msg: "状态栏"};
+          $rootScope.$broadcast('alert:changed');
+        }, timeout);
+      }
+      $rootScope.$broadcast('alert:changed');
+    };
+    sharedData.getAlert = function(){
+      console.log(sharedData.alert);
+      return sharedData.alert;
+    };
     return sharedData;
   })
   .directive("notebookListEditor", function($timeout, Notebook, sharedData) {
@@ -281,7 +301,8 @@ angular.module('Shu.write')
               is_published: true
             },
             function(ok) {
-              console.log(ok);
+              var msg = "文章《" + $scope.title + "》发布成功。";
+              sharedData.openAlert("success", msg, 1800);
             });
         };
         $scope.deleteArticle = function() {
@@ -337,6 +358,7 @@ controller("RemoveModalInstanceCtrl", function($scope, $modalInstance, sharedDat
       },
       function(ok) {
         sharedData.removeOneArticle($scope.article.id);
+        sharedData.openAlert("success", "删除成功", 1800);
       },
       function(errorResponse) {
         console.log(errorResponse);
