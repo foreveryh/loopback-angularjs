@@ -1,4 +1,4 @@
-angular.module('Shu.page', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate']);
+angular.module('Shu.page', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'ngSanitize']);
 
 angular.module('Shu.page')
   .config(function($stateProvider) {
@@ -12,13 +12,15 @@ angular.module('Shu.page')
           })
         }
       },
-      controller: function($rootScope, $scope, $window, article) {
+      controller: function($rootScope, $scope, $window, $sce, article) {
         $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
           $window.document.title = '——Shu';
           $rootScope.bodylayout = "post output reader-day-mode reader-font2";
-          //do action of fetching data here is also possible
-          $scope.article = article;
         });
+        $scope.article = article;
+        $scope.deliberatelyTrustDangerousHtml = function() {
+          return $sce.trustAsHtml($scope.article.content);
+        };
       }
     });
   });

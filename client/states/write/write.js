@@ -32,7 +32,7 @@ angular.module('Shu.write')
             });
         }
       },
-      controller: function($rootScope, $scope, $window, sharedData) {
+      controller: function($rootScope, $scope, $window, sharedData, Article) {
         $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
           $window.document.title = '——Shu';
           $rootScope.bodylayout = "input reader-day-mode reader-font2";
@@ -45,6 +45,19 @@ angular.module('Shu.write')
         $scope.$on('alert:changed', function(event) {
           $scope.alert = sharedData.getAlert(); 
         });
+        //save article
+        $scope.saveArticle = function(){
+          Article.upsert({
+              id: $scope.selectedArticle.id,
+              title: $scope.selectedArticle.title,
+              content: $scope.selectedArticle.content,
+              is_published: false
+            },
+            function(ok) {
+              var msg = "文章《" + ok.title + "》保存成功。";
+              sharedData.openAlert("success", msg, 1800);
+            });
+        };
       },
       controllerAs: 'writeCtrl'
     });
