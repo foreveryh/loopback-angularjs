@@ -1,164 +1,213 @@
 /* Component LESS */
 /* Add Component LESS Above */
 /* Containter */
-.container .article,.preview-mode .preview,.kalamu-area,.kalamu-area:focus,.history-view .view-area {
+.kalamu-area, .kalamu-area:focus, .container .article, .preview-mode .preview, .history-view .view-area {
     bottom: 0;
     padding: 30px;
-    padding-bottom: 0;
-    font-size: 17px;
-    font-weight: 100;
-    line-height: 30px;
-    color: #2f2f2f
+    padding-bottom: 0
 }
 
-.container .article .title,.preview-mode .preview .title,.kalamu-area .title,.kalamu-area:focus .title,.history-view .view-area .title {
+.container .article, .preview-mode .preview, .kalamu-area, .kalamu-area:focus, .history-view .view-area, .collection-top .description {
+    color: #2f2f2f;
+    font-size: 17px;
+    font-weight: 100;
+    line-height: 30px
+}
+
+.container .article .title, .preview-mode .preview .title, .kalamu-area .title,
+.kalamu-area:focus .title, .history-view .view-area .title, .collection-top .description .title {
     margin-left: -8px;
     font-size: 50px;
     font-weight: 700;
-    line-height: 70px
+    line-height: 70px;
+    word-break: break-all
 }
 
-.container .article p,.preview-mode .preview p,.kalamu-area p,.kalamu-area:focus p,.history-view .view-area p {
+.container .article p, .preview-mode .preview p, .kalamu-area p, .kalamu-area:focus p, .history-view .view-area p, .collection-top .description p {
     margin: 0 0 25px 0
 }
 
-.container .article blockquote p:last-child,.preview-mode .preview blockquote p:last-child,.kalamu-area blockquote p:last-child,.kalamu-area:focus blockquote p:last-child,.history-view .view-area blockquote p:last-child {
+.container .article blockquote p:last-child, .preview-mode .preview blockquote p:last-child, .kalamu-area blockquote p:last-child, .kalamu-area:focus blockquote p:last-child, .history-view .view-area blockquote p:last-child, .collection-top .description blockquote p:last-child {
     margin: 0
 }
 
-.container .article li p,.preview-mode .preview li p,.kalamu-area li p,.kalamu-area:focus li p,.history-view .view-area li p {
+.container .article li p, .preview-mode .preview li p, .kalamu-area li p,
+.kalamu-area:focus li p, .history-view .view-area li p, .collection-top .description li p {
     overflow: visible
 }
 
-.container .article a,.preview-mode .preview a,.kalamu-area a,.kalamu-area:focus a,.history-view .view-area a {
+.container .article a, .preview-mode .preview a, .kalamu-area a, .kalamu-area:focus a, .history-view .view-area a, .collection-top .description a {
     color: #4094c7
 }
 
-.container .article a:hover,.preview-mode .preview a:hover,.kalamu-area a:hover,.kalamu-area:focus a:hover,.history-view .view-area a:hover {
-    color: #4bb2e0
-}
-
-.container .article a.active,.container .article a:active,.container .article a:focus,.preview-mode .preview a.active,.preview-mode .preview a:active,.preview-mode .preview a:focus,.kalamu-area a.active,.kalamu-area a:active,.kalamu-area a:focus,.kalamu-area:focus a.active,.kalamu-area:focus a:active,.kalamu-area:focus a:focus,.history-view .view-area a.active,.history-view .view-area a:active,.history-view .view-area a:focus {
+.container .article a:hover, .preview-mode .preview a:hover, .kalamu-area a:hover, .kalamu-area:focus a:hover, .history-view .view-area a:hover, .collection-top .description a:hover {
     color: #075b8d
 }
 
-.container .article a.disabled,.container .article a.disabled:hover,.container .article a.disabled:focus,.container .article a.disabled:active,.container .article a.disabled.active,.container .article a[disabled],.container .article a[disabled]:hover,.container .article a[disabled]:focus,.container .article a[disabled]:active,.container .article a[disabled].active,.preview-mode .preview a.disabled,.preview-mode .preview a.disabled:hover,.preview-mode .preview a.disabled:focus,.preview-mode .preview a.disabled:active,.preview-mode .preview a.disabled.active,.preview-mode .preview a[disabled],.preview-mode .preview a[disabled]:hover,.preview-mode .preview a[disabled]:focus,.preview-mode .preview a[disabled]:active,.preview-mode .preview a[disabled].active,.kalamu-area a.disabled,.kalamu-area a.disabled:hover,.kalamu-area a.disabled:focus,.kalamu-area a.disabled:active,.kalamu-area a.disabled.active,.kalamu-area a[disabled],.kalamu-area a[disabled]:hover,.kalamu-area a[disabled]:focus,.kalamu-area a[disabled]:active,.kalamu-area a[disabled].active,.kalamu-area:focus a.disabled,.kalamu-area:focus a.disabled:hover,.kalamu-area:focus a.disabled:focus,.kalamu-area:focus a.disabled:active,.kalamu-area:focus a.disabled.active,.kalamu-area:focus a[disabled],.kalamu-area:focus a[disabled]:hover,.kalamu-area:focus a[disabled]:focus,.kalamu-area:focus a[disabled]:active,.kalamu-area:focus a[disabled].active,.history-view .view-area a.disabled,.history-view .view-area a.disabled:hover,.history-view .view-area a.disabled:focus,.history-view .view-area a.disabled:active,.history-view .view-area a.disabled.active,.history-view .view-area a[disabled],.history-view .view-area a[disabled]:hover,.history-view .view-area a[disabled]:focus,.history-view .view-area a[disabled]:active,.history-view .view-area a[disabled].active {
+.container .article a.active, .container .article a:active, .container .article a:focus, .preview-mode .preview a.active, .preview-mode .preview a:active, .preview-mode .preview a:focus, .kalamu-area a.active, .kalamu-area a:active, .kalamu-area a:focus, .kalamu-area:focus a.active, .kalamu-area:focus a:active, .kalamu-area:focus a:focus, .history-view .view-area a.active, .history-view .view-area a:active, .history-view .view-area a:focus, .collection-top .description a.active, .collection-top .description a:active, .collection-top .description a:focus {
+    color: #075b8d
+}
+
+.container .article a.disabled, .container .article a.disabled:hover, .container .article a.disabled:focus, .container .article a.disabled:active, .container .article a.disabled.active, .container .article a[disabled],
+.container .article a[disabled]:hover, .container .article a[disabled]:focus, .container .article a[disabled]:active, .container .article a[disabled].active, .preview-mode .preview a.disabled,
+.preview-mode .preview a.disabled:hover, .preview-mode .preview a.disabled:focus, .preview-mode .preview a.disabled:active, .preview-mode .preview a.disabled.active, .preview-mode .preview a[disabled],
+.preview-mode .preview a[disabled]:hover, .preview-mode .preview a[disabled]:focus, .preview-mode .preview a[disabled]:active, .preview-mode .preview a[disabled].active, .kalamu-area a.disabled,
+.kalamu-area a.disabled:hover, .kalamu-area a.disabled:focus, .kalamu-area a.disabled:active, .kalamu-area a.disabled.active, .kalamu-area a[disabled],
+.kalamu-area a[disabled]:hover, .kalamu-area a[disabled]:focus, .kalamu-area a[disabled]:active, .kalamu-area a[disabled].active, .kalamu-area:focus a.disabled, .kalamu-area:focus a.disabled:hover, .kalamu-area:focus a.disabled:focus, .kalamu-area:focus a.disabled:active, .kalamu-area:focus a.disabled.active, .kalamu-area:focus a[disabled], .kalamu-area:focus a[disabled]:hover, .kalamu-area:focus a[disabled]:focus, .kalamu-area:focus a[disabled]:active, .kalamu-area:focus a[disabled].active, .history-view .view-area a.disabled, .history-view .view-area a.disabled:hover, .history-view .view-area a.disabled:focus, .history-view .view-area a.disabled:active, .history-view .view-area a.disabled.active, .history-view .view-area a[disabled],
+.history-view .view-area a[disabled]:hover, .history-view .view-area a[disabled]:focus, .history-view .view-area a[disabled]:active, .history-view .view-area a[disabled].active, .collection-top .description a.disabled,
+.collection-top .description a.disabled:hover, .collection-top .description a.disabled:focus, .collection-top .description a.disabled:active, .collection-top .description a.disabled.active, .collection-top .description a[disabled],
+.collection-top .description a[disabled]:hover, .collection-top .description a[disabled]:focus, .collection-top .description a[disabled]:active, .collection-top .description a[disabled].active {
     cursor: not-allowed;
     color: #999999
 }
 
-.container .article p,.container .article ul,.container .article ol,.preview-mode .preview p,.preview-mode .preview ul,.preview-mode .preview ol,.kalamu-area p,.kalamu-area ul,.kalamu-area ol,.kalamu-area:focus p,.kalamu-area:focus ul,.kalamu-area:focus ol,.history-view .view-area p,.history-view .view-area ul,.history-view .view-area ol {
+.container .article p, .container .article ul, .container .article ol,
+.preview-mode .preview p, .preview-mode .preview ul, .preview-mode .preview ol,
+.kalamu-area p, .kalamu-area ul, .kalamu-area ol, .kalamu-area:focus p, .kalamu-area:focus ul, .kalamu-area:focus ol, .history-view .view-area p, .history-view .view-area ul, .history-view .view-area ol,
+.collection-top .description p, .collection-top .description ul, .collection-top .description ol {
     text-align: justify;
     text-justify: inter-ideograph
 }
 
-.container .article h1,.container .article h2,.container .article h3,.container .article h4,.container .article h5,.container .article h6,.preview-mode .preview h1,.preview-mode .preview h2,.preview-mode .preview h3,.preview-mode .preview h4,.preview-mode .preview h5,.preview-mode .preview h6,.kalamu-area h1,.kalamu-area h2,.kalamu-area h3,.kalamu-area h4,.kalamu-area h5,.kalamu-area h6,.kalamu-area:focus h1,.kalamu-area:focus h2,.kalamu-area:focus h3,.kalamu-area:focus h4,.kalamu-area:focus h5,.kalamu-area:focus h6,.history-view .view-area h1,.history-view .view-area h2,.history-view .view-area h3,.history-view .view-area h4,.history-view .view-area h5,.history-view .view-area h6 {
+.container .article h1, .container .article h2, .container .article h3,
+.container .article h4, .container .article h5, .container .article h6,
+.preview-mode .preview h1, .preview-mode .preview h2, .preview-mode .preview h3,
+.preview-mode .preview h4, .preview-mode .preview h5, .preview-mode .preview h6,
+.kalamu-area h1, .kalamu-area h2, .kalamu-area h3, .kalamu-area h4, .kalamu-area h5,
+.kalamu-area h6, .kalamu-area:focus h1, .kalamu-area:focus h2, .kalamu-area:focus h3, .kalamu-area:focus h4, .kalamu-area:focus h5, .kalamu-area:focus h6, .history-view .view-area h1, .history-view .view-area h2, .history-view .view-area h3,
+.history-view .view-area h4, .history-view .view-area h5, .history-view .view-area h6,
+.collection-top .description h1, .collection-top .description h2, .collection-top .description h3,
+.collection-top .description h4, .collection-top .description h5, .collection-top .description h6 {
     margin: 0;
     color: inherit;
     text-rendering: optimizelegibility
 }
 
-.container .article h1,.preview-mode .preview h1,.kalamu-area h1,.kalamu-area:focus h1,.history-view .view-area h1 {
+.container .article h1, .preview-mode .preview h1, .kalamu-area h1,
+.kalamu-area:focus h1, .history-view .view-area h1, .collection-top .description h1 {
     font-size: 31px;
     font-weight: bold;
     line-height: 45px
 }
 
-.container .article h2,.preview-mode .preview h2,.kalamu-area h2,.kalamu-area:focus h2,.history-view .view-area h2 {
+.container .article h2, .preview-mode .preview h2, .kalamu-area h2,
+.kalamu-area:focus h2, .history-view .view-area h2, .collection-top .description h2 {
     font-size: 27px;
     font-weight: bold;
     line-height: 42px
 }
 
-.container .article h3,.preview-mode .preview h3,.kalamu-area h3,.kalamu-area:focus h3,.history-view .view-area h3 {
+.container .article h3, .preview-mode .preview h3, .kalamu-area h3,
+.kalamu-area:focus h3, .history-view .view-area h3, .collection-top .description h3 {
     font-size: 24px;
     font-weight: bold;
     line-height: 36px
 }
 
-.container .article h1,.container .article h2,.container .article h3,.container .article h4,.preview-mode .preview h1,.preview-mode .preview h2,.preview-mode .preview h3,.preview-mode .preview h4,.kalamu-area h1,.kalamu-area h2,.kalamu-area h3,.kalamu-area h4,.kalamu-area:focus h1,.kalamu-area:focus h2,.kalamu-area:focus h3,.kalamu-area:focus h4,.history-view .view-area h1,.history-view .view-area h2,.history-view .view-area h3,.history-view .view-area h4 {
+.container .article h1, .container .article h2, .container .article h3,
+.container .article h4, .preview-mode .preview h1, .preview-mode .preview h2,
+.preview-mode .preview h3, .preview-mode .preview h4, .kalamu-area h1,
+.kalamu-area h2, .kalamu-area h3, .kalamu-area h4, .kalamu-area:focus h1, .kalamu-area:focus h2, .kalamu-area:focus h3, .kalamu-area:focus h4, .history-view .view-area h1, .history-view .view-area h2, .history-view .view-area h3,
+.history-view .view-area h4, .collection-top .description h1, .collection-top .description h2,
+.collection-top .description h3, .collection-top .description h4 {
     margin-bottom: 7px
 }
 
-.container .article h4,.preview-mode .preview h4,.kalamu-area h4,.kalamu-area:focus h4,.history-view .view-area h4 {
+.container .article h4, .preview-mode .preview h4, .kalamu-area h4,
+.kalamu-area:focus h4, .history-view .view-area h4, .collection-top .description h4 {
     font-size: 22px;
     font-weight: bold;
     line-height: 33px
 }
 
-.container .article h5,.preview-mode .preview h5,.kalamu-area h5,.kalamu-area:focus h5,.history-view .view-area h5 {
+.container .article h5, .preview-mode .preview h5, .kalamu-area h5,
+.kalamu-area:focus h5, .history-view .view-area h5, .collection-top .description h5 {
     font-size: 20px;
     font-weight: bold;
     line-height: 30px
 }
 
-.container .article h6,.preview-mode .preview h6,.kalamu-area h6,.kalamu-area:focus h6,.history-view .view-area h6 {
+.container .article h6, .preview-mode .preview h6, .kalamu-area h6,
+.kalamu-area:focus h6, .history-view .view-area h6, .collection-top .description h6 {
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 17px;
     font-weight: bold;
     line-height: 30px
 }
 
-.container .article img,.preview-mode .preview img,.kalamu-area img,.kalamu-area:focus img,.history-view .view-area img {
-    border: 1px solid #d9d9d9
-}
-
-.container .article hr,.preview-mode .preview hr,.kalamu-area hr,.kalamu-area:focus hr,.history-view .view-area hr {
+.container .article hr, .preview-mode .preview hr, .kalamu-area hr,
+.kalamu-area:focus hr, .history-view .view-area hr, .collection-top .description hr {
     margin: 0 0 25px;
     border-top: 1px solid #d9d9d9
 }
 
-.container .article blockquote,.preview-mode .preview blockquote,.kalamu-area blockquote,.kalamu-area:focus blockquote,.history-view .view-area blockquote {
+.container .article blockquote, .preview-mode .preview blockquote,
+.kalamu-area blockquote, .kalamu-area:focus blockquote, .history-view .view-area blockquote, .collection-top .description blockquote {
     position: relative;
-    margin-bottom: 25px;
     padding: 20px;
-    font-size: 17px;
-    font-weight: 100;
-    line-height: 30px;
-    word-break: break-word;
+    margin-bottom: 25px;
+    background-color: whitesmoke;
     border-left: 4px solid #999999;
-    background-color: #f6f6f6
-}
-
-.container .article blockquote p,.preview-mode .preview blockquote p,.kalamu-area blockquote p,.kalamu-area:focus blockquote p,.history-view .view-area blockquote p {
+    word-break: break-word;
     font-size: 17px;
     font-weight: 100;
     line-height: 30px
 }
 
-.container .article ol,.container .article ul,.preview-mode .preview ol,.preview-mode .preview ul,.kalamu-area ol,.kalamu-area ul,.kalamu-area:focus ol,.kalamu-area:focus ul,.history-view .view-area ol,.history-view .view-area ul {
+.container .article blockquote p, .preview-mode .preview blockquote p,
+.kalamu-area blockquote p, .kalamu-area:focus blockquote p, .history-view .view-area blockquote p, .collection-top .description blockquote p {
+    font-size: 17px;
+    font-weight: 100;
+    line-height: 30px
+}
+
+.container .article ol, .container .article ul, .preview-mode .preview ol,
+.preview-mode .preview ul, .kalamu-area ol, .kalamu-area ul, .kalamu-area:focus ol, .kalamu-area:focus ul, .history-view .view-area ol, .history-view .view-area ul, .collection-top .description ol,
+.collection-top .description ul {
     margin-bottom: 25px
 }
 
-.container .article ol li,.container .article ul li,.preview-mode .preview ol li,.preview-mode .preview ul li,.kalamu-area ol li,.kalamu-area ul li,.kalamu-area:focus ol li,.kalamu-area:focus ul li,.history-view .view-area ol li,.history-view .view-area ul li {
+.container .article ol li, .container .article ul li, .preview-mode .preview ol li,
+.preview-mode .preview ul li, .kalamu-area ol li, .kalamu-area ul li, .kalamu-area:focus ol li, .kalamu-area:focus ul li, .history-view .view-area ol li, .history-view .view-area ul li,
+.collection-top .description ol li, .collection-top .description ul li {
     line-height: 30px
 }
 
-.container .article ol li ol,.container .article ol li ul,.container .article ul li ol,.container .article ul li ul,.preview-mode .preview ol li ol,.preview-mode .preview ol li ul,.preview-mode .preview ul li ol,.preview-mode .preview ul li ul,.kalamu-area ol li ol,.kalamu-area ol li ul,.kalamu-area ul li ol,.kalamu-area ul li ul,.kalamu-area:focus ol li ol,.kalamu-area:focus ol li ul,.kalamu-area:focus ul li ol,.kalamu-area:focus ul li ul,.history-view .view-area ol li ol,.history-view .view-area ol li ul,.history-view .view-area ul li ol,.history-view .view-area ul li ul {
+.container .article ol li ol, .container .article ol li ul, .container .article ul li ol,
+.container .article ul li ul, .preview-mode .preview ol li ol, .preview-mode .preview ol li ul,
+.preview-mode .preview ul li ol, .preview-mode .preview ul li ul, .kalamu-area ol li ol,
+.kalamu-area ol li ul, .kalamu-area ul li ol, .kalamu-area ul li ul, .kalamu-area:focus ol li ol, .kalamu-area:focus ol li ul, .kalamu-area:focus ul li ol, .kalamu-area:focus ul li ul, .history-view .view-area ol li ol, .history-view .view-area ol li ul,
+.history-view .view-area ul li ol, .history-view .view-area ul li ul, .collection-top .description ol li ol,
+.collection-top .description ol li ul, .collection-top .description ul li ol,
+.collection-top .description ul li ul {
     margin-top: 15px
 }
 
-.container .article pre,.preview-mode .preview pre,.kalamu-area pre,.kalamu-area:focus pre,.history-view .view-area pre {
+.container .article pre, .preview-mode .preview pre, .kalamu-area pre,
+.kalamu-area:focus pre, .history-view .view-area pre, .collection-top .description pre {
     word-wrap: normal;
     word-break: normal;
     overflow: auto;
     margin-bottom: 25px
 }
 
-.container .article pre code,.preview-mode .preview pre code,.kalamu-area pre code,.kalamu-area:focus pre code,.history-view .view-area pre code {
-    background-color: transparent;
-    padding: 0
+.container .article pre code, .preview-mode .preview pre code, .kalamu-area pre code,
+.kalamu-area:focus pre code, .history-view .view-area pre code, .collection-top .description pre code {
+    padding: 0;
+    background-color: transparent
 }
 
-.container .article code,.preview-mode .preview code,.kalamu-area code,.kalamu-area:focus code,.history-view .view-area code {
+.container .article code, .preview-mode .preview code, .kalamu-area code,
+.kalamu-area:focus code, .history-view .view-area code, .collection-top .description code {
     padding: 2px 4px;
-    color: #e05b44;
     background-color: #fae5e2;
     border: none;
+    color: #d96f5d;
     white-space: pre
 }
 
-.container .article table,.preview-mode .preview table,.kalamu-area table,.kalamu-area:focus table,.history-view .view-area table {
+.container .article table, .preview-mode .preview table, .kalamu-area table,
+.kalamu-area:focus table, .history-view .view-area table, .collection-top .description table {
     width: 100%;
     margin-bottom: 25px;
     border: 1px solid #dddddd;
@@ -166,11 +215,15 @@
     border-left: none
 }
 
-.container .article table thead th,.preview-mode .preview table thead th,.kalamu-area table thead th,.kalamu-area:focus table thead th,.history-view .view-area table thead th {
+.container .article table thead th, .preview-mode .preview table thead th,
+.kalamu-area table thead th, .kalamu-area:focus table thead th, .history-view .view-area table thead th, .collection-top .description table thead th {
     vertical-align: bottom
 }
 
-.container .article table th,.container .article table td,.preview-mode .preview table th,.preview-mode .preview table td,.kalamu-area table th,.kalamu-area table td,.kalamu-area:focus table th,.kalamu-area:focus table td,.history-view .view-area table th,.history-view .view-area table td {
+.container .article table th, .container .article table td, .preview-mode .preview table th,
+.preview-mode .preview table td, .kalamu-area table th, .kalamu-area table td,
+.kalamu-area:focus table th, .kalamu-area:focus table td, .history-view .view-area table th, .history-view .view-area table td,
+.collection-top .description table th, .collection-top .description table td {
     padding: 8px;
     border-left: 1px solid #dddddd;
     border-top: 1px solid #dddddd;
@@ -178,7 +231,8 @@
     vertical-align: top
 }
 
-.container .article table th,.preview-mode .preview table th,.kalamu-area table th,.kalamu-area:focus table th,.history-view .view-area table th {
+.container .article table th, .preview-mode .preview table th, .kalamu-area table th,
+.kalamu-area:focus table th, .history-view .view-area table th, .collection-top .description table th {
     font-weight: bold
 }
 
@@ -189,16 +243,30 @@
 }
 
 .image-package .image-caption {
-    display: inline-block;
     min-width: 20%;
     min-height: 20px;
-    border-bottom: 1px solid #d9d9d9;
-    margin: 0 auto;
+    display: inline-block;
     padding: 10px;
+    margin: 0 auto;
+    border-bottom: 1px solid #d9d9d9;
     font-size: 14px;
     color: #999999;
     font-style: italic;
     line-height: 150%
+}
+
+.image-package.image-uploading {
+    position: relative
+}
+
+.image-package.image-uploading .uploading-mask {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 50%;
+    color: black;
+    background: rgba(255, 255, 255, 0.5)
 }
 
 .output .image-caption:empty {
@@ -207,21 +275,21 @@
 
 @media (max-width: 480px) {
     .post .container .article .title {
-        font-size:32px !important
+        font-size: 32px !important
     }
-    
+
     .post .show-content h1 {
         font-size: 31px
     }
-    
+
     .post .show-content h2 {
         font-size: 28px
     }
-    
+
     .post .show-content h3 {
         font-size: 26px
     }
-    
+
     .post .image-package {
         width: 100%;
         height: auto
@@ -230,290 +298,139 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
     .post .show-content h1 {
-        font-size:37px
+        font-size: 37px
     }
-    
+
     .post .show-content h2 {
         font-size: 33px
     }
-    
+
     .post .show-content h3 {
         font-size: 29px
     }
 }
 
 @media (max-width: 768px) {
-    .container .article p,.container .article ul,.container .article ol {
-        text-align:left;
+    .container .article p, .container .article ul, .container .article ol {
+        text-align: left;
         word-wrap: break-word;
         -ms-word-wrap: break-word
     }
 }
 
 /* Post */
-.post.output {
-    background: #3f3f3f
-}
-
-.post-bg {
-    position: relative;
-    background-color: white;
-    -webkit-box-shadow: 0 2px 4px #222222;
-    -moz-box-shadow: 0 2px 4px #222222;
-    box-shadow: 0 2px 4px #222222;
-    z-index: 9
-}
-
-.post-bg .container {
-    width: 700px;
-    position: relative
-}
-
-.bookmarked i.icon-bookmark {
-    color: #e78170
-}
-
 .post .navbar-user {
     display: none
 }
 
-.wrap-btn {
-    position: fixed;
-    top: 10px;
-    right: 0;
-    width: 100%;
-    z-index: 999
-}
-
-.wrap-btn .editor-article {
-    top: 10px;
-    float: right;
-    margin-right: 6px
-}
-
-.wrap-btn .editor-article a,.wrap-btn .editor-article a:hover,.wrap-btn .editor-article a:focus {
-    padding: 2px 5px;
-    margin: 0 5px !important;
-    background: none;
-    border: none;
-    outline: none;
-    color: #555555
-}
-
-.wrap-btn .editor-article i {
-    display: inline-block;
-    width: 14px;
-    text-align: center
-}
-
-.wrap-btn .editor-article .nighttime,.wrap-btn .editor-article .daytime,.wrap-btn .editor-article .bookmark,.wrap-btn .editor-article .bookmarked {
-    display: inline-block;
-    font-size: 14px;
-    vertical-align: middle
-}
-
-.wrap-btn .editor-article .nighttime,.wrap-btn .editor-article .daytime {
+.post .post-bg .container .related-avatar-group {
     display: none
 }
 
-.wrap-btn .login {
+.post .post-bg .container {
+    width: 700px
+}
+
+.post .post-bg .container a, .post .post-bg .container [type="submit"] {
     position: relative;
-    top: 12px;
-    float: right;
-    margin-right: 8px;
-    padding: 0 2px
-}
-
-.wrap-btn .user.avatar {
-    position: relative;
-    float: right;
-    margin-right: 10px;
-    display: inline-block;
-    width: 42px;
-    height: 42px;
-    padding-right: 10px;
-    border: none
-}
-
-.wrap-btn .user.avatar b.caret {
-    position: absolute;
-    right: 0;
-    top: 20px
-}
-
-.wrap-btn>.dropdown-menu {
-    left: auto;
-    right: 0;
-    top: 50px
-}
-
-.wrap-btn>.dropdown-menu:before,.wrap-btn>.dropdown-menu:after {
-    top: -9px;
-    left: 111px
-}
-
-.wrap-btn>.dropdown-menu:after {
-    top: -7px
-}
-
-.wrap-btn .dropdown-submenu .dropdown-menu {
-    left: auto;
-    right: 100%;
-    margin-left: 0;
-    margin-right: -1px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px
-}
-
-.wrap-btn .dropdown-menu i {
-    display: inline-block;
-    width: 18px;
-    height: 15px;
-    text-align: center
-}
-
-.post .people {
-    position: absolute;
-    right: 700px;
-    top: 80px;
-    width: 160px;
-    padding: 0 20px 20px 0;
-    text-align: right
-}
-
-.post .people .avatar {
-    width: 60px;
-    height: 60px;
-    margin: 0 0 10px 0;
-    display: inline-block
-}
-
-.post .people .name {
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 24px
-}
-
-.post .people .about {
-    color: #999999;
-    font-size: 12px;
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
-}
-
-.post .people .about p.intro {
-    word-wrap: break-word
-}
-
-.post .people .about a {
-    color: #4094c7;
-    font-size: 12px;
-    font-weight: normal;
-    line-height: 20px
-}
-
-.post .people .about a:hover {
-    color: #4bb2e0
-}
-
-.post .people .about a.active,.post .people .about a:active,.post .people .about a:focus {
-    color: #075b8d
-}
-
-.post .people .about a.disabled,.post .people .about a.disabled:hover,.post .people .about a.disabled:focus,.post .people .about a.disabled:active,.post .people .about a.disabled.active,.post .people .about a[disabled],.post .people .about a[disabled]:hover,.post .people .about a[disabled]:focus,.post .people .about a[disabled]:active,.post .people .about a[disabled].active {
-    cursor: not-allowed;
-    color: #999999
-}
-
-.post .people .sns {
-    margin-bottom: 10px
-}
-
-.post .people .sns a {
-    width: 20px;
-    margin-left: 7px;
-    display: inline-block
-}
-
-.post .people .sns a img {
-    opacity: 0.8;
-    filter: alpha(opacity=80);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px
-}
-
-.post .people .sns a:hover img {
-    opacity: 1;
-    filter: alpha(opacity=100)
-}
-
-.post .people .microcode {
-    width: 159px;
-    height: 159px;
-    padding: 1px;
-    margin-bottom: 20px;
-    background: #f1f1f1
-}
-
-.post .people .microcode img {
-    height: 158px;
-    width: 158px
+    z-index: 1000
 }
 
 .post .container .article {
-    position: relative;
-    padding: 70px 40px 30px
+    padding: 100px 40px 30px
 }
 
-.post .container .article .meta-top a {
-    font-size: 16px
+.post .container .article .meta-top {
+    margin: 30px 0 45px 0;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
+}
+
+.post .container .article .meta-top img {
+    border: none
+}
+
+.post .container .article .meta-top a span {
+    color: inherit
 }
 
 .post .container .article .meta-top span {
     position: relative;
-    top: 2px
-}
-
-.post .container .article .avatar {
-    display: inline-block;
-    margin-right: 5px;
-    line-height: 1%;
-    width: 40px;
-    height: 40px
-}
-
-.post .container .article .meta-top {
-    margin: 0 0 20px 0;
-    display: none
-}
-
-.post .container .article .article-info {
-    overflow: hidden
-}
-
-.post .container .article .article-info a {
-    margin-right: 15px
-}
-
-.post .container .article .article-info a .icon-book {
-    margin-right: 5px
-}
-
-.post .container .article .article-info p {
-    margin-bottom: 20px;
+    top: 4px;
+    margin-right: 10px;
     font-size: 14px;
     color: #999999
 }
 
-.post .container .article .article-info p span {
-    margin: 0 15px;
-    font-size: 14px
+.post .container .article .avatar {
+    width: 54px;
+    height: 54px;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 1%
 }
 
-.post .container .article .article-info p a {
-    font-size: 14px
+.post .container .article .article-share {
+    display: none;
+    padding: 20px;
+    margin: 0 -10px 45px;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center
+}
+
+.post .container .article .article-share:empty {
+    display: none
+}
+
+.post .container .article .article-share .btn {
+    padding: 0;
+    border: none;
+    background: none
+}
+
+.post .container .article .article-share a {
+    font-size: 16px;
+    color: #3f3f3f
+}
+
+.post .container .article .article-share i {
+    margin-right: 6px
+}
+
+.post .container .article .article-share .add-collection, .post .container .article .article-share .bookmark,
+.post .container .article .article-share .bookmarked {
+    margin-right: 15%
+}
+
+.post .container .article .article-share .bookmarked i {
+    color: #e78170
+}
+
+.post .container .article .article-share .open {
+    position: relative
+}
+
+.post .container .article .article-share .open ul {
+    min-width: initial;
+    width: 50px;
+    top: 32px
+}
+
+.post .container .article .article-share .open ul::before, .post .container .article .article-share .open ul::after {
+    left: 16px
+}
+
+.post .container .article .article-share .open li {
+    text-align: center
+}
+
+.post .container .article .article-share .open a {
+    padding: 4px 0
+}
+
+.post .container .article .article-share .open img {
+    width: 20px;
+    border: none
 }
 
 .post .container .article .show-content {
@@ -523,39 +440,42 @@
 .post .btn-reward {
     position: relative;
     left: 50%;
-    margin-left: -30px;
     width: 60px;
     height: 60px;
     display: inline-block;
     padding: 0;
+    margin-left: -30px;
+    background: #F47425;
     border: none;
     border-radius: 50%;
-    background: #F47425;
     line-height: 60px;
     font-size: 16px;
     color: white;
     text-align: center
 }
 
-.post .further-reading {
-    padding: 0 40px 55px;
-    font-size: 14px;
-    color: #c2c2c2
+.post .further-reading, .post .meta-bottom, .post .post-bg .like, .post .author-info,
+.post .like-list, .post .comment-list, .post .author-article .content,
+.post .other-article .content {
+    width: 620px;
+    margin: 0 auto
 }
 
-.post .further-reading [contenteditable][placeholder]:empty:before {
-    content: attr(placeholder)
+.post .further-reading {
+    margin-bottom: 70px;
+    font-size: 14px;
+    color: #d5d5d5
 }
 
 .post .further-reading .further-reading-line {
-    padding-top: 5px;
-    border-top: 1px solid #d9d9d9;
     width: 40px;
-    margin: 20px 0
+    padding-top: 5px;
+    margin: 20px 0;
+    border-top: 1px solid #d9d9d9
 }
 
 .post .further-reading a {
-    color: #c2c2c2
+    color: #d5d5d5
 }
 
 .post .further-reading .reading-list>li {
@@ -566,7 +486,7 @@
     position: relative
 }
 
-.post .further-reading .article-origin,.post .further-reading .btn-link {
+.post .further-reading .btn-link, .post .further-reading .article-origin {
     font-size: 12px;
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
@@ -575,17 +495,18 @@
     border-bottom: 1px solid #d9d9d9
 }
 
-.post .further-reading .reading-info,.post .further-reading .reading-link-text {
+.post .further-reading .reading-info, .post .further-reading .reading-link-text {
     display: inline-block;
     outline: none
 }
 
-.post .further-reading .reading-info h6,.post .further-reading .reading-info span,.post .further-reading .reading-link-text h6,.post .further-reading .reading-link-text span {
+.post .further-reading .reading-info h6, .post .further-reading .reading-info span,
+.post .further-reading .reading-link-text h6, .post .further-reading .reading-link-text span {
     outline: none;
     display: inline-block
 }
 
-.post .further-reading .reading-info h6:focus,.post .further-reading .reading-info span:focus,.post .further-reading .reading-link-text h6:focus,.post .further-reading .reading-link-text span:focus {
+.post .further-reading .reading-info h6:focus, .post .further-reading .reading-info span:focus, .post .further-reading .reading-link-text h6:focus, .post .further-reading .reading-link-text span:focus {
     border-bottom: 1px solid #d9d9d9
 }
 
@@ -593,7 +514,7 @@
     margin: 0;
     display: inline-block;
     font-size: 14px;
-    color: #333333
+    color: #555555
 }
 
 .post .further-reading .reading-states {
@@ -602,8 +523,8 @@
 
 .post .further-reading .edit {
     position: absolute;
-    margin-left: 5px;
     display: inline-block;
+    margin-left: 5px;
     background-color: white;
     border: 1px solid transparent;
     text-align: center;
@@ -620,17 +541,15 @@
     border-bottom: 1px solid #d9d9d9
 }
 
-.post .further-reading .edit li:last-child,.post .further-reading .edit li:first-child {
+.post .further-reading .edit li:last-child, .post .further-reading .edit li:first-child {
     border-bottom: none
 }
 
 .post .further-reading .edit li a {
-    display: inline-block;
     width: 100%;
+    display: inline-block;
     padding: 0 4px;
     text-align: left;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box
 }
 
@@ -645,82 +564,83 @@
 }
 
 .post .meta-bottom {
-    padding: 0 40px 30px
+    text-align: center
 }
 
-.post .meta-bottom .like {
-    overflow: hidden;
-    float: left
+.post .meta-bottom .share-group {
+    height: 45px;
+    line-height: 45px;
+    margin-bottom: 46px
 }
 
-.post .meta-bottom .like .btn {
+.post .meta-bottom .share-group>a {
+    padding: 0 15px;
+    margin-right: 8px;
+    display: inline-block;
+    background-color: #eeeeee;
+    border-radius: 50px;
+    font-size: 18px;
+    color: #717171
+}
+
+.post .meta-bottom .share-group>a:hover {
+    color: #555555
+}
+
+.post .meta-bottom .share-group>a .fa {
+    vertical-align: middle
+}
+
+.post .meta-bottom .share-group>a .fa-weixin {
+    font-size: 16px
+}
+
+.post .meta-bottom .share-group>a>span {
+    margin-left: 5px;
+    font-size: 14px
+}
+
+.post .meta-bottom .share-group .share-douban {
+    padding: 0 13px
+}
+
+.post .meta-bottom .share-group .more {
     position: relative;
-    width: 60px;
-    height: 20px;
-    padding: 8px 24px;
-    font-size: 16px;
-    color: #e78170;
-    background: transparent;
-    border-color: #e78170;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px
+    top: 2px;
+    display: inline-block
 }
 
-.post .meta-bottom .like .btn:hover {
-    color: #e36a56;
-    background: #f6cec7;
-    border-color: #f6cec7
+.post .meta-bottom .share-group .more>a {
+    padding: 0 14px 0 15px;
+    display: inline-block;
+    background-color: #eeeeee;
+    border-radius: 50px;
+    font-size: 20px
 }
 
-.post .meta-bottom .like .btn span {
-    position: absolute;
-    -webkit-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -moz-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -o-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
-    transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99)
+.post .meta-bottom .share-group .more .dropdown-menu {
+    top: 55px
 }
 
-.post .meta-bottom .like span.like-content {
-    left: 29px
+.post .meta-bottom .share-group .more .dropdown-menu::before, .post .meta-bottom .share-group .more .dropdown-menu::after {
+    left: 13px
 }
 
-.post .meta-bottom .like span.load-img {
-    right: -30px;
-    line-height: 17px
+.post .meta-bottom .share-group .more li {
+    text-align: left
 }
 
-.post .meta-bottom .like .note-liked,.post .meta-bottom .like .note-liked:hover {
-    border-color: #de533c;
-    background-color: #de533c;
-    color: white
+.post .meta-bottom .share-group .more .fa-arrow-circle-o-down {
+    margin-right: 12px;
+    margin-left: 2px
 }
 
-.post .meta-bottom .like.load .btn {
-    background-color: #f9ddd9;
-    border-color: #f9ddd9
-}
-
-.post .meta-bottom .like.load .like-content {
-    left: -100px;
-    opacity: 0.1;
-    filter: alpha(opacity=10);
-    -webkit-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -moz-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -o-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
-    transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99)
-}
-
-.post .meta-bottom .like.load span.load-img {
-    right: 47px;
-    -webkit-transition: all 0.1s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -moz-transition: all 0.1s cubic-bezier(0.35, 0.32, 0, 0.99);
-    -o-transition: all 0.1s cubic-bezier(0.35, 0.32, 0, 0.99);
-    transition: all 0.1s cubic-bezier(0.35, 0.32, 0, 0.99)
+.post .meta-bottom .share-group .more img {
+    width: 16px;
+    margin-right: 10px
 }
 
 .post .meta-bottom .share-note-text {
-    float: right;
     margin: 8px 0 0;
     list-style: none
 }
@@ -752,10 +672,10 @@
 }
 
 .post .meta-bottom .share-note-text i:hover {
-    color: #333333
+    color: #3f3f3f
 }
 
-.post .meta-bottom .share-note-text .dropdown-menu i.icon-download {
+.post .meta-bottom .share-note-text .dropdown-menu i.fa-arrow-circle-o-down {
     position: relative;
     top: 1px;
     margin: 0 5px 0 1px
@@ -769,412 +689,464 @@
     margin: 0
 }
 
-.post .comment {
-    width: 620px;
-    margin: 0 auto
+.post .post-bg .like {
+    margin-bottom: 50px;
+    text-align: center
 }
 
-.post .comment .nav-tabs {
-    padding: 2px 0;
-    margin: 0 auto 30px;
-    border-bottom: none
+.post .post-bg .like .btn {
+    width: 144px;
+    height: 42px;
+    padding: 8px 24px;
+    overflow: hidden;
+    line-height: 45px;
+    font-size: 18px;
+    color: #e78170;
+    background: transparent;
+    border-color: #e78170;
+    border-radius: 40px
 }
 
-.post .comment .nav-tabs>li.active {
-    background-color: #343434;
-    background-image: -moz-linear-gradient(top, #2e2e2e, #3f3f3f);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2e2e2e), to(#3f3f3f));
-    background-image: -webkit-linear-gradient(top, #2e2e2e, #3f3f3f);
-    background-image: -o-linear-gradient(top, #2e2e2e, #3f3f3f);
-    background-image: linear-gradient(to bottom, #2e2e2e, #3f3f3f);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2E2E2E', endColorstr='#FF3F3F3F', GradientType=0)
+.post .post-bg .like .btn:hover {
+    color: #e36a56;
+    background: #f6cec7;
+    border-color: #f6cec7
 }
 
-.post .comment .nav-tabs>li.active a {
-    -webkit-box-shadow: 0 -17px 26px rgba(0,0,0,0.4);
-    -moz-box-shadow: 0 -17px 26px rgba(0,0,0,0.4);
-    box-shadow: 0 -17px 26px rgba(0,0,0,0.4)
+.post .post-bg .like .btn span {
+    position: absolute;
+    -webkit-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -moz-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -o-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99)
 }
 
-.post .comment .nav-tabs>li>a {
-    position: relative;
-    padding: 14px 20px;
-    margin: 0;
-    border: none;
-    background: none;
+.post .post-bg .like span.like-content {
+    right: 0;
+    left: 0
+}
+
+.post .post-bg .like span.load-img {
+    right: -30px;
+    line-height: 42px
+}
+
+.post .post-bg .like .note-liked, .post .post-bg .like .note-liked:hover {
+    border-color: #de533c;
+    background-color: #de533c;
+    color: white
+}
+
+.post .post-bg .like.load .btn {
+    background-color: #f9ddd9;
+    border-color: #f9ddd9
+}
+
+.post .post-bg .like.load .like-content {
+    left: -200px;
+    opacity: 0.1;
+    filter: alpha(opacity=10);
+    -webkit-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -moz-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -o-transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99);
+    transition: all 0.3s cubic-bezier(0.35, 0.32, 0, 0.99)
+}
+
+.post .post-bg .like.load span.load-img {
+    right: 80px;
+    top: 14px;
+    -webkit-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -moz-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
+    -o-transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99);
+    transition: all 0.2s cubic-bezier(0.35, 0.32, 0, 0.99)
+}
+
+.post .author-info {
+    padding: 0 0 15px;
+    margin-bottom: 54px;
+    border-bottom: 1px solid #d9d9d9
+}
+
+.post .author-info .title {
+    padding-bottom: 10px;
+    margin: 0 0 15px;
+    border-bottom: 1px solid #d9d9d9;
+    font-size: 14px;
+    font-weight: normal;
     color: #999999
 }
 
-.post .comment .nav-tabs .toggle_comment a {
-    padding-right: 0;
-    font-size: 12px;
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
+.post .author-info .basic-info {
+    width: 49.4%;
+    padding: 10px 0;
+    border-right: 1px solid #d9d9d9
 }
 
-.post .comment .nav-tabs>.active>a,.post .comment .nav-tabs>.active>a:hover,.post .comment .nav-tabs>.active>a:focus {
-    color: #bbbbbb;
-    background: none
-}
-
-.post .comment .nav-tabs>li>a:hover {
-    color: gainsboro
-}
-
-.post .comment .nav-tabs>.active>a:before,.post .comment .nav-tabs>.active>a:after {
+.post .author-info .basic-info .avatar {
     position: absolute;
-    top: -1px;
-    left: 0;
-    content: "";
+    width: 80px;
+    height: 80px
+}
+
+.post .author-info .basic-info .info-r {
+    margin-left: 95px;
+    min-height: 84px
+}
+
+.post .author-info .basic-info .info-r p {
+    padding-right: 10px;
+    margin-bottom: 7px;
+    word-break: break-all
+}
+
+.post .author-info .basic-info .info-r .btn-group {
+    margin-bottom: 10px
+}
+
+.post .author-info .basic-info .info-r .btn-group .btn-list {
+    border-radius: 0 4px 4px 0
+}
+
+.post .author-info .basic-info .info-r .dropdown-menu {
+    top: 35px;
+    left: 6px;
+    z-index: 1020
+}
+
+.post .author-info .basic-info .info-r .sns a {
+    margin-right: 5px
+}
+
+.post .author-info .basic-info .info-r .sns img {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px
+}
+
+.post .author-info .user-stats {
+    width: 49%;
+    margin-top: 30px;
+    text-align: center
+}
+
+.post .author-info .user-stats a {
+    display: inline-block
+}
+
+.post .author-info .user-stats .follow-user {
+    margin: 0 55px
+}
+
+.post .author-info .user-stats b {
+    margin-bottom: 8px;
     display: block;
-    right: 0;
-    height: 6px;
-    background: #e78170;
-    -webkit-box-shadow: 9px -4px 20px rgba(0,0,0,0.8);
-    -moz-box-shadow: 9px -4px 20px rgba(0,0,0,0.8);
-    box-shadow: 9px -4px 20px rgba(0,0,0,0.8)
+    font-size: 20px
 }
 
-.post .comment .nav-tabs>.active>a:after {
-    -webkit-box-shadow: -9px -4px 20px rgba(0,0,0,0.8);
-    -moz-box-shadow: -9px -4px 20px rgba(0,0,0,0.8);
-    box-shadow: -9px -4px 20px rgba(0,0,0,0.8)
+.post .author-info .user-stats span {
+    font-size: 12px;
+    color: #b3b3b3
 }
 
-.post .comment .tab-content {
-    overflow: inherit
+.post .comment-list .loader-tiny {
+    width: 34px;
+    margin: 0 auto;
+    display: inherit
 }
 
-.post .comment .tab-content .people {
-    position: static;
-    width: 98%;
-    margin: 3px auto;
-    padding: 0 0 20px 0;
-    text-align: left
+.post .comment-list form {
+    margin-bottom: 46px
 }
 
-.post .comment .tab-content .people .name {
-    color: #bbbbbb
-}
-
-.post .comment .tab-content .people .avatar {
-    margin-right: 10px
-}
-
-.post .comment .tab-content .people .icon-home {
-    color: #bbbbbb
-}
-
-.post .comment .tab-content .people br {
-    display: none
-}
-
-.post .comment .tab-content .comment-list .comment-text {
+.post .comment-list .comment-text {
     padding: 10px;
-    margin: 10px auto 15px;
-    background: white;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     border-radius: 4px
 }
 
-.post .comment .tab-content .comment-list .comment-text.letter textarea {
-    height: 112px
-}
-
-.post .comment .tab-content .comment-list textarea {
+.post .comment-list textarea {
     width: 100%;
     height: 78px;
     padding: 0;
     margin: 0;
     border: none;
     box-shadow: none;
+    background: transparent;
     resize: none
 }
 
-.post .comment .tab-content .comment-list .hotkey,.post .comment .tab-content .comment-list .warning {
+.post .comment-list .hotkey, .post .comment-list .warning {
     position: relative;
     top: 2px;
     margin-left: 11px
 }
 
-.post .comment .tab-content .comment-list .hotkey i,.post .comment .tab-content .comment-list .warning i {
+.post .comment-list .hotkey i, .post .comment-list .warning i {
     margin-right: 5px
 }
 
-.post .comment .tab-content .emoji {
+.post .comment-list .close-comment {
+    margin-top: 12px
+}
+
+.post .comment-list .open-comment {
+    left: 50%;
+    margin-left: -55px;
+    background: none
+}
+
+.post .comment-list .emoji {
     position: relative;
     display: inline-block
 }
 
-.post .comment .tab-content .emoji .icon-smile {
+.post .comment-list .emoji .fa-smile-o {
     position: relative;
     top: 2px;
     margin-left: 20px;
-    font-size: 16px;
-    color: #eeeeee
+    font-size: 16px
 }
 
-.post .comment .comment-list,.post .comment .like {
-    min-height: 150px
+.post .comment-list .share-group {
+    position: relative;
+    top: 7px;
+    color: #999999
 }
 
-.post .comment .comment-list .tips {
-    text-align: center
+.post .comment-list .share-group img {
+    opacity: 0.6;
+    filter: alpha(opacity=60)
 }
 
-.post .comment .comment-list .signout-comment {
-    text-align: center
+.post .comment-list .share-group a {
+    margin: 0 4px
 }
 
-.post .comment .comment-list .signout-comment a,.post .comment .comment-list .signout-comment a:hover {
-    color: gainsboro
+.post .comment-list .share-group .share-douban {
+    position: relative;
+    top: 3px;
+    color: #999999;
+    font-size: 18px;
+    font-weight: bold
 }
 
-.post .comment .comment-list hr {
-    margin-bottom: 0;
-    border-top: none;
-    border-color: #8a8a8a
+.post .atwho-view {
+    z-index: 1010
 }
 
-.post .comment .comment-list .note-comment {
-    padding: 14px 0 10px;
-    border-bottom: 1px dashed #8a8a8a
+.post .like-list {
+    margin-bottom: 30px;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
-.post .comment .comment-list .avatar {
+.post .like-list>a, .post .like-list>a:hover {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 18px;
+    margin-bottom: 18px;
+    color: #e78170;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 50%
+}
+
+.post .like-list>a img, .post .like-list>a:hover img {
+    border: none
+}
+
+.post .like-list>a.avatar {
+    position: relative
+}
+
+.post .like-list>a.avatar i {
     position: absolute;
-    margin-top: 3px
+    right: -6px;
+    top: 18px;
+    font-size: 14px
 }
 
-.post .comment .comment-list .avatar a {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    z-index: 1
+.post .like-list>a.avatar i::before {
+    font-size: 18px;
+    color: white
 }
 
-.post .comment .comment-list .content {
-    padding-left: 45px
+.post .like-list>a.avatar i::after {
+    position: absolute;
+    right: 2px;
+    top: 2px
 }
 
-.post .comment .comment-list .content .comment-header {
+.post .like-list .fa-trophy::after {
+    content: "\f091"
+}
+
+.post .like-list .fa-heart::after {
+    content: "\f004"
+}
+
+.post .like-list .fa-comment::after {
+    content: "\f075"
+}
+
+.post .like-list i.fa-comment {
+    color: #15a7f0
+}
+
+.post .like-list .more {
+    position: relative;
+    top: 1px;
+    border: none;
+    background-color: #eeeeee;
+    color: #999999
+}
+
+.post .comment-list {
+    margin-bottom: 35px
+}
+
+.post .comment-list .signout-comment {
+    text-align: center
+}
+
+.post .comment-list .note-comment {
+    padding: 0 0 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #d9d9d9
+}
+
+.post .comment-list .note-comment .avatar {
+    position: absolute;
+    margin-top: 3px;
+    width: 36px;
+    height: 36px
+}
+
+.post .comment-list .note-comment .content {
+    margin-left: 45px
+}
+
+.post .comment-list .note-comment .content .comment-header {
     margin-bottom: 5px
 }
 
-.post .comment .comment-list .content .author-name {
+.post .comment-list .note-comment .content .author-name {
     font-size: 14px;
-    color: #4bb2e0
-}
-
-.post .comment .comment-list .content .author-name:hover {
     color: #4094c7
 }
 
-.post .comment .comment-list .content .author-name.active,.post .comment .comment-list .content .author-name:active,.post .comment .comment-list .content .author-name:focus {
+.post .comment-list .note-comment .content .author-name:hover {
     color: #075b8d
 }
 
-.post .comment .comment-list .content .author-name.disabled,.post .comment .comment-list .content .author-name.disabled:hover,.post .comment .comment-list .content .author-name.disabled:focus,.post .comment .comment-list .content .author-name.disabled:active,.post .comment .comment-list .content .author-name.disabled.active,.post .comment .comment-list .content .author-name[disabled],.post .comment .comment-list .content .author-name[disabled]:hover,.post .comment .comment-list .content .author-name[disabled]:focus,.post .comment .comment-list .content .author-name[disabled]:active,.post .comment .comment-list .content .author-name[disabled].active {
+.post .comment-list .note-comment .content .author-name.active, .post .comment-list .note-comment .content .author-name:active, .post .comment-list .note-comment .content .author-name:focus {
+    color: #075b8d
+}
+
+.post .comment-list .note-comment .content .author-name.disabled,
+.post .comment-list .note-comment .content .author-name.disabled:hover, .post .comment-list .note-comment .content .author-name.disabled:focus, .post .comment-list .note-comment .content .author-name.disabled:active, .post .comment-list .note-comment .content .author-name.disabled.active,
+.post .comment-list .note-comment .content .author-name[disabled],
+.post .comment-list .note-comment .content .author-name[disabled]:hover, .post .comment-list .note-comment .content .author-name[disabled]:focus, .post .comment-list .note-comment .content .author-name[disabled]:active, .post .comment-list .note-comment .content .author-name[disabled].active {
     cursor: not-allowed;
     color: #999999
 }
 
-.post .comment .comment-list .content .reply-time {
+.post .comment-list .note-comment .content .reply-time {
     font-size: 12px;
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
-.post .comment .comment-list .content .reply-time a {
-    color: #b3b3b3
+.post .comment-list .note-comment .content .reply-time a {
+    color: #b1b1b1
 }
 
-.post .comment .comment-list .content p {
-    margin-bottom: 0;
-    color: #ebebeb;
+.post .comment-list .note-comment .content p {
     word-break: break-word
 }
 
-.post .comment .comment-list .content p img {
+.post .comment-list .note-comment .content p img {
     width: 20px
 }
 
-.post .comment .comment-list .content p a {
-    color: #4bb2e0
-}
-
-.post .comment .comment-list .content p a:hover {
+.post .comment-list .note-comment .content p a {
     color: #4094c7
 }
 
-.post .comment .comment-list .content p a.active,.post .comment .comment-list .content p a:active,.post .comment .comment-list .content p a:focus {
+.post .comment-list .note-comment .content p a:hover {
     color: #075b8d
 }
 
-.post .comment .comment-list .content p a.disabled,.post .comment .comment-list .content p a.disabled:hover,.post .comment .comment-list .content p a.disabled:focus,.post .comment .comment-list .content p a.disabled:active,.post .comment .comment-list .content p a.disabled.active,.post .comment .comment-list .content p a[disabled],.post .comment .comment-list .content p a[disabled]:hover,.post .comment .comment-list .content p a[disabled]:focus,.post .comment .comment-list .content p a[disabled]:active,.post .comment .comment-list .content p a[disabled].active {
+.post .comment-list .note-comment .content p a.active, .post .comment-list .note-comment .content p a:active, .post .comment-list .note-comment .content p a:focus {
+    color: #075b8d
+}
+
+.post .comment-list .note-comment .content p a.disabled, .post .comment-list .note-comment .content p a.disabled:hover, .post .comment-list .note-comment .content p a.disabled:focus, .post .comment-list .note-comment .content p a.disabled:active, .post .comment-list .note-comment .content p a.disabled.active,
+.post .comment-list .note-comment .content p a[disabled], .post .comment-list .note-comment .content p a[disabled]:hover, .post .comment-list .note-comment .content p a[disabled]:focus, .post .comment-list .note-comment .content p a[disabled]:active, .post .comment-list .note-comment .content p a[disabled].active {
     cursor: not-allowed;
     color: #999999
 }
 
-.post .comment .comment-list .content .comment-footer {
+.post .comment-list .note-comment .comment-footer {
     margin-top: 10px
 }
 
-.post .comment .comment-list .content .comment-footer .delete,.post .comment .comment-list .content .comment-footer .dismiss {
+.post .comment-list .note-comment .comment-footer .delete, .post .comment-list .note-comment .comment-footer .dismiss {
     margin-left: 14px
 }
 
-.post .comment .comment-list .content .comment-footer a {
-    color: #666666;
+.post .comment-list .note-comment .comment-footer a {
+    color: #999999;
     font-size: 13px
 }
 
-.post .comment .comment-list .content .comment-footer a:hover {
-    color: #bbbbbb
+.post .comment-list .note-comment .comment-footer a:hover {
+    color: #555555
 }
 
-.post .comment .comment-list .content .comment-footer i {
+.post .comment-list .note-comment .comment-footer i {
     position: relative;
     bottom: 1px;
     margin-right: 5px
 }
 
-.post .comment .like ul {
-    margin: 0 0 10px;
-    list-style: none
-}
-
-.post .comment .like li {
-    margin-bottom: 5px
-}
-
-.post .comment .like .author {
-    margin: 0 9px 8px 0;
-    display: inline-block;
-    color: #4094c7
-}
-
-.post .comment .like .author:hover {
-    color: #4bb2e0
-}
-
-.post .comment .like .author.active,.post .comment .like .author:active,.post .comment .like .author:focus {
-    color: #075b8d
-}
-
-.post .comment .like .author.disabled,.post .comment .like .author.disabled:hover,.post .comment .like .author.disabled:focus,.post .comment .like .author.disabled:active,.post .comment .like .author.disabled.active,.post .comment .like .author[disabled],.post .comment .like .author[disabled]:hover,.post .comment .like .author[disabled]:focus,.post .comment .like .author[disabled]:active,.post .comment .like .author[disabled].active {
-    cursor: not-allowed;
-    color: #999999
-}
-
-.post .comment .like .avatar {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin-right: 4px
-}
-
-.post .comment .like .more-like {
-    margin-left: 39px;
-    color: gainsboro
-}
-
-.post .comment .like .more-like .icon-double-angle-down {
-    position: relative;
-    top: 2px;
-    margin-left: 5px;
-    font-size: 18px
-}
-
-.post .comment .pagination ul {
-    float: right
-}
-
-.function {
-    padding: 0 0 170px;
-    color: #999999;
-    background-color: #3f3f3f;
-    background-color: #3f3f3f;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#262626), color-stop(50px, #3f3f3f), to(#3f3f3f));
-    background-image: -webkit-linear-gradient(#262626, #3f3f3f 50px, #3f3f3f);
-    background-image: -moz-linear-gradient(top, #262626, #3f3f3f 50px, #3f3f3f);
-    background-image: -o-linear-gradient(#262626, #3f3f3f 50px, #3f3f3f);
-    background-image: linear-gradient(#262626, #3f3f3f 50px, #3f3f3f);
-    background-repeat: no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF262626', endColorstr='#FF3F3F3F', GradientType=0)
-}
-
-.function .before,.function .after {
-    margin-top: 30px;
-    font-size: 16px;
-    color: #bbbbbb
-}
-
-.function .before {
-    float: left
-}
-
-.function .before i {
-    margin-right: 10px
-}
-
-.function .after {
-    float: right
-}
-
-.function .after i {
-    margin-left: 10px
-}
-
-.function .collections p {
-    margin: 20px 0 30px;
-    color: white;
-    font-size: 12px;
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
-}
-
-.function .collections p span {
-    margin: 0 20px
-}
-
-.function .collections ul {
-    margin: 0
-}
-
-.function .collections li {
-    margin: 0 40px 10px 0;
-    display: inline-block;
+.post .comment-list .all-comments {
     text-align: center
 }
 
-.function .collections a {
-    color: #bbbbbb
+.post .author-article, .post .other-article {
+    background-color: whitesmoke
 }
 
-.function .collections .img-broder {
-    margin-bottom: 10px;
-    border: 2px solid gainsboro;
-    display: inline-block;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%
+.post .author-article .content, .post .other-article .content {
+    margin-top: 40px
 }
 
-.function .collections img {
-    width: 45px;
-    height: 45px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%
+.post .author-article h5, .post .other-article h5 {
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: normal
 }
 
-.function .collections .clear {
-    clear: both
+.post .author-article .article-list li, .post .other-article .article-list li {
+    padding-bottom: 15px;
+    margin-bottom: 15px
 }
 
-.function .collections .more {
-    font-size: 12px;
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
+.post .author-article {
+    position: relative;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid whitesmoke;
+    z-index: 2
+}
+
+.post .other-article {
+    position: relative;
+    top: -1px;
+    padding-bottom: 30px;
+    border-top: 1px solid #d9d9d9;
+    overflow: hidden;
+    z-index: 1
 }
 
 .footer-logo {
@@ -1183,18 +1155,21 @@
 
 .post.output.longweibo {
     padding: 0 !important;
-    background: none
+    background: #fff;
+    line-height: 1.5
 }
 
 .post.output.longweibo .post-bg {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none
 }
 
 .post.output.longweibo .container {
     width: 640px;
     overflow: hidden
+}
+
+.post.output.longweibo blockquote p:last-child {
+    margin: 0
 }
 
 .post.output.longweibo .meta-top {
@@ -1215,7 +1190,8 @@
     margin-bottom: 35px
 }
 
-.post.output.longweibo .article p,.post.output.longweibo .article ul,.post.output.longweibo .article ol {
+.post.output.longweibo .article p, .post.output.longweibo .article ul,
+.post.output.longweibo .article ol {
     text-align: left
 }
 
@@ -1226,7 +1202,7 @@
 }
 
 .post.output.longweibo .article .author {
-    color: #28a1c5;
+    color: #15a7f0;
     font-size: 30px;
     font-weight: normal;
     line-height: 45px
@@ -1235,15 +1211,32 @@
 .post.output.longweibo .article h1 {
     margin-bottom: 30px;
     font-size: 42px;
-    font-weight: bold;
-    line-height: 63px
+    line-height: 1.5
 }
 
-.post.output.longweibo .article h2,.post.output.longweibo .article h3,.post.output.longweibo .article h4,.post.output.longweibo .article h5,.post.output.longweibo .article h6 {
-    margin-bottom: 30px;
-    font-size: 36px;
-    font-weight: bold;
-    line-height: 54px
+.post.output.longweibo .article h2 {
+    margin-bottom: 26px;
+    font-size: 38px
+}
+
+.post.output.longweibo .article h3 {
+    margin-bottom: 24px;
+    font-size: 36px
+}
+
+.post.output.longweibo .article h4 {
+    margin-bottom: 22px;
+    font-size: 34px
+}
+
+.post.output.longweibo .article h5 {
+    margin-bottom: 20px;
+    font-size: 32px
+}
+
+.post.output.longweibo .article h6 {
+    margin-bottom: 18px;
+    font-size: 30px
 }
 
 .post.output.longweibo .article .show-content {
@@ -1254,16 +1247,16 @@
 
 .post.output.longweibo .article * {
     font-size: 30px;
-    line-height: 50px
+    line-height: 1.5
 }
 
 .post.output.longweibo .footer {
     width: 640px;
-    height: 145px;
+    height: 264px;
     padding: 0;
     margin: 0 auto;
     overflow: hidden;
-    background: url(http://static.jianshu.io/assets/long-footer-0df09ac4b7cdfa4436058fb5ab9b36b8.gif) no-repeat
+    background: url(http://static.jianshu.io/assets/long-footer-49ceb64d69b9b1ed2919ea2b26741536.png) no-repeat
 }
 
 .post .fix-ie8 .meta-top {
@@ -1272,117 +1265,102 @@
 
 .post .fix-ie8 .people {
     position: static;
-    display: none;
     width: 600px;
-    margin: 10px auto;
-    border-left: 2px solid #e1e1e1;
-    border-right: none;
     padding: 0 0 20px 20px;
-    text-align: left
+    margin: 10px auto;
+    border-left: 2px solid #3f3f3f;
+    border-right: none;
+    text-align: left;
+    display: none
 }
 
-.post .fix-ie8 .people .avatar,.post .fix-ie8 .people .name {
+.post .fix-ie8 .people .avatar, .post .fix-ie8 .people .name {
     margin-left: 0
 }
 
 @media (max-width: 480px) {
-    .post {
-        padding:0 !important
-    }
-
-    .post .wrap-btn .editor-article {
-        top: 11px
-    }
-
     .post .wrap-btn .login {
         position: relative;
         top: 13px
     }
 
-    .post .contents {
-        width: 300px
+    .post .container .article .article-share .add-collection, .post .container .article .article-share .bookmark,
+    .post .container .article .article-share .bookmarked {
+        margin-right: 8%
     }
 
-    .post .contents .close {
-        padding-left: 273px !important
+    .post .meta-bottom .share-group>a {
+        padding: 0 11px
     }
 
-    .post .article {
-        padding-bottom: 0
+    .post .meta-bottom .share-group>a img {
+        margin-right: 0
     }
 
-    .post .meta-bottom {
-        padding: 8px
+    .post .meta-bottom .share-group>a span {
+        display: none
     }
 
-    .post .function {
-        min-height: 250px
+    .post .author-info {
+        padding: 0 10px 15px
     }
 
-    .post .comment .nav-tabs li {
+    .post .author-info .title {
+        padding-left: 10px;
+        margin: 0 -10px 15px
+    }
+
+    .post .author-info .basic-info {
+        width: auto;
+        padding: 20px 20px;
+        float: none;
+        border: none;
+        border-bottom: 1px solid #d9d9d9;
+        text-align: center
+    }
+
+    .post .author-info .basic-info .avatar {
+        display: inline-block;
+        position: inherit;
+        margin-bottom: 15px
+    }
+
+    .post .author-info .basic-info .info-r {
+        margin-left: 0
+    }
+
+    .post .author-info .user-stats {
+        width: 100%;
         float: none
     }
 
-    .post .comment .nav-tabs>.active>a:before {
+    .post .comment-list .share-group {
         display: none
     }
 
-    .post .comment .nav-tabs>.active {
-        background: #555555
-    }
-
-    .contribute-modal {
-        width: 300px !important;
-        right: 35px !important
-    }
-
-    .function .collections li {
-        margin: 0;
-        display: block;
-        text-align: left
-    }
-
-    .function .collections li br {
-        display: none
-    }
-
-    .function .collections .img-broder {
-        margin-bottom: 15px;
-        margin-right: 5px
-    }
-
-    .function .collections img {
-        width: 40px;
-        height: 40px
-    }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    .post .article .title {
-        font-size:37px
-    }
-
-    .post .contents {
-        width: 300px
-    }
-
-    .post .contents .close {
-        padding-left: 273px !important
+    .post .comment-list .note-comment {
+        padding: 0 10px 10px 0
     }
 }
 
 @media (max-width: 767px) {
-    .post .container {
-        width:100%
+    .post .post-bg .container {
+        width: 100%
     }
 
-    .post .article {
-        margin-top: 60px
+    .post .further-reading, .post .meta-bottom, .post .post-bg .like, .post .author-info,
+    .post .like-list, .post .comment-list, .post .author-article .content,
+    .post .other-article .content {
+        width: auto
     }
 
-    .post .article,.post .further-reading,.post .meta-bottom {
-        padding-left: 10px !important;
-        padding-right: 10px !important
+    .post .container .article {
+        padding-left: 10px;
+        padding-right: 10px
+    }
+
+    .post .container .article {
+        padding-top: 77px
     }
 
     .post .container .article .title {
@@ -1390,22 +1368,33 @@
         font-size: 37px
     }
 
-    .post .people {
-        width: auto !important;
-        margin: 0 auto
-    }
-
-    .post .comment {
-        padding: 0;
-        width: 100%
-    }
-
-    .post .comment-list footer {
+    .post .container .article .article-share {
         display: block
     }
 
-    .post .function .comment>.tab-content {
-        padding: 0 10px
+    .post .meta-bottom .share-group .more .dropdown-menu {
+        left: auto;
+        right: 0;
+        z-index: 2
+    }
+
+    .post .meta-bottom .share-group .more .dropdown-menu::before, .post .meta-bottom .share-group .more .dropdown-menu::after {
+        left: auto;
+        right: 13px
+    }
+
+    .post .further-reading, .post .meta-bottom, .post .like-list, .post .author-info,
+    .post .comment-list, .post .author-article, .post .other-article {
+        padding-left: 10px;
+        padding-right: 10px
+    }
+
+    .post .post-bg .container .related-avatar-group {
+        position: relative;
+        top: 77px;
+        padding-left: 10px;
+        margin-bottom: 30px;
+        display: inline-block
     }
 
     .post .read-modal .change-font {
@@ -1413,36 +1402,20 @@
     }
 }
 
-@media (max-width: 979px) {
-    .output.post {
-        background-image:none;
-        background-color: white
+@media (max-width: 768px) {
+    .post .post-bg .container a, .post .post-bg .container [type="submit"] {
+        position: relative;
+        z-index: 1
     }
 
-    .post .contents .close {
-        padding-left: 202px
+    .share-group .dropdown-menu {
+        z-index: initial
     }
+}
 
-    .post .meta {
-        position: absolute;
-        top: 30px;
-        right: 0px;
-        left: auto;
-        margin-left: 0px;
-        border-right: none
-    }
-
-    .post .meta img {
-        display: none
-    }
-
-    .post .footer-logo {
-        margin-top: 80px
-    }
-
-    .meta-bottom .share-note-text .dropdown-menu {
-        right: 1px;
-        left: auto
+@media (min-width: 1588px) {
+    .post .post-bg .article-related {
+        padding-left: 195px
     }
 }
 
@@ -1450,134 +1423,158 @@
     min-width: 150px
 }
 
-@media (max-width: 1200px) {
-    .post .people {
-        display:none
-    }
-
-    .post .container .article .meta-top,.post .comment .tab-content .people {
-        display: block
-    }
-}
-
-.notebooks-menu-btn {
+.wrap-btn {
     position: fixed;
-    left: 69px;
-    top: 22px;
-    z-index: 1060
-}
-
-.notebooks-menu-btn:focus {
-    text-decoration: none
-}
-
-.notebooks-menu.modal.fade {
-    top: 40px;
-    left: 69px;
-    width: 315px;
-    margin-left: 0;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px
-}
-
-.panel .panel-heading {
-    padding: 10px 20px;
-    border-bottom: 1px solid #d9d9d9;
-    text-align: center
-}
-
-.panel .panel-heading h4 {
-    margin: 0;
-    line-height: 150%
-}
-
-.panel .list-group {
-    margin: 0;
-    overflow-y: auto;
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px
-}
-
-.panel .list-group-item {
-    display: block;
-    padding: 10px;
-    border-bottom: 1px solid #eeeeee;
-    font-size: 12px;
+    right: 0;
+    width: 100%;
+    padding-top: 10px;
+    z-index: 1000;
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
-.panel .list-group-item:hover,.panel .list-group-item.active {
-    background-color: #f6f6f6
+.wrap-btn .editor-article {
+    top: 10px;
+    float: right;
+    margin-right: 6px
 }
 
-.panel .list-group-item:last-child {
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px
+.wrap-btn .editor-article span {
+    position: relative;
+    display: inline-block
 }
 
-.panel i.icon-chevron-right {
+.wrap-btn .editor-article .editor-btn {
+    padding: 0 10px;
+    margin-right: 10px
+}
+
+.wrap-btn .editor-article>a, .wrap-btn .editor-article span>a {
+    display: inline-block;
+    font-size: 18px;
+    vertical-align: middle
+}
+
+.wrap-btn .editor-article>a span, .wrap-btn .editor-article span>a span {
     display: none
 }
 
-@media (max-width: 480px) {
-    .notebooks-menu.modal.fade.in {
-        width:240px;
-        left: 65px;
-        top: 50px
-    }
-
-    .panel .panel-heading h4 {
-        font-size: 16px
-    }
-
-    .notebooks-menu-btn {
-        top: 13px;
-        left: 65px
-    }
+.wrap-btn .editor-article span>a, .wrap-btn .editor-article span>a:hover, .wrap-btn .editor-article span>a:focus {
+    padding: 2px 5px;
+    margin: 0 12px !important;
+    background: none;
+    border: none;
+    outline: none;
+    color: #555555
 }
 
-@media (min-width: 1588px) {
-    .notebooks-menu-btn,.notebooks-menu.modal.fade.in {
-        left:195px
-    }
+.wrap-btn .editor-article .dropdown-menu {
+    top: 30px;
+    right: -49px;
+    left: auto
 }
 
-.editor-actions {
-    max-width: 600px;
-    padding: 0 30px;
-    margin: 80px auto 0
+.wrap-btn .editor-article .dropdown-menu li {
+    font-size: 12px
 }
 
-.editor-actions .section {
-    margin: 40px 0
-}
-
-.editor-actions .section label {
-    position: relative;
-    top: 2px;
-    margin-bottom: 10px;
+.wrap-btn .editor-article .dropdown-menu li i {
+    width: 16px;
+    margin-right: 3px;
     font-size: 16px
 }
 
-.editor-actions .section .btn {
-    margin-right: 10px
+.wrap-btn .editor-article .dropdown-menu li img {
+    position: relative;
+    top: -2px;
+    width: 16px;
+    margin-right: 6px
 }
 
-.editor-actions .select2-container {
-    width: 100%
+.wrap-btn .editor-article i {
+    display: inline-block;
+    width: 14px;
+    text-align: center
 }
 
-.editor-actions .select2-choices {
-    min-height: 60px
+.wrap-btn .editor-article .bookmarked i.fa-bookmark {
+    color: #e78170
 }
 
-.editor-actions .editor-footer {
-    margin-top: 60px
+.wrap-btn .editor-article .nighttime, .wrap-btn .editor-article .daytime {
+    display: none
 }
 
-.editor-actions .editor-footer .btn-success {
-    margin-right: 10px
+.article-related {
+    padding-left: 65px;
+    margin-top: 10px
+}
+
+.related-avatar-group {
+    position: relative;
+    display: inline-block
+}
+
+.article-related>a, .related-avatar-group>a, .related-avatar-group>a.avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #e78170;
+    color: #e78170;
+    text-align: center;
+    line-height: 32px
+}
+
+.article-related>a img, .related-avatar-group>a img, .related-avatar-group>a.avatar img {
+    border: none
+}
+
+.related-avatar-group>a.avatar:hover {
+    color: #e78170 !important
+}
+
+.related-avatar-group .fa-trophy::after {
+    content: "\f091"
+}
+
+.related-avatar-group .fa-heart::after {
+    content: "\f004"
+}
+
+.related-avatar-group .fa-comment::after {
+    content: "\f075"
+}
+
+.related-avatar-group i.fa-comment {
+    color: #15a7f0 !important
+}
+
+.related-avatar-group>a.avatar {
+    position: relative;
+    border: none
+}
+
+.related-avatar-group>a.avatar i {
+    position: absolute;
+    top: 18px;
+    right: -6px;
+    font-size: 14px
+}
+
+.related-avatar-group>a.avatar i::before {
+    font-size: 18px;
+    color: white
+}
+
+.related-avatar-group>a.avatar i::after {
+    position: absolute;
+    top: 2px;
+    right: 2px
+}
+
+.related-avatar-group .more {
+    background-color: #eeeeee;
+    border: none;
+    color: #999999
 }

@@ -14,7 +14,7 @@ angular.module('Shu.page')
       },
       controller: function($rootScope, $scope, $window, $sce, article) {
         $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-          $window.document.title = '——Shu';
+          $window.document.title = article.title + " - 简书";
           $rootScope.bodylayout = "post output reader-day-mode reader-font2";
         });
         $scope.article = article;

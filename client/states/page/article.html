@@ -1,24 +1,37 @@
-<div class="container-fluid">
-  <!-- Article activities for width under 768px -->
-  <div class="related-avatar-group activities"></div>
-  <div class="article">
-    <div class="preview">
-      <h1 class="title">{{article.title}}</h1>
-      <div class="meta-top">
-        <a href="/users/a36e18ccb59d">
-          <div class="avatar" style="display:inline-block;"><img alt="1" src="http://tp4.sinaimg.cn/1699633975/180/5697962658/1" />
-          </div>
-          <span>author</span>
-        </a> <span>{{article.created_at}}</span>
-        <span class="wordage"></span>
-        <span class="views-count"></span>
+<div id="show-note-containter">
+  <div class="post-bg" id="flag">
+    <div class="wrap-btn">
+      <!-- Notebook and collections button upper left -->
+      <div class="article-related pull-left">
+        <a class="collection-menu-btn" data-target="#collection-menu" data-toggle="modal" href="javascript:void(null);">
+          <i class="fa fa-th"></i>
+        </a> <a class="notebooks-menu-btn" data-target="#notebooks-menu" data-toggle="modal" href="javascript:void(null);"><i class="fa fa-list-ul"></i></a>
+        <div class="related-avatar-group activities"></div>
       </div>
+    </div>
+    <div class="container">
+      <!-- Article activities for width under 768px -->
+      <div class="related-avatar-group activities"></div>
+      <div class="article">
+        <div class="preview">
+          <h1 class="title">{{article.title}}</h1>
+          <div class="meta-top">
+            <a href="/users/a36e18ccb59d">
+              <div class="avatar" style="display:inline-block;"><img alt="1" src="http://tp4.sinaimg.cn/1699633975/180/5697962658/1" />
+              </div>
+              <span>author</span>
+            </a> <span>{{article.created_at}}</span>
+            <span class="wordage"></span>
+            <span class="views-count"></span>
+          </div>
 
-      <!-- Collection/Bookmark/Share for width under 768px -->
-      <div class="article-share"></div>
-      <!-- -->
+          <!-- Collection/Bookmark/Share for width under 768px -->
+          <div class="article-share"></div>
+          <!-- -->
 
-      <div class="show-content" ng-bind-html="deliberatelyTrustDangerousHtml()">
+          <div class="show-content" ng-bind-html="deliberatelyTrustDangerousHtml()">
+          </div>
+        </div>
       </div>
     </div>
   </div>
