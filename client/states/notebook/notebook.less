@@ -1,6 +1,5 @@
 /* Component LESS */
 /* Add Component LESS Above */
-
 .book .col-md-3 {
     padding: 50px 30px
 }
@@ -136,35 +135,41 @@
 
 .book .toolbar {
     height: 36px;
-    border-bottom: 2px solid #d9d9d9
+    border-bottom: 1px solid #d9d9d9
 }
 
 .book .nav-tabs {
     float: left;
+    margin-top: 7px;
     margin-bottom: 0;
     border-bottom: none
 }
 
-.book .nav-tabs li {
-    margin-right: 20px
+.book .nav-tabs li a {
+    color: #999999;
+    line-height: 1
 }
 
-.book .nav-tabs li a,.book .nav-tabs li a:hover {
-    padding-left: 0;
-    padding-right: 0;
-    border: none;
+.book .nav-tabs li a, .book .nav-tabs li a:hover, .book .nav-tabs li a:focus {
+    padding: 0;
+    margin-right: 15px;
     background: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
+    border: none;
     border-radius: 0
 }
 
-.book .nav-tabs li a:hover {
-    border-bottom: 2px solid #999999
+.book .nav-tabs li:first-child a {
+    padding-right: 15px;
+    border-right: 1px solid #999999
+}
+
+.book .nav-tabs .submissions a, .book .nav-tabs .submissions a:hover, .book .nav-tabs .submissions a:focus {
+    padding-left: 15px;
+    border-left: 1px solid #999999
 }
 
 .book .nav-tabs li.active a {
-    border-bottom: 2px solid #555555
+    color: #555555
 }
 
 .book .view-btn {
@@ -194,35 +199,53 @@
 }
 
 .book .thumbnails {
-    margin: 20px 0 50px
+    padding: 0;
+    list-style: none
 }
 
 .book .thumbnails li {
-    height: 350px;
-    padding: 20px;
-    margin: 0 -1px -1px 0;
-    border: 1px solid #d9d9d9
+    width: 100%;
+    padding: 20px 0 15px;
+    margin: 0;
+    border-bottom: 1px dashed #d9d9d9;
 }
 
-.book .thumbnails h4 {
-    margin: 0 0 15px;
-    font-size: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap
+.book .thumbnails li:last-child {
+    border: none
+}
+
+.book .thumbnails h5 {
+    margin-top: 0;
+    font-size: 16px
 }
 
 .book .thumbnails .avatar {
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    margin: 0 0 10px 0
+    float: right;
+    width: 36px;
+    height: 36px;
+    margin: 5px 0 0 10px
 }
 
 .book .thumbnails .article-content {
+    margin: 12px 0 5px;
     font-size: 12px;
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     color: #999999
+}
+
+.book .thumbnails .btn {
+    background-color: transparent;
+    border-radius: 20px
+}
+
+.book .thumbnails .btn.accept {
+    border: 1px solid #46a546;
+    color: #46a546
+}
+
+.book .thumbnails .btn.reject {
+    border: 1px solid #e78170;
+    color: #e78170
 }
 
 .book .new-view .thumbnails li {
@@ -296,78 +319,69 @@
         padding-left: 40px
     }
 }
-/*
 @media (max-width: 767px) {
-    .book .collection-list .aside.span3,.book .notebook-list .aside.span3 {
+    .book .collection-list .aside.col-sm-3,.book .notebook-list .aside.col-sm-3 {
         margin:0
     }
 
-    .book .collection-list .thumbnails li.span4,.book .notebook-list .thumbnails li.span4 {
+    .book .collection-list .thumbnails li.col-sm-4,.book .notebook-list .thumbnails li.col-sm-4 {
         width: 100%
     }
 }
 
 @media (max-width: 768px) {
-    .book .collection-list .aside.span3,.book .notebook-list .aside.span3 {
-        position:static;
+    .book .collection-article .aside.col-sm-3, .book .notebook-list .aside.col-sm-3 {
+        position: static;
         width: 100%;
         padding-top: 70px;
         border: none;
         overflow: inherit;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
         box-shadow: none
     }
 
-    .book .collection-list .aside.span3 .btn-group .follow i,.book .notebook-list .aside.span3 .btn-group .follow i {
-        margin: 0;
+    .book .collection-article .aside.col-sm-3 .btn-group .follow i, .book .notebook-list .aside.col-sm-3 .btn-group .follow i {
         padding: 0;
+        margin: 0;
         border: none
     }
 
-    .book .collection-list .aside.span3 .author,.book .notebook-list .aside.span3 .author {
+    .book .collection-article .aside.col-sm-3 .author, .book .notebook-list .aside.col-sm-3 .author {
         position: static;
         margin: 20px 0
     }
 
-    .book .collection-list .aside.span3 .author .avatar,.book .notebook-list .aside.span3 .author .avatar {
+    .book .collection-article .aside.col-sm-3 .author .avatar, .book .notebook-list .aside.col-sm-3 .author .avatar {
         display: none
     }
 
-    .book .collection-list .aside.span3 .btn-group span,.book .notebook-list .aside.span3 .btn-group span {
+    .book .collection-article .aside.col-sm-3 .btn-group span, .book .notebook-list .aside.col-sm-3 .btn-group span {
         display: inline
     }
 
-    .book .collection-list .span9,.book .notebook-list .span9 {
+    .book .collection-article .col-sm-9, .book .notebook-list .col-sm-9 {
         width: 100%;
         padding: 10px;
         margin-left: 0
     }
 
-    .book .collection-list .span9 .view-btn,.book .notebook-list .span9 .view-btn {
+    .book .collection-article .col-sm-9 .view-btn, .book .notebook-list .col-sm-9 .view-btn {
         display: none
     }
 
-    .book .collection-list .span9 .thumbnails,.book .notebook-list .span9 .thumbnails {
-        padding: 0
-    }
-
-    .book .collection-list .span9 .thumbnails li,.book .notebook-list .span9 .thumbnails li {
-        width: 33.399%;
+    .book .collection-article .col-sm-9 .thumbnails li, .book .notebook-list .col-sm-9 .thumbnails li {
         padding: 10px
     }
 }
-*/
+
 @media (max-width: 979px) {
-/*
-    .collection-list .thumbnails li.span4,.notebook-list .thumbnails li.span4 {
-        width:50%
+    .collection-article .thumbnails li.col-sm-4, .notebook-list .thumbnails li.col-sm-4 {
+        width: 50%
     }
 
-    .book .collection-list.new-view .thumbnails li.span4,.book .notebook-list.new-view .thumbnails li.span4 {
+    .book .collection-article.new-view .thumbnails li.col-sm-4, .book .notebook-list.new-view .thumbnails li.col-sm-4 {
         width: 100%
     }
-*/
+
     .book .aside .btn-group span {
         display: none
     }
@@ -375,7 +389,7 @@
 
 @media (min-width: 1588px) {
     .book .col-md-9 {
-        max-width:1200px;
+        max-width: 1200px;
         padding-left: 80px
     }
 }

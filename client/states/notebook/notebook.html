@@ -15,32 +15,15 @@
     <!-- content -->
     <div class="tab-content col-sm-offset-3 col-sm-9 col-md-9">
       <div class="toolbar">
-        <ul class="nav nav-tabs nav-notebooks">
+        <ul class="nav nav-notebooks">
           <li class="latest-articles active">
-            <a data-pjax="list-container" href="/notebooks/272085/latest">目录</a>
-          </li>
-          <li class="top-articles ">
-            <a data-pjax="list-container" href="/notebooks/272085/top">热门文章</a>
+           目录
           </li>
         </ul>
-        <ul class="switch-views view-btn">
-          <li>
-            <a class="list-show active" data-original-title="列表显示" data-view="list" href="javascript:void(null);">
-              <i class="icon-reorder"></i>
-            </a>
-          </li>
-          <li>
-            <a class="window-show" data-original-title="橱窗显示" data-view="window" href="javascript:void(null);">
-              <i class="icon-th-large"></i>
-            </a>
-          </li>
-
-        </ul>
-
       </div>
-      <div id="list-container" class="tab-pane active">
+      <div id="list-container">
         <ul class="thumbnails">
-          <li ng-repeat="article in notebook.articles" class="span4">
+          <li ng-repeat="article in notebook.articles" class="col-sm-4 col-md-4">
             <h4><a href="#/p/{{article.id}}" target="_blank">{{article.title}}</a></h4>
             <p class="article-content">{{article.content}}</p>
             <div class="article-info">

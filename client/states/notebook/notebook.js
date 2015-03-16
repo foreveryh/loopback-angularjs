@@ -17,7 +17,7 @@ angular.module('Shu.notebook')
       },
       controller: function($rootScope, $scope, $window, notebook) {
         $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-          $window.document.title = '——Shu';
+          $window.document.title = notebook.name + " - 文集 -简书";
           $rootScope.bodylayout = "book output reader-day-mode reader-font2";
           //do action of fetching data here is also possible
           //$scope.notebook = notebook;
