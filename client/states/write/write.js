@@ -1,4 +1,4 @@
-angular.module('Shu.write', ['ui.bootstrap', 'ui.utils', 'ui.router', 'Shu.utility', 'ngAnimate', 'oc.lazyLoad']);
+angular.module('Shu.write', ['ui.bootstrap', 'ui.utils', 'ui.router', 'Shu.utility', 'ngAnimate', 'ngSanitize', 'oc.lazyLoad']);
 
 angular.module('Shu.write')
   .config(function($stateProvider) {

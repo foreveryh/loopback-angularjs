@@ -1,4 +1,4 @@
-angular.module('Shu.notebook', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate']);
+angular.module('Shu.notebook', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'ngSanitize']);
 
 angular.module('Shu.notebook')
   .config(function($stateProvider) {

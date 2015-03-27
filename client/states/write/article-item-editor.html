@@ -1,6 +1,6 @@
 <li class="one-note" ng-class="active? 'active':''" ng-click="activeMe();">
   <i class="icon icon-note note-icon stop-share"></i>
-  <p class="abbreviate">{{text}}</p>
+  <p class="abbreviate" ng-bind-html="text"></p>
   <p class="wordage win-text">字数: {{word_count}}</p> <a href class="note-link title">{{title}}</a>
   <div dropdown ng-show="active">
     <a href class="share-note dropdown-toggle" dropdown-toggle><i class="fa fa-cog"></i></a>

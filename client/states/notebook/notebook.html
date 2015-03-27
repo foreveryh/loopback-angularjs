@@ -25,7 +25,7 @@
         <ul class="thumbnails">
           <li ng-repeat="article in notebook.articles" class="col-sm-4 col-md-4">
             <h4><a href="#/p/{{article.id}}" target="_blank">{{article.title}}</a></h4>
-            <p class="article-content">{{article.content}}</p>
+            <p class="article-content" ng-bind-html="article.content"></p>
             <div class="article-info">
             </div>
           </li>
