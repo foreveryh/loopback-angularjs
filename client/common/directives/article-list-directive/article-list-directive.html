@@ -1,20 +1,5 @@
 <div id="list-container">
-<!--     <ul class="clearfix sort-nav list-unstyled" id="collection-categories-nav" data-js-module="collection-category" data-fetch-url="/recommendations/notes">
-        <li class="active">
-            <a class="category" href="javascript:void(null);">全部</a>
-        </li>
-        <li>
-            <a class="category" data-category-id="24" href="javascript:void(null);">有话好好说</a>
-        </li>
-        <li>
-            <a class="category" data-category-id="25" href="javascript:void(null);">三思而后读</a>
-        </li>
-        <li>
-            <img alt="Tiny" class="hide loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif">
-        </li>
-    </ul>
- -->
-
+    <!-- <ul ng-class="{thumbnails: $state.includes('recommend')}"> -->
     <ul class="thumbnails">
        <article-summary-directive ng-repeat="item in articles"></article-summary-directive>
     </ul>

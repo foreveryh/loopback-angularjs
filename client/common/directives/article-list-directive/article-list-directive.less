@@ -11,3 +11,80 @@
     list-style-type:none;
   }
 }
+ul.ranking {
+    margin: 30px auto 10px;
+    list-style: none
+}
+
+.ranking li, .weeks li, .ranking .author li {
+    position: relative;
+    padding: 0 0 15px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #d9d9d9
+}
+
+.ranking b, .weeks b, .ranking .author b {
+    position: absolute;
+    top: 0;
+    left: -55px;
+    width: 38px;
+    height: 38px;
+    display: block;
+    border: 1px solid #999999;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 38px
+}
+
+.ranking .avatar, .weeks .avatar, .ranking .author .avatar {
+    float: right;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0
+}
+
+.ranking h4, .weeks h4, .ranking .author h4 {
+    margin: 0 0 3px;
+    font-size: 17px
+}
+
+.ranking .author .avatar {
+    float: left;
+    margin: 0 10px 0 0
+}
+
+.ranking .author .fa-heart-o, .ranking .author .fa-heart {
+    position: absolute;
+    top: 30%;
+    right: 1px;
+    color: #999999
+}
+
+.ranking .author .fa-heart {
+    color: #e78170
+}
+
+@media (max-width: 480px) {
+    .ranking-nav {
+        padding-left: 0
+    }
+
+    .ranking li, .weeks li, .ranking .author li {
+        padding-bottom: 10px
+    }
+
+    .ranking b, .weeks b, .ranking .author b {
+        top: -6px;
+        left: -40px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px
+    }
+
+    .ranking .avatar, .weeks .avatar, .ranking .author .avatar {
+        width: 30px;
+        height: 30px;
+        margin-top: -7px
+    }
+}

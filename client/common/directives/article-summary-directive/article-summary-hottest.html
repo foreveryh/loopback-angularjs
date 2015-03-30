@@ -1,19 +1,15 @@
 <li>
-    <div class="article">
-        <a class="title" href="" target="_blank">{{item.title}}</a>
-        <a class="avatar maleskine-author" data-user-slug="119df7a83b71" href="http://www.jianshu.com/users/119df7a83b71"><img alt="407190c748f4" quality="100" src="" thumbnail="90x90">
-        </a>
-        <br>
-        <a class="content" href="/#/p/{{item.id}}" target="_blank"> {{item.summary}}...</a>
-        <div class="article-info">
-            <a class="author" ng-href="p/1">{{item.author}}</a>
-            <i class="fa fa-book"></i>
-            <a class="notebook" href="http://www.jianshu.com/notebooks/89778/latest">{{item.notebook}}</a>
-            <i class="fa fa-th"></i>&nbsp;<a class="collections" href="collection/1hjajt.html">看片看戏看剧,</a><a class="collections" href="collection/x8ghVy.html">玩趣,</a><a class="collections" href="collection/6e920552893e.html">电影告诉我们的事</a>
-            <a class="like-icon-button" href="sign_in.html" id="like-note"><i class="icon-heart-empty"></i>{{item.like}}</a>
-            <a class="bookmark" href="sign_in.html">
-                <i class="fa fa-bookmark-empty"></i>
-            </a>
-        </div>
-    </div>
+  <b>{{$index + 1}}</b>
+  <h4><a href="/p/4281daf9c8c0" target="_blank">{{item.title}}</a></h4>
+  <div class="article-info">
+    <i class="fa fa-book"></i>
+    <a class="notebook" href="/notebooks/216126/latest" target="_blank">{{item.notebook}}</a>
+    <i class="fa fa-th"></i>&nbsp;<a class="collections" href="/collection/cd5034b69683">治愈系,</a><a class="collections" href="/collection/f16b3d483ec2">干货,</a><a class="collections" href="/collection/5e2b390a6062">缤纷心情</a>
+    <a href="/p/4281daf9c8c0#comments" target="_blank">
+      <i class="fa fa-comments-o"></i> 79
+    </a> <a class="like-icon-button" data-signin-link="true" data-toggle="modal" href="/sign_in" id="like-note"><i class="fa fa-heart-o"></i>3654</a>
+    <a class="bookmark" data-signin-link="true" data-toggle="modal" href="/sign_in">
+      <i class="fa fa-bookmark-o"></i><span>收藏文章</span>
+    </a>
+  </div>
 </li>

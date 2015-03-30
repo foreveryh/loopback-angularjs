@@ -28,7 +28,6 @@ angular.module('Shu').directive('tabbarDirective', function($state) {
 		},
 		templateUrl: function() {
 			var tpl = $state.current.name;
-			console.log(tpl);
 			return 'common/directives/tabbar-directive/tabbar-directive.html';
 		},
 		link: function(scope, element, attrs, fn) {
@@ -59,7 +58,7 @@ angular.module('Shu').directive('tabbarDirective', function($state) {
 			});
 		},
 		template:
-			'<li ng-class="{active: selected}">' +
+			'<li ui-sref-active="active">' +
         '<a href="" ng-click="select()">{{ title }}</a>' +
       '</li>'
 	};
