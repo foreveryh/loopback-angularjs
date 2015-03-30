@@ -1,4 +1,7 @@
 angular.module('Shu.utility', []);
+angular.module('Shu.utility').run(function() {
+  // js prototype 
+});
 angular.module('Shu.utility').factory('utility', function() {
   /**
    * isArray

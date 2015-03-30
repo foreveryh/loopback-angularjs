@@ -22,7 +22,7 @@
     },
     "summary": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "content": {
       "type": "string",
@@ -33,6 +33,10 @@
       "required": false
     },
     "created_at": {
+      "type": "date",
+      "required": false
+    },
+    "updated_at":{
       "type": "date",
       "required": false
     },
