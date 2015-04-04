@@ -18,57 +18,69 @@ angular.module('Shu.home').config(function($stateProvider) {
         listClass: 'top-notes ranking'
       });
   })
-  .controller('HomeCtrl', function($rootScope, $scope, $window, Article) {
-    var defaultState = false; // true - recommend, false - hottest
-    var recommendItems = Article.find({
-        filter: {
-          limit: 2
-        }
-      },
-      function(success) {},
-      function(error) {});
+  .factory('homeShared', function(Article) {
+    var sharedData = {
+      initialized: false,
+      homeState: false, // true - recommend, false - hottest
+      recommendItems: [],
+      hottestItems: []
+    };
 
-    var hottestItems = Article.find({
-        filter: {
-          limit: 2
-        }
-      },
-      function(list) {
-        /* success */
-      },
-      function(error) {
-        /* error */
-      });
+    function _fetchInitialData() {
+      return Article.find({
+          filter: {
+            limit: 2
+          }
+        },
+        function(list) {
+          Array.prototype.push.apply(sharedData.recommendItems, list);
+          Array.prototype.push.apply(sharedData.hottestItems, list);
+        },
+        function(error) {
+
+        });
+    };
+    //load more data
+    sharedData.fetchMoreData = function() {
+      var _target = sharedData.homeState ? sharedData.recommendItems : sharedData.hottestItems;
+      Article.find({
+          filter: {
+            limit: 3,
+            skip: _target.length
+          }
+        },
+        function(list) {
+          Array.prototype.push.apply(_target, list);
+          console.log("Load more successly");
+        },
+        function(error) {
+          console.log(error);
+        });
+    };
+    //get current items
+    sharedData.getCurrentItems = function() {
+      if (!sharedData.initialized) {
+        _fetchInitialData();
+        sharedData.initialized = true;
+      }
+      return sharedData.homeState ? sharedData.recommendItems : sharedData.hottestItems;
+    };
+    sharedData.setHomeState = function(state){
+      sharedData.homeState = state;
+    }
+    return sharedData;
+  })
+  .controller('HomeCtrl', function($rootScope, $scope, $window, Article, homeShared) {
 
     $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-      $window.document.title = '首页 - 短篇';
+      $window.document.title = '首页 - 短篇 ';
       if (fromState.name !== 'recommend' && fromState.name !== 'hottest') {
         $rootScope.bodylayout = "output reader-day-mode reader-font2";
       }
-      defaultState = toState !== "hottest" ? true : false;
-      $scope.articles =  defaultState ? recommendItems: hottestItems;
- 
+      homeShared.setHomeState(toState.name !== "hottest" ? true : false);
+      $scope.articles = homeShared.getCurrentItems();
     });
     $scope.loadMore = function() {
-
-      var skipLen = defaultState ? recommendItems.length : hottestItems.length;
-      Article.find({
-        filter: {
-          limit: 2,
-          skip: skipLen
-        }
-      },
-      function(success){
-        if (defaultState) {
-          Array.prototype.push.apply(recommendItems, success);
-          console.log("Load more successly");
-        }else{
-          Array.prototype.push.apply(hottestItems,success);
-        }
-      },
-      function(error){
-        console.log(error);
-      });
+      homeShared.fetchMoreData();
     };
-
   });
