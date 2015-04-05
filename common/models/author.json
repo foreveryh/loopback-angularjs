@@ -9,7 +9,7 @@
     "mongodb": {
       "collection": "author"
     }
-  },  
+  },
   "properties": {
     "name": {
       "type": "string"
@@ -17,12 +17,12 @@
   },
   "validations": [],
   "relations": {
-     "articles": {
+    "articles": {
       "type": "hasMany",
       "model": "article",
       "foreignKey": "authorId"
-      }
-    },
+    }
+  },
   "acls": [],
   "methods": []
 }

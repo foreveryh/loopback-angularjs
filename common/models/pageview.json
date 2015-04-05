@@ -1,0 +1,21 @@
+{
+  "name": "pageview",
+  "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "pageview"
+    },
+    "mongodb": {
+      "collection": "pageview"
+    }
+  },
+  "properties": {
+    "count": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

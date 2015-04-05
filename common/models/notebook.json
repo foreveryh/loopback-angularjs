@@ -10,7 +10,7 @@
     "mongodb": {
       "collection": "notebook"
     }
-  },  
+  },
   "properties": {
     "id": {
       "type": "string",

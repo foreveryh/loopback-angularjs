@@ -37,5 +37,9 @@
   "author": {
     "dataSource": "db",
     "public": true
+  },
+  "pageview": {
+    "dataSource": "db",
+    "public": true
   }
 }

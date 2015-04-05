@@ -10,7 +10,7 @@
     "mongodb": {
       "collection": "article"
     }
-  },  
+  },
   "properties": {
     "id": {
       "type": "string",
@@ -36,7 +36,7 @@
       "type": "date",
       "required": false
     },
-    "updated_at":{
+    "updated_at": {
       "type": "date",
       "required": false
     },
@@ -48,7 +48,7 @@
       "type": "number",
       "required": false
     },
-    "is_published":{
+    "is_published": {
       "type": "boolean",
       "required": true
     }
@@ -59,10 +59,15 @@
       "type": "belongsTo",
       "model": "notebook",
       "foreignKey": ""
-    }, 
-      "author": {
+    },
+    "author": {
       "type": "belongsTo",
       "model": "author",
+      "foreignKey": ""
+    },
+    "pageview": {
+      "type": "hasOne",
+      "model": "pageview",
       "foreignKey": ""
     }
   },
