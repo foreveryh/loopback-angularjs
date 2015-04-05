@@ -20,7 +20,6 @@ module.exports = function(Article) {
     }
     next();
   });
-
   //
   String.prototype.strLen = function() {
     var len = 0,

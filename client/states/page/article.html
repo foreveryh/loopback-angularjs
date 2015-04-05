@@ -20,9 +20,9 @@
               <div class="avatar" style="display:inline-block;"><img alt="1" src="http://tp4.sinaimg.cn/1699633975/180/5697962658/1" />
               </div>
               <span>author</span>
-            </a> <span>{{article.created_at}}</span>
-            <span class="wordage"></span>
-            <span class="views-count"></span>
+            </a> <span>{{article.created_at | date:"MM/dd/yyyy 'at' h:mma"}}</span>
+            <span class="wordage">{{article.words_count}} 字</span>
+            <span class="views-count">{{article.pageview_count}} 次阅读</span>
           </div>
 
           <!-- Collection/Bookmark/Share for width under 768px -->
