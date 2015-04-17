@@ -1,12 +1,11 @@
-angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate']);
-
-angular.module('Shu.home').config(function($stateProvider) {
+angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'ui.bootstrap.modal'])
+  .config(function($stateProvider) {
 
     /* Add New States Above */
 
     $stateProvider
       .state('recommend', {
-        url: '/recommend',
+        url: '',
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
         listClass: 'thumbnails'
@@ -65,7 +64,7 @@ angular.module('Shu.home').config(function($stateProvider) {
       }
       return sharedData.homeState ? sharedData.recommendItems : sharedData.hottestItems;
     };
-    sharedData.setHomeState = function(state){
+    sharedData.setHomeState = function(state) {
       sharedData.homeState = state;
     }
     return sharedData;
