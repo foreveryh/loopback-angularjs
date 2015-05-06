@@ -34,6 +34,10 @@
       {
         "name": "Shu.notebook",
         "file": "states/notebook/notebook.js"
+      },
+      {
+        "name": "account",
+        "file": "account/account.js"
       }
     ]
   }

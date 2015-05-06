@@ -1,0 +1,20 @@
+<div class="sign-up">
+    <form u-signup accept-charset="UTF-8" class="form-group" id="sign_up">
+        <p id="signup_errors" class="signin_error" ng-show="error">{{error.message}}</p>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+            <input class="form-control" id="sign_up_email" name="email" placeholder="你的邮件地址" type="text" value="">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input class="form-control" id="nickname" name="username" placeholder="选一个昵称" type="text" value="">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+            <input class="form-control" id="sign_up_password" name="password" placeholder="输入密码" type="password">
+        </div>
+        <button class="ladda-button submit-button btn-success">
+            <span class="ladda-label">注册</span>
+        </button>
+    </form>
+</div>

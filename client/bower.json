@@ -23,6 +23,7 @@
     "less.js": "~2.1",
     "font-awesome": "~4.2",
     "textAngular": "~1.2.2",
-    "ocLazyLoad": "~0.5.2"
+    "ocLazyLoad": "~0.5.2",
+    "angular-ladda": "~0.2.2"
   }
 }

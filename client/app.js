@@ -1,4 +1,4 @@
-angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page', 'Shu.write', 'Shu.notebook']);
+angular.module('Shu', ['lbServices', 'ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'Shu.home', 'Shu.page', 'Shu.write', 'Shu.notebook', 'Shu.user', 'Shu.auth']);
 //Modal window with custom URL in AngularJS
 //http://stackoverflow.com/questions/24713242/using-ui-router-with-bootstrap-ui-modal
 angular.module('Shu')
@@ -39,8 +39,9 @@ angular.module('Shu').config(function($stateProvider, modalStateProvider, $urlRo
   LoopBackResourceProvider.setUrlBase('http://0.0.0.0:3000/api');
 });
 
-angular.module('Shu').run(function($rootScope) {
-
+angular.module('Shu').run(function($rootScope, authFactory) {
+  // Initiate the user service
+  authFactory.init();
   $rootScope.safeApply = function(fn) {
     var phase = $rootScope.$$phase;
     if (phase === '$apply' || phase === '$digest') {

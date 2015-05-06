@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="login-page">
+        <div class="logo"><img alt="Img logo" src="http://static.jianshu.io/assets/img_logo-d414bf107e1d86cd81389cd2f98d37ac.png"></div>
+        <h4 class="title">
+      <span>
+        <a ui-sref-active="active" href ui-sref="account.sign_in">登录</a>
+        <b>·</b>
+        <a ui-sref-active="active" href ui-sref="account.sign_up">注册</a>
+      </span>
+    </h4>
+        <div id="pjax-container">
+            <ui-view></ui-view>
+        </div>
+        <div class="login-sns">
+            <p>您还可以通过以下方式直接登录</p>
+            <ul class="login-sns">
+                <li class="weibo">
+                    <a href="/users/auth/weibo"><i class="fa fa-weibo"></i></a>
+                </li>
+                <li class="qq">
+                    <a href="/users/auth/qq_connect"><i class="fa fa-qq"></i></a>
+                </li>
+                <li class="douban">
+                    <a href="/users/auth/douban"><i class="fa fa-douban"></i></a>
+                </li>
+                <li class="google">
+                    <a href="/users/auth/google_oauth2"><i class="fa fa-google-plus"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
