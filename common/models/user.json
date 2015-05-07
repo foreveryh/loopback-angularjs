@@ -1,15 +1,20 @@
 {
-    "name": "user",
-    "base": "User",
-    "idInjection": true,
-    "properties": {},
-    "validations": [],
-    "relations": {},
-    "acls": [{
-        "principalType": "ROLE",
-        "principalId": "$everyone",
-        "accessType": "READ",
-        "permission": "ALLOW"
-    }],
-    "methods": []
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "accessType": "READ",
+    "permission": "ALLOW"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "signup"
+  }],
+  "methods": []
 }

@@ -7,7 +7,7 @@
       "./models"
     ]
   },
-  "User": {
+  "user": {
     "dataSource": "db"
   },
   "AccessToken": {

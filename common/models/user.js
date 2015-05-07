@@ -59,35 +59,35 @@ module.exports = function(user) {
     }
   );
   //send verification email after registration
-  user.afterRemote('create', function(context, user) {
-    console.log('> user.afterRemote triggered');
+  // user.afterRemote('create', function(context, user) {
+  //   console.log('> user.afterRemote triggered');
 
-    var options = {
-      type: 'email',
-      to: user.email,
-      from: 'noreply@loopback.com',
-      subject: 'Thanks for registering.',
-      template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      redirect: '/verified',
-      user: user
-    };
+  //   var options = {
+  //     type: 'email',
+  //     to: user.email,
+  //     from: 'noreply@loopback.com',
+  //     subject: 'Thanks for registering.',
+  //     template: path.resolve(__dirname, '../../server/views/verify.ejs'),
+  //     redirect: '/verified',
+  //     user: user
+  //   };
 
-    user.verify(options, function(err, response) {
-      if (err) {
-        next(err);
-        return;
-      }
+  //   user.verify(options, function(err, response) {
+  //     if (err) {
+  //       next(err);
+  //       return;
+  //     }
 
-      console.log('> verification email sent:', response);
+  //     console.log('> verification email sent:', response);
 
-      context.res.render('response', {
-        title: 'Signed up successfully',
-        content: 'Please check your email and click on the verification link ' + 'before logging in.',
-        redirectTo: '/',
-        redirectToLinkText: 'Log in'
-      });
-    });
-  });
+  //     context.res.render('response', {
+  //       title: 'Signed up successfully',
+  //       content: 'Please check your email and click on the verification link ' + 'before logging in.',
+  //       redirectTo: '/',
+  //       redirectToLinkText: 'Log in'
+  //     });
+  //   });
+  // });
 
   //send password reset link when requested
   user.on('resetPasswordRequest', function(info) {
