@@ -6,6 +6,7 @@ angular.module('Shu.page')
     $stateProvider.state('article', {
       url: '/p/:id',
       templateUrl: 'states/page/article.html',
+      data: {public: true},
       resolve: {
         article: function(Article, $stateParams) {
           return Article.findOne({

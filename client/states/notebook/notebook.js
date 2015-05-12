@@ -5,6 +5,7 @@ angular.module('Shu.notebook')
     $stateProvider.state('notebook', {
       url: '/notebook/:id',
       templateUrl: 'states/notebook/notebook.html',
+      data: {public: true},
       resolve: {
        notebook: function(Notebook, $stateParams){
         var notebook = Notebook.findById(

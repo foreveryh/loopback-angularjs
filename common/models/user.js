@@ -21,7 +21,7 @@ module.exports = function(user) {
 
     user.create(credentials, function(err, instance) {
       if (!err) {
-        user.login(credentials, function(err, token) {
+        user.login(credentials, 'user', function(err, token) {
           if (!err) {
             cb(null, token);
             console.log(token);
@@ -34,7 +34,7 @@ module.exports = function(user) {
       }
     });
   }
-  
+
   user.remoteMethod(
     'signup', {
       description: 'Sign up a user with username/email and password',

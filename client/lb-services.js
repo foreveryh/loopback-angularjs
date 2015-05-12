@@ -35,7 +35,7 @@ module.factory(
   "User",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/Users/:id",
+      urlBase + "/users/:id",
       { 'id': '@id' },
       {
 
@@ -70,7 +70,7 @@ module.factory(
          * </em>
          */
         "prototype$__findById__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/:fk",
+          url: urlBase + "/users/:id/accessTokens/:fk",
           method: "GET",
         },
 
@@ -102,7 +102,7 @@ module.factory(
          * This method returns no data.
          */
         "prototype$__destroyById__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/:fk",
+          url: urlBase + "/users/:id/accessTokens/:fk",
           method: "DELETE",
         },
 
@@ -141,7 +141,7 @@ module.factory(
          * </em>
          */
         "prototype$__updateById__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/:fk",
+          url: urlBase + "/users/:id/accessTokens/:fk",
           method: "PUT",
         },
 
@@ -152,7 +152,7 @@ module.factory(
          *
          * @description
          *
-         * Queries accessTokens of User.
+         * Queries accessTokens of user.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -176,7 +176,7 @@ module.factory(
          * </em>
          */
         "prototype$__get__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
+          url: urlBase + "/users/:id/accessTokens",
           method: "GET",
           isArray: true,
         },
@@ -214,7 +214,7 @@ module.factory(
          * </em>
          */
         "prototype$__create__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
+          url: urlBase + "/users/:id/accessTokens",
           method: "POST",
         },
 
@@ -244,7 +244,7 @@ module.factory(
          * This method returns no data.
          */
         "prototype$__delete__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens",
+          url: urlBase + "/users/:id/accessTokens",
           method: "DELETE",
         },
 
@@ -255,7 +255,7 @@ module.factory(
          *
          * @description
          *
-         * Counts accessTokens of User.
+         * Counts accessTokens of user.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -278,7 +278,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "prototype$__count__accessTokens": {
-          url: urlBase + "/Users/:id/accessTokens/count",
+          url: urlBase + "/users/:id/accessTokens/count",
           method: "GET",
         },
 
@@ -316,7 +316,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/Users",
+          url: urlBase + "/users",
           method: "POST",
         },
 
@@ -354,7 +354,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/Users",
+          url: urlBase + "/users",
           method: "PUT",
         },
 
@@ -386,7 +386,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/Users/:id/exists",
+          url: urlBase + "/users/:id/exists",
           method: "GET",
         },
 
@@ -419,7 +419,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/Users/:id",
+          url: urlBase + "/users/:id",
           method: "GET",
         },
 
@@ -452,7 +452,7 @@ module.factory(
          * </em>
          */
         "find": {
-          url: urlBase + "/Users",
+          url: urlBase + "/users",
           method: "GET",
           isArray: true,
         },
@@ -486,7 +486,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/Users/findOne",
+          url: urlBase + "/users/findOne",
           method: "GET",
         },
 
@@ -520,7 +520,7 @@ module.factory(
          * This method returns no data.
          */
         "updateAll": {
-          url: urlBase + "/Users/update",
+          url: urlBase + "/users/update",
           method: "POST",
         },
 
@@ -550,7 +550,7 @@ module.factory(
          * This method returns no data.
          */
         "deleteById": {
-          url: urlBase + "/Users/:id",
+          url: urlBase + "/users/:id",
           method: "DELETE",
         },
 
@@ -582,7 +582,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/Users/count",
+          url: urlBase + "/users/count",
           method: "GET",
         },
 
@@ -619,7 +619,7 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/Users/:id",
+          url: urlBase + "/users/:id",
           method: "PUT",
         },
 
@@ -663,7 +663,7 @@ module.factory(
          *
          */
         "login": {
-          url: urlBase + "/Users/login",
+          url: urlBase + "/users/login",
           method: "POST",
           params: {
             include: "user"
@@ -710,7 +710,7 @@ module.factory(
          * This method returns no data.
          */
         "logout": {
-          url: urlBase + "/Users/logout",
+          url: urlBase + "/users/logout",
           method: "POST",
           interceptor: {
             response: function(response) {
@@ -751,7 +751,7 @@ module.factory(
          * This method returns no data.
          */
         "confirm": {
-          url: urlBase + "/Users/confirm",
+          url: urlBase + "/users/confirm",
           method: "GET",
         },
 
@@ -786,7 +786,45 @@ module.factory(
          * This method returns no data.
          */
         "resetPassword": {
-          url: urlBase + "/Users/reset",
+          url: urlBase + "/users/reset",
+          method: "POST",
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.User#signup
+         * @methodOf lbServices.User
+         *
+         * @description
+         *
+         * Sign up a user with username/email and password
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {Function(Object, Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {Function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @return {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The response body contains properties of the AccessToken created on login.
+         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
+         * 
+         *
+         */
+        "signup": {
+          url: urlBase + "/users/signup",
           method: "POST",
         },
 
@@ -811,7 +849,7 @@ module.factory(
          *   from the server.
          */
         "getCurrent": {
-           url: urlBase + "/" + "/Users" + "/:id",
+           url: urlBase + "/" + "/users" + "/:id",
            method: "GET",
            params: {
              id: function() {

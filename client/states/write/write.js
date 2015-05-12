@@ -6,6 +6,7 @@ angular.module('Shu.write')
     $stateProvider.state('write', {
       url: '/write',
       templateUrl: 'states/write/write.html',
+      data: {public: false},
       resolve: {
         // Any property in resolve should return a promise and is executed before the view is loaded
         loadMyCtrl: function($ocLazyLoad) {

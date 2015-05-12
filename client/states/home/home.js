@@ -5,16 +5,18 @@ angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate'
 
     $stateProvider
       .state('recommend', {
-        url: '',
+        url: '/',
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
-        listClass: 'thumbnails'
+        listClass: 'thumbnails',
+        data: {public: true}
       })
       .state('hottest', {
         url: '/hottest',
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
-        listClass: 'top-notes ranking'
+        listClass: 'top-notes ranking',
+        data: {public: true}
       });
   })
   .factory('homeShared', function(Article) {

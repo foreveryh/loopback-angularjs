@@ -27,6 +27,7 @@ angular.module('Shu.auth', []);
       authorized: false,
       authenticated: false
     };
+    var previousRoute = null;
     var defaultRoute = null;
     var loginRoute = null;
     var states = {};
@@ -40,7 +41,7 @@ angular.module('Shu.auth', []);
       var $state = null;
     }
 
-    if ($state && (!$state.transitionTo || !$state.get)) {
+    if ($state && (!$state.go || !$state.get)) {
       // This is not the correct $state service
       $state = null;
     }
@@ -62,7 +63,7 @@ angular.module('Shu.auth', []);
         if (useLocation) {
           $location.path(states[state].url);
         } else {
-          $state.transitionTo(state);
+          $state.go(state);
         }
       } else if ($route) {
         $location.path(state);
@@ -74,20 +75,46 @@ angular.module('Shu.auth', []);
      */
     var checkAccessToState = function(state, stateParams) {
       if (state) {
-
+        if ((!state.data || (state.data && isPublic(state.data) == false)) && status.authenticated == false) {
+          service.authenticationRequiredHandler(state, stateParams);
+          return false;
+        } else if (state.data && state.data.hasPermission && user.permissions) {
+          if (!service.hasPermission(state.data.hasPermission)) {
+            service.accessDeniedHandler(user, state, stateParams);
+            return false;
+          }
+        }
+        // Only do auth check if user is loaded (indicated by user_id present)
+        else if (state.data && state.data.authCheck && user.user_id) {
+          if (!state.data.authCheck(user, stateParams)) {
+            service.accessDeniedHandler(user, state, stateParams);
+            return false;
+          }
+        }
       }
       return true;
     };
+
     /**
      * Invokes authenticationRequired/accessDeniedHandler if route is protected. 
      * Returns false if access should be denied.
      */
     var checkAccessToRoute = function(route) {
       if (route.$$route) {
-
+        if (isPublic(route.$$route) == false && status.authenticated == false) {
+          service.authenticationRequiredHandler(route);
+          return false;
+        } else if (route.$$route.hasPermission && user.permissions && !service.hasPermission(route.$$route.hasPermission)) {
+          service.accessDeniedHandler(user, route);
+          return false;
+        } else if (route.$$route.authCheck && status.authenticated && !route.$$route.authCheck(user)) {
+          service.accessDeniedHandler(user, route);
+          return false;
+        }
       }
       return true;
     };
+
     // Expose the user object to HTML templates via the root scope
     $rootScope.user = user;
     $rootScope.user.authorized = false;
@@ -96,17 +123,20 @@ angular.module('Shu.auth', []);
     var service = {
       authenticationRequiredHandler: function() {
         $timeout(function() {
+          $log.info("authenticationRequiredHandler");
           transitionTo(loginRoute);
         });
       },
       accessDeniedHandler: function() {
         $timeout(function() {
-          transitionTo(defaultRoute, true);
+          $log.info("accessDeniedHandler");
+          transitionTo(defaultRoute, false);
         });
       },
       authenticationSuccessHandler: function() {
         $timeout(function() {
-          transitionTo(defaultRoute, true);
+          $log.info("authenticationSuccessHandler");
+          transitionTo(defaultRoute, false);
         });
       },
 
@@ -148,9 +178,7 @@ angular.module('Shu.auth', []);
       },
       //reset session
       reset: resetSession,
-      //Get and set session token
-      token: token,
-      // Activate the session (set token, load user, start heartbeat, trigger event)
+      // Activate the session (set token, load user, trigger event)
       activate: activateSession,
       // Sign up a new user and logs in
       signup: signup,
@@ -171,9 +199,7 @@ angular.module('Shu.auth', []);
       // Load the logged in user
       loadUser: loadUser,
       // Load the logged in user with a promise
-      getCurrent: getCurrent,
-      // Start session heartbeat
-      startHeartbeat: startHeartbeat
+      getCurrentUser: getCurrentUser
     };
 
     // Extend the current user with hasPermission() and hasFeature()
@@ -201,7 +227,7 @@ angular.module('Shu.auth', []);
             var deferred = $q.defer();
 
             try {
-              user.getCurrent().then(function() {
+              user.getCurrentUser().then(function() {
                 if ($route ? checkAccessToRoute($route.current) : checkAccessToState(state)) {
                   deferred.resolve();
                 } else {
@@ -224,7 +250,7 @@ angular.module('Shu.auth', []);
 
       if ($state) {
         // Set the default state
-        defaultRoute = '';
+        defaultRoute = 'recommend';
 
         for (var state in states) {
           // Add resolver for user and permissions
@@ -232,7 +258,7 @@ angular.module('Shu.auth', []);
           angular.extend(states[state].resolve, authResolver);
 
           // Found the login state
-          if (states[state].data && states[state].data.login) {
+          if (states[state].data && states[state].login) {
             loginRoute = state;
           }
         }
@@ -253,6 +279,10 @@ angular.module('Shu.auth', []);
           }
         }
       }
+      //Todo: If a token is present, use that for authentication
+      if (token){
+        this.activate(token);
+      }
       // Listen for route changes
       if ($state) {
         $rootScope.$on('$stateChangeStart', function(ev, toState, toParams) {
@@ -271,6 +301,14 @@ angular.module('Shu.auth', []);
             ev.preventDefault();
           }
         });
+        //Todo: transitionTo previousRoute
+        $rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, from, fromParams) {
+          // get the previous state
+          if (from.name) {
+            previousRoute = from.name;
+          }
+        });
+
       } else if ($route) {
         $rootScope.$on('$routeChangeStart', function(ev, data) {
           // Check if this is the verify email route
@@ -287,44 +325,52 @@ angular.module('Shu.auth', []);
     }
 
     function resetSession() {
+      token = null;
+      status.authorized = false;
+      status.authenticated = false;
 
+      //Todo: Remove session
+
+      for (var key in user) {
+        delete user[key];
+      }
+
+      // Check access to the current route/state again, now that session is reset
+      if ($state) {
+        checkAccessToState($state.current, $state.params);
+      } else if ($route) {
+        checkAccessToRoute($route.current);
+      }
     }
 
-    function token(value) {
-      if (value) {
-        token = value;
-
+    function activateSession(accessToken, callback) {
+      var that = this;
+      if (accessToken && accessToken.id) {
+        //Ignored: session token has been saved in LoopBackAuth.
+        token = accessToken.id;
         status.authorized = true;
         status.authenticated = true;
         $rootScope.user.authorized = true;
         $rootScope.user.authenticated = true;
+      } else {
+        callback && callback("Got accessToken Faild", null);
+      }
+      // Load the logged in user
+      var cachedUser = User.getCachedCurrent();
+      if (cachedUser) {
+        angular.extend(user, cachedUser);
+        callback && callback(null, user);
+        // Check access to the current route/state again, now that session is activated
+        if ($state) {
+          checkAccessToState($state.current, $state.params);
+        } else if ($route) {
+          checkAccessToRoute($route.current);
+        }
+        $rootScope.$broadcast('user.login');
+      } else {
+        that.reset();
       }
 
-      return token;
-    }
-
-    function activateSession(token, callback) {
-      var that = this;
-      this.token(token);
-      this.startHeartbeat(options.heartbeatInterval);
-
-      // Load the logged in user
-      this.loadUser(function(error, result) {
-        if (!error) {
-          callback && callback(error, result);
-
-          // Check access to the current route/state again, now that session is activated
-          if ($state) {
-            checkAccessToState($state.current, $state.params);
-          } else if ($route) {
-            checkAccessToRoute($route.current);
-          }
-
-          $rootScope.$broadcast('user.login');
-        } else {
-          that.reset();
-        }
-      });
     }
 
     function signup(credentials, callback) {
@@ -339,11 +385,10 @@ angular.module('Shu.auth', []);
         return;
       }
 
-      User.create(credentials,
+      User.signup(credentials,
         function(result) {
           $log.info(result);
-          // Success - Log in the user
-          //that.login(result);
+          that.authenticationSuccessHandler();
         },
         function(error) {
           $log.error(error);
@@ -428,8 +473,8 @@ angular.module('Shu.auth', []);
 
     function loadUser(callback) {
       var that = this;
-      user = User.getCachedCurrent();
-      if (!user) {
+      result = User.getCachedCurrent();
+      if (!result) {
         User.getCurrent(
           function(result) {
             $timeout(function() {
@@ -440,15 +485,18 @@ angular.module('Shu.auth', []);
           function(error) {
             callback && callback(error, null);
           });
+      } else {
+        angular.extend(user, result);
+        callback && callback(null, user);
       }
     }
 
-    function getCurrent() {
+    function getCurrentUser() {
       var deferred = $q.defer();
       var that = this;
 
       try {
-        if (this.current.user_id) {
+        if (this.current.id) {
           deferred.resolve(this.current);
         } else {
           //Question: what's the following meaning?
@@ -462,10 +510,6 @@ angular.module('Shu.auth', []);
       }
 
       return deferred.promise;
-    }
-
-    function startHeartbeat() {
-
     }
   }
 
@@ -571,7 +615,6 @@ angular.module('Shu.auth', []);
                 });
               }
             }
-
           });
 
           return false;
