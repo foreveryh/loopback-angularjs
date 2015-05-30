@@ -280,7 +280,7 @@ angular.module('Shu.auth', []);
         }
       }
       //Todo: If a token is present, use that for authentication
-      if (token){
+      if (token) {
         this.activate(token);
       }
       // Listen for route changes
@@ -374,61 +374,91 @@ angular.module('Shu.auth', []);
     }
 
     function signup(credentials, callback) {
-      var that = this;
-      this.reset();
+        var that = this;
+        this.reset();
 
-      if (!credentials.password) {
-        callback && callback({
-          name: 'MISSING_PASSWORD',
-          message: "Please enter a password."
-        }, null);
-        return;
+        if (!credentials.password) {
+          callback && callback({
+            name: 'MISSING_PASSWORD',
+            message: "Please enter a password."
+          }, null);
+          return;
+        }
+
+        User.signup(credentials,
+          function(result) {
+            $log.info(result);
+            that.authenticationSuccessHandler();
+          },
+          function(error) {
+            $log.error(error);
+            callback && callback(error, null);
+          });
       }
+      //Todo
+    function verifyEmail(callback) {
+      var that = this;
+      var params = {
+        uid: ""，
+        token: "",
+        redirect: ""
+      };
 
-      User.signup(credentials,
+      User.confirm(params,
         function(result) {
-          $log.info(result);
-          that.authenticationSuccessHandler();
+          callback && callback(null, result);
         },
         function(error) {
-          $log.error(error);
           callback && callback(error, null);
         });
     }
 
-    function verifyEmail() {
-
-    }
-
     function login(credentials, callback) {
+        var that = this;
+        this.reset();
+
+        User.login(credentials,
+          function(result) {
+            if (result) {
+              //Todo: if Email not verified
+              if (false) {
+
+              } else {
+                that.activate(result, callback);
+                // Invoke the authenticationSuccessHandler handler
+                that.authenticationSuccessHandler();
+              }
+            }
+          },
+          function(error) {
+            callback && callback(error, null);
+          }
+        );
+      }
+      //Todo
+    function logout(callback) {
+        var that = this;
+
+        User.logout(
+          function(result) {
+            that.reset();
+            callback && callback(null, result);
+          },
+          function(error) {
+            callback && callback(error, null);
+          });
+      }
+      //Todo
+    function resetPassword(user, callback) {
       var that = this;
       this.reset();
-
-      User.login(credentials,
+      User.resetPassword(user,
         function(result) {
-          if (result) {
-            //Todo: if Email not verified
-            if (false) {
 
-            } else {
-              that.activate(result, callback);
-              // Invoke the authenticationSuccessHandler handler
-              that.authenticationSuccessHandler();
-            }
-          }
         },
         function(error) {
-          callback && callback(error, null);
-        }
-      );
-    }
 
-    function logout() {
-
-    }
-
-    function resetPassword() {
-
+        });
     }
 
     function setPassword() {
@@ -614,6 +644,56 @@ angular.module('Shu.auth', []);
                   scope.loading = false;
                 });
               }
+            }
+          });
+
+          return false;
+        };
+
+        element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
+      }
+    }
+    //Set password directive
+  angular
+    .module('Shu.auth')
+    .directive('uResetPassword', uResetPassword);
+
+  uResetPassword.$inject = ['$rootScope', '$timeout', 'authFactory'];
+
+  function uResetPassword($rootScope, $timeout, authFactory) {
+      var directive = {
+        restrict: 'A',
+        link: linkFunc
+      };
+      return directive;
+
+      function linkFunc(scope, element, attrs) {
+        var evHandler = function(e) {
+          e.preventDefault();
+
+          if (scope.loading) {
+            return false;
+          }
+
+          $timeout(function() {
+            scope.error = null;
+            scope.loading = true;
+          });
+
+          authFactory.resetPassword({
+            email: this.email.value
+          }, function(error, result) {
+            if (error) {
+              $timeout(function() {
+                scope.error = error;
+                scope.loading = false;
+              });
+              return handleError(scope, error, attrs.reset_errors);
+            } else {
+              $timeout(function() {
+                scope.emailSent = true;
+                scope.loading = false;
+              });
             }
           });
 
