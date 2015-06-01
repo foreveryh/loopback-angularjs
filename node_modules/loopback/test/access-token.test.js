@@ -1,6 +1,8 @@
 var loopback = require('../');
 var extend = require('util')._extend;
 var Token = loopback.AccessToken.extend('MyToken');
+var ds = loopback.createDataSource({connector: loopback.Memory});
+Token.attachTo(ds);
 var ACL = loopback.ACL;
 
 describe('loopback.token(options)', function() {
@@ -107,6 +109,51 @@ describe('loopback.token(options)', function() {
           .end(done);
       });
   });
+
+  it('should rewrite url for the current user literal at the end without query',
+    function(done) {
+      var app = createTestApp(this.token, done);
+      var id = this.token.id;
+      var userId = this.token.userId;
+      request(app)
+        .get('/users/me')
+        .set('authorization', id)
+        .end(function(err, res) {
+          assert(!err);
+          assert.deepEqual(res.body, {userId: userId});
+          done();
+        });
+    });
+
+  it('should rewrite url for the current user literal at the end with query',
+    function(done) {
+      var app = createTestApp(this.token, done);
+      var id = this.token.id;
+      var userId = this.token.userId;
+      request(app)
+        .get('/users/me?state=1')
+        .set('authorization', id)
+        .end(function(err, res) {
+          assert(!err);
+          assert.deepEqual(res.body, {userId: userId, state: 1});
+          done();
+        });
+    });
+
+  it('should rewrite url for the current user literal in the middle',
+    function(done) {
+      var app = createTestApp(this.token, done);
+      var id = this.token.id;
+      var userId = this.token.userId;
+      request(app)
+        .get('/users/me/1')
+        .set('authorization', id)
+        .end(function(err, res) {
+          assert(!err);
+          assert.deepEqual(res.body, {userId: userId, state: 1});
+          done();
+        });
+    });
 
   it('should skip when req.token is already present', function(done) {
     var tokenStub = { id: 'stub id' };
@@ -284,7 +331,7 @@ describe('app.enableAuth()', function() {
 
 function createTestingToken(done) {
   var test = this;
-  Token.create({}, function(err, token) {
+  Token.create({userId: '123'}, function(err, token) {
     if (err) return done(err);
     test.token = token;
     done();
@@ -307,7 +354,7 @@ function createTestApp(testToken, settings, done) {
   var app = loopback();
 
   app.use(loopback.cookieParser('secret'));
-  app.use(loopback.token({model: Token}));
+  app.use(loopback.token({model: Token, currentUserLiteral: 'me'}));
   app.get('/token', function(req, res) {
     res.cookie('authorization', testToken.id, {signed: true});
     res.end();
@@ -320,6 +367,15 @@ function createTestApp(testToken, settings, done) {
       return done(e);
     }
     res.send('ok');
+  });
+  app.use('/users/:uid', function(req, res) {
+    var result = {userId: req.params.uid};
+    if (req.query.state) {
+      result.state = req.query.state;
+    } else if (req.url !== '/') {
+      result.state = req.url.substring(1);
+    }
+    res.status(200).send(result);
   });
   app.use(loopback.rest());
   app.enableAuth();

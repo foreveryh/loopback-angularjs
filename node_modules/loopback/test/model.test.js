@@ -66,7 +66,7 @@ describe('Model / PersistedModel', function() {
 
 describe.onServer('Remote Methods', function() {
 
-  var User;
+  var User, Post;
   var dataSource;
   var app;
 
@@ -84,11 +84,22 @@ describe.onServer('Remote Methods', function() {
       trackChanges: true
     });
 
+    Post = PersistedModel.extend('post', {
+      id: { id: true, type: String, defaultFn: 'guid' },
+      title: String,
+      content: String
+    }, {
+      trackChanges: true
+    });
+
     dataSource = loopback.createDataSource({
       connector: loopback.Memory
     });
 
     User.attachTo(dataSource);
+    Post.attachTo(dataSource);
+
+    User.hasMany(Post);
 
     User.login = function(username, password, fn) {
       if (username === 'foo' && password === 'bar') {
@@ -163,6 +174,63 @@ describe.onServer('Remote Methods', function() {
           done();
         });
     });
+
+    it('Call the findById with filter.fields using HTTP / REST', function(done) {
+      request(app)
+        .post('/users')
+        .send({first: 'x', last: 'y'})
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var userId = res.body.id;
+          assert(userId);
+          request(app)
+            .get('/users/' + userId + '?filter[fields]=first')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function(err, res) {
+              if (err) return done(err);
+              assert.equal(res.body.first, 'x', 'first should be x');
+              assert(res.body.last === undefined, 'last should not be present');
+              done();
+            });
+        });
+    });
+
+    it('Call the findById with filter.include using HTTP / REST', function(done) {
+      request(app)
+        .post('/users')
+        .send({first: 'x', last: 'y'})
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var userId = res.body.id;
+          assert(userId);
+          request(app)
+            .post('/users/' + userId + '/posts')
+            .send({title: 'T1', content: 'C1'})
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function(err, res) {
+              if (err) return done(err);
+              var post = res.body;
+              request(app)
+                .get('/users/' + userId + '?filter[include]=posts')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end(function(err, res) {
+                  if (err) return done(err);
+                  assert.equal(res.body.first, 'x', 'first should be x');
+                  assert.equal(res.body.last, 'y', 'last should be y');
+                  assert.deepEqual(post, res.body.posts[0]);
+                  done();
+                });
+            });
+        });
+    });
+
   });
 
   describe('Model.beforeRemote(name, fn)', function() {
@@ -214,6 +282,24 @@ describe.onServer('Remote Methods', function() {
           if (err) return done(err);
           assert(beforeCalled, 'before hook was not called');
           assert(afterCalled, 'after hook was not called');
+          done();
+        });
+    });
+  });
+
+  describe('Model.afterRemoteError(name, fn)', function() {
+    it('runs the function when method fails', function(done) {
+      var actualError = 'hook not called';
+      User.afterRemoteError('login', function(ctx, next) {
+        actualError = ctx.error;
+        next();
+      });
+
+      request(app).get('/users/sign-in?username=bob&password=123')
+        .end(function(err, res) {
+          if (err) return done(err);
+          expect(actualError)
+            .to.have.property('message', 'bad username and password!');
           done();
         });
     });
@@ -483,9 +569,11 @@ describe.onServer('Remote Methods', function() {
   describe('Model._getACLModel()', function() {
     it('should return the subclass of ACL', function() {
       var Model = require('../').Model;
+      var originalValue = Model._ACL();
       var acl = ACL.extend('acl');
       Model._ACL(null); // Reset the ACL class for the base model
       var model = Model._ACL();
+      Model._ACL(originalValue); // Reset the value back
       assert.equal(model, acl);
     });
   });
@@ -528,6 +616,35 @@ describe.onServer('Remote Methods', function() {
         'count',
         'prototype.updateAttributes'
       ]);
+    });
+  });
+
+  describe('Model.getApp(cb)', function() {
+    var app, TestModel;
+    beforeEach(function setup() {
+      app = loopback();
+      TestModel = loopback.createModel('TestModelForGetApp'); // unique name
+      app.dataSource('db', { connector: 'memory' });
+    });
+
+    it('calls the callback when already attached', function(done) {
+      app.model(TestModel, { dataSource: 'db' });
+      TestModel.getApp(function(err, a) {
+        if (err) return done(err);
+        expect(a).to.equal(app);
+        done();
+      });
+      // fails on time-out when not implemented correctly
+    });
+
+    it('calls the callback after attached', function(done) {
+      TestModel.getApp(function(err, a) {
+        if (err) return done(err);
+        expect(a).to.equal(app);
+        done();
+      });
+      app.model(TestModel, { dataSource: 'db' });
+      // fails on time-out when not implemented correctly
     });
   });
 });

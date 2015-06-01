@@ -2,7 +2,7 @@ var loopback = require('../');
 var lt = require('loopback-testing');
 var path = require('path');
 var SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-integration-app');
-var app = require(path.join(SIMPLE_APP, 'app.js'));
+var app = require(path.join(SIMPLE_APP, 'server/server.js'));
 var assert = require('assert');
 
 describe('remoting - integration', function() {
@@ -114,7 +114,7 @@ describe('remoting - integration', function() {
         'create(data:object):store POST /stores',
         'upsert(data:object):store PUT /stores',
         'exists(id:any):boolean GET /stores/:id/exists',
-        'findById(id:any):store GET /stores/:id',
+        'findById(id:any,filter:object):store GET /stores/:id',
         'find(filter:object):store GET /stores',
         'findOne(filter:object):store GET /stores/findOne',
         'updateAll(where:object,data:object) POST /stores/update',

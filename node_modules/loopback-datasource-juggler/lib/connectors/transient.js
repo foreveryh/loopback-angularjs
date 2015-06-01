@@ -97,7 +97,8 @@ Transient.prototype.save = function save(model, data, callback) {
 
 Transient.prototype.update =
   Transient.prototype.updateAll = function updateAll(model, where, data, cb) {
-    this.flush('update', null, cb);
+    var count = 0;
+    this.flush('update', {count: count}, cb);
 };
 
 Transient.prototype.updateAttributes = function updateAttributes(model, id, data, cb) {
@@ -109,7 +110,7 @@ Transient.prototype.updateAttributes = function updateAttributes(model, id, data
       throw err;
     }
   }
-  
+
   this.setIdValue(model, data, id);
   this.save(model, data, cb);
 };

@@ -1,4 +1,5 @@
 var util = require('util');
+
 /**
  *
  * @param newClass
@@ -61,7 +62,7 @@ exports.mixin = function (newClass, mixinClass, options) {
   if (options.instanceProperties && mixinClass.prototype) {
     mixInto(mixinClass.prototype, newClass.prototype, options);
   }
-  
+
   return newClass;
 };
 
@@ -75,12 +76,22 @@ function mixInto(sourceScope, targetScope, options) {
     var isDelegate = isFunc && targetProperty.value._delegate;
     var shouldOverride = options.override || !targetPropertyExists || isDelegate;
 
+    if (propertyName == '_mixins') {
+      mergeMixins(sourceScope._mixins, targetScope._mixins);
+      return;
+    }
+
     if (shouldOverride) {
-      if (sourceIsFunc) {
-        sourceProperty.value = sourceProperty.value;
-      }
-      
       Object.defineProperty(targetScope, propertyName, sourceProperty);
     }
   });
+}
+
+function mergeMixins(source, target) {
+  // hand-written equivalent of lodash.union()
+  for (var ix in source) {
+    var mx = source[ix];
+    if (target.indexOf(mx) === -1)
+      target.push(mx);
+  }
 }

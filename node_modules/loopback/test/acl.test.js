@@ -266,6 +266,8 @@ describe('security ACLs', function() {
         {principalType: ACL.USER, principalId: 'u001', property: 'name',
           accessType: ACL.ALL, permission: ACL.ALLOW},
         {principalType: ACL.USER, principalId: 'u002', property: 'findOne',
+          accessType: ACL.ALL, permission: ACL.ALLOW},
+        {principalType: ACL.USER, principalId: 'u003', property: ['findOne', 'findById'],
           accessType: ACL.ALL, permission: ACL.ALLOW}
       ]
     });
@@ -274,7 +276,11 @@ describe('security ACLs', function() {
     assert(staticACLs.length === 3);
 
     staticACLs = ACL.getStaticACLs('Model1', 'findOne');
+    assert(staticACLs.length === 2);
+
+    staticACLs = ACL.getStaticACLs('Model1', 'findById');
     assert(staticACLs.length === 1);
+    assert(staticACLs[0].property === 'findById');
   });
 
   it('should check access against LDL, ACL, and Role', function() {
@@ -348,5 +354,44 @@ describe('security ACLs', function() {
         });
       });
     });
+  });
+});
+
+describe('access check', function() {
+  var app;
+  before(function() {
+    app = loopback();
+    app.use(loopback.rest());
+    app.enableAuth();
+    app.dataSource('test', {connector: 'memory'});
+  });
+
+  it('should occur before other remote hooks', function(done) {
+    var MyTestModel = app.model('MyTestModel', {base: 'PersistedModel', dataSource: 'test'});
+    var checkAccessCalled = false;
+    var beforeHookCalled = false;
+
+    // fake / spy on the checkAccess method
+    MyTestModel.checkAccess = function() {
+      var cb = arguments[arguments.length - 1];
+      checkAccessCalled = true;
+      var allowed = true;
+      cb(null, allowed);
+    };
+
+    MyTestModel.beforeRemote('find', function(ctx, next) {
+      // ensure this is called after checkAccess
+      if (!checkAccessCalled) return done(new Error('incorrect order'));
+      beforeHookCalled = true;
+      next();
+    });
+
+    request(app)
+      .get('/MyTestModels')
+      .end(function(err, result) {
+        assert(beforeHookCalled, 'the before hook should be called');
+        assert(checkAccessCalled, 'checkAccess should have been called');
+        done();
+      });
   });
 });

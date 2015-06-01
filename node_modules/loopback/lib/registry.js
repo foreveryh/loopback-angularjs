@@ -1,12 +1,3 @@
-/*
- * This file exports methods and objects for manipulating
- * Models and DataSources.
- *
- * It is an internal file that should not be used outside of loopback.
- * All exported entities can be accessed via the `loopback` object.
- * @private
- */
-
 var assert = require('assert');
 var extend = require('util')._extend;
 var juggler = require('loopback-datasource-juggler');
@@ -14,11 +5,23 @@ var debug = require('debug')('loopback:registry');
 var DataSource = juggler.DataSource;
 var ModelBuilder = juggler.ModelBuilder;
 
-var registry = module.exports;
+module.exports = Registry;
 
-registry.defaultDataSources = {};
+/**
+ * Define and reference `Models` and `DataSources`.
+ *
+ * @class
+ */
 
-registry.modelBuilder = new ModelBuilder();
+function Registry() {
+  this.defaultDataSources = {};
+  this.modelBuilder = new ModelBuilder();
+  require('./model')(this);
+  require('./persisted-model')(this);
+
+  // Set the default model base class.
+  this.modelBuilder.defaultModelBaseClass = this.getModel('Model');
+}
 
 /**
  * Create a named vanilla JavaScript class constructor with an attached
@@ -84,7 +87,8 @@ registry.modelBuilder = new ModelBuilder();
  * @header loopback.createModel
  */
 
-registry.createModel = function(name, properties, options) {
+Registry.prototype.createModel = function(name, properties, options) {
+
   if (arguments.length === 1 && typeof name === 'object') {
     var config = name;
     name = config.name;
@@ -106,7 +110,7 @@ registry.createModel = function(name, properties, options) {
       if (baseName === 'DataModel') {
         console.warn('Model `%s` is extending deprecated `DataModel. ' +
           'Use `PeristedModel` instead.', name);
-        BaseModel = this.PersistedModel;
+        BaseModel = this.getModel('PeristedModel');
       } else {
         console.warn('Model `%s` is extending an unknown model `%s`. ' +
           'Using `PersistedModel` as the base.', name, baseName);
@@ -114,9 +118,11 @@ registry.createModel = function(name, properties, options) {
     }
   }
 
-  BaseModel = BaseModel || this.PersistedModel;
-
+  BaseModel = BaseModel || this.getModel('PersistedModel');
   var model = BaseModel.extend(name, properties, options);
+  model.registry = this;
+
+  this._defineRemoteMethods(model, options.methods);
 
   // try to attach
   try {
@@ -174,7 +180,7 @@ function addACL(acls, acl) {
  * @header loopback.configureModel(ModelCtor, config)
  */
 
-registry.configureModel = function(ModelCtor, config) {
+Registry.prototype.configureModel = function(ModelCtor, config) {
   var settings = ModelCtor.settings;
   var modelName = ModelCtor.modelName;
 
@@ -232,7 +238,7 @@ registry.configureModel = function(ModelCtor, config) {
     ModelCtor.attachTo(config.dataSource);
     debug('Attached model `%s` to dataSource `%s`',
       modelName, config.dataSource.name);
-  } else if (config.dataSource === null) {
+  } else if (config.dataSource === null || config.dataSource === false) {
     debug('Model `%s` is not attached to any DataSource by configuration.',
       modelName);
   } else {
@@ -243,30 +249,55 @@ registry.configureModel = function(ModelCtor, config) {
       'Use `null` or `false` to mark models not attached to any data source.',
       modelName);
   }
+
+  // Remote methods
+  this._defineRemoteMethods(ModelCtor, config.methods);
+};
+
+Registry.prototype._defineRemoteMethods = function(ModelCtor, methods) {
+  if (!methods) return;
+  if (typeof methods !== 'object') {
+    console.warn('Ignoring non-object "methods" setting of "%s".',
+      ModelCtor.modelName);
+    return;
+  }
+
+  Object.keys(methods).forEach(function(key) {
+    var meta = methods[key];
+    if (typeof meta.isStatic !== 'boolean') {
+      console.warn('Remoting metadata for "%s.%s" is missing "isStatic" ' +
+        'flag, the method is registered as an instance method.',
+        ModelCtor.modelName,
+        key);
+      console.warn('This behaviour may change in the next major version.');
+    }
+    ModelCtor.remoteMethod(key, meta);
+  });
 };
 
 /**
  * Look up a model class by name from all models created by
  * `loopback.createModel()`
- * @param {String} modelName The model name
+ * @param {String|Function} modelOrName The model name or a `Model` constructor.
  * @returns {Model} The model class
  *
  * @header loopback.findModel(modelName)
  */
-registry.findModel = function(modelName) {
+Registry.prototype.findModel = function(modelName) {
+  if (typeof modelType === 'function') return modelName;
   return this.modelBuilder.models[modelName];
 };
 
 /**
  * Look up a model class by name from all models created by
- * `loopback.createModel()`. Throw an error when no such model exists.
+ * `loopback.createModel()`. **Throw an error when no such model exists.**
  *
- * @param {String} modelName The model name
+ * @param {String} modelOrName The model name or a `Model` constructor.
  * @returns {Model} The model class
  *
  * @header loopback.getModel(modelName)
  */
-registry.getModel = function(modelName) {
+Registry.prototype.getModel = function(modelName) {
   var model = this.findModel(modelName);
   if (model) return model;
 
@@ -282,9 +313,17 @@ registry.getModel = function(modelName) {
  *
  * @header loopback.getModelByType(modelType)
  */
-registry.getModelByType = function(modelType) {
-  assert(typeof modelType === 'function',
-    'The model type must be a constructor');
+Registry.prototype.getModelByType = function(modelType) {
+  var type = typeof modelType;
+  var accepted = ['function', 'string'];
+
+  assert(accepted.indexOf(type) > -1,
+    'The model type must be a constructor or model name');
+
+  if (type === 'string') {
+    modelType = this.getModel(modelType);
+  }
+
   var models = this.modelBuilder.models;
   for (var m in models) {
     if (models[m].prototype instanceof modelType) {
@@ -302,12 +341,11 @@ registry.getModelByType = function(modelType) {
  * @property {Object} connector LoopBack connector.
  * @property {*} [*] Other&nbsp;connector properties.
  *   See the relevant connector documentation.
- *
- * @header loopback.createDataSource(name, options)
  */
 
-registry.createDataSource = function(name, options) {
+Registry.prototype.createDataSource = function(name, options) {
   var self = this;
+
   var ds = new DataSource(name, options, self.modelBuilder);
   ds.createModel = function(name, properties, settings) {
     settings = settings || {};
@@ -340,11 +378,9 @@ registry.createDataSource = function(name, options) {
  *
  * @param {String} [name] The name of the data source.
  * If not provided, the `'default'` is used.
- *
- * @header loopback.memory([name])
  */
 
-registry.memory = function(name) {
+Registry.prototype.memory = function(name) {
   name = name || 'default';
   var memory = (
     this._memoryDataSources || (this._memoryDataSources = {})
@@ -368,7 +404,7 @@ registry.memory = function(name) {
  * @header loopback.setDefaultDataSourceForType(type, dataSource)
  */
 
-registry.setDefaultDataSourceForType = function(type, dataSource) {
+Registry.prototype.setDefaultDataSourceForType = function(type, dataSource) {
   var defaultDataSources = this.defaultDataSources;
 
   if (!(dataSource instanceof DataSource)) {
@@ -382,21 +418,19 @@ registry.setDefaultDataSourceForType = function(type, dataSource) {
 /**
  * Get the default `dataSource` for a given `type`.
  * @param {String} type The datasource type.
- * @returns {DataSource} The data source instance.
- * @header loopback.getDefaultDataSourceForType(type)
+ * @returns {DataSource} The data source instance
  */
 
-registry.getDefaultDataSourceForType = function(type) {
+Registry.prototype.getDefaultDataSourceForType = function(type) {
   return this.defaultDataSources && this.defaultDataSources[type];
 };
 
 /**
  * Attach any model that does not have a dataSource to
  * the default dataSource for the type the Model requests
- * @header loopback.autoAttach()
  */
 
-registry.autoAttach = function() {
+Registry.prototype.autoAttach = function() {
   var models = this.modelBuilder.models;
   assert.equal(typeof models, 'object', 'Cannot autoAttach without a models object');
 
@@ -410,7 +444,7 @@ registry.autoAttach = function() {
   }, this);
 };
 
-registry.autoAttachModel = function(ModelCtor) {
+Registry.prototype.autoAttachModel = function(ModelCtor) {
   if (ModelCtor.autoAttach) {
     var ds = this.getDefaultDataSourceForType(ModelCtor.autoAttach);
 
@@ -424,18 +458,8 @@ registry.autoAttachModel = function(ModelCtor) {
   }
 };
 
-registry.DataSource = DataSource;
-
-/*
- * Core models
- * @private
- */
-
-registry.Model = require('./model');
-registry.PersistedModel = require('./persisted-model');
-
 // temporary alias to simplify migration of code based on <=2.0.0-beta3
-Object.defineProperty(registry, 'DataModel', {
+Object.defineProperty(Registry.prototype, 'DataModel', {
   get: function() {
     var stackLines = new Error().stack.split('\n');
     console.warn('loopback.DataModel is deprecated, ' +
@@ -445,6 +469,3 @@ Object.defineProperty(registry, 'DataModel', {
     return this.PersistedModel;
   }
 });
-
-// Set the default model base class. This is done after the Model class is defined.
-registry.modelBuilder.defaultModelBaseClass = registry.Model;
