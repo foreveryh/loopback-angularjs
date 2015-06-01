@@ -2,5 +2,21 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "myEmailDataSource": {
+    "connector": "mail",
+    "transports": [{
+      "type": "smtp",
+      "host": "smtp.gmail.com",
+      "secure": true,
+      "port": 465,
+      "tls": {
+        "rejectUnauthorized": false
+      },
+      "auth": {
+        "user": "m18600080486@gmail.com",
+        "pass": "1qaz@WSX;"
+      }
+    }]
   }
 }

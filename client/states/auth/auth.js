@@ -399,7 +399,7 @@ angular.module('Shu.auth', []);
     function verifyEmail(callback) {
       var that = this;
       var params = {
-        uid: ""，
+        uid: "",
         token: "",
         redirect: ""
       };
@@ -454,10 +454,12 @@ angular.module('Shu.auth', []);
       this.reset();
       User.resetPassword(user,
         function(result) {
-
+          $log.info(result);
+          callback && callback(null, result);
         },
         function(error) {
-
+          $log.warn(error);
+          callback && callback(error, null);
         });
     }
 

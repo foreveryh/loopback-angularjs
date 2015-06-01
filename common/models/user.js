@@ -91,9 +91,11 @@ module.exports = function(user) {
 
   //send password reset link when requested
   user.on('resetPasswordRequest', function(info) {
+    console.log(info.email); // the email of the requested user
+    console.log(info.accessToken.id); // the temp access token to allow password reset
     var url = 'http://' + config.host + ':' + config.port + '/reset-password';
     var html = 'Click <a href="' + url + '?access_token=' + info.accessToken.id + '">here</a> to reset your password';
-
+    console.log("reset password requested");
     user.app.models.Email.send({
       to: info.email,
       from: info.email,

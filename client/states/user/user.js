@@ -14,6 +14,10 @@ angular.module('Shu.user').config(function($stateProvider) {
     url: '/sign_up',
     templateUrl: 'states/user/sign_up.html',
     data: {public: true}
+  }).state('account.reset_password',{
+    url: '/reset_password',
+    templateUrl: 'states/user/reset_password.html',
+    data: {public: true}
   });
 });
 angular.module('Shu.user').controller(function() {
