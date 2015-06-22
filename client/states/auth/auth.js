@@ -189,7 +189,7 @@ angular.module('Shu.auth', []);
       // End session / Logout user
       logout: logout,
       // Send reset password email
-      resetPassword: resetPassword,
+      requestResetPassword: requestResetPassword,
       // Set new password
       setPassword: setPassword,
       // Check if the user has permission
@@ -449,7 +449,7 @@ angular.module('Shu.auth', []);
           });
       }
       //Todo
-    function resetPassword(user, callback) {
+    function requestResetPassword(user, callback) {
       var that = this;
       this.reset();
       User.resetPassword(user,
@@ -614,6 +614,10 @@ angular.module('Shu.auth', []);
             return false;
           }
 
+          $timeout(function() {
+            scope.error = null;
+            scope.loading = true;
+          });
           // Create the sign up object
           var object = {};
           for (var i = 0; i < this.elements.length; ++i) {
@@ -653,7 +657,7 @@ angular.module('Shu.auth', []);
         element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
       }
     }
-    //Set password directive
+    //reset password directvie 
   angular
     .module('Shu.auth')
     .directive('uResetPassword', uResetPassword);
@@ -661,6 +665,33 @@ angular.module('Shu.auth', []);
   uResetPassword.$inject = ['$rootScope', '$timeout', 'authFactory'];
 
   function uResetPassword($rootScope, $timeout, authFactory) {
+    var directive = {
+      restrict: 'A',
+      link: linkFunc
+    };
+    return directive;
+
+    function linkFunc(scope, element, attrs) {
+      e.preventDefault();
+
+      if (scope.loading) {
+        return false;
+      }
+      $timeout(function() {
+        scope.error = null;
+        scope.loading = true;
+      });
+      //reset password request
+    }
+  };
+  //request reset password directive
+  angular
+    .module('Shu.auth')
+    .directive('uRequestResetPassword', uRequestResetPassword);
+
+  uRequestResetPassword.$inject = ['$rootScope', '$timeout', 'authFactory'];
+
+  function uRequestResetPassword($rootScope, $timeout, authFactory) {
       var directive = {
         restrict: 'A',
         link: linkFunc
@@ -680,7 +711,7 @@ angular.module('Shu.auth', []);
             scope.loading = true;
           });
 
-          authFactory.resetPassword({
+          authFactory.requestResetPassword({
             email: this.email.value
           }, function(error, result) {
             if (error) {
