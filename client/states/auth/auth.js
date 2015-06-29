@@ -191,7 +191,7 @@ angular.module('Shu.auth', []);
       // Send reset password email
       requestResetPassword: requestResetPassword,
       // Set new password
-      setPassword: setPassword,
+      resetPassword: resetPassword,
       // Check if the user has permission
       hasPermission: hasPermission,
       // Check if the user has features
@@ -450,9 +450,23 @@ angular.module('Shu.auth', []);
       }
       //Todo
     function requestResetPassword(user, callback) {
+        var that = this;
+        this.reset();
+        User.resetPassword(user,
+          function(result) {
+            $log.info(result);
+            callback && callback(null, result);
+          },
+          function(error) {
+            $log.warn(error);
+            callback && callback(error, null);
+          });
+      }
+      //Todo
+    function resetPassword(passwordToken, newPassword, callback) {
       var that = this;
       this.reset();
-      User.resetPassword(user,
+      User.setPassword(newPassword,
         function(result) {
           $log.info(result);
           callback && callback(null, result);
@@ -461,10 +475,6 @@ angular.module('Shu.auth', []);
           $log.warn(error);
           callback && callback(error, null);
         });
-    }
-
-    function setPassword() {
-
     }
 
     function hasPermission(permissions) {
@@ -674,16 +684,39 @@ angular.module('Shu.auth', []);
     return directive;
 
     function linkFunc(scope, element, attrs) {
-      e.preventDefault();
+      var evHandler = function(e) {
+        e.preventDefault();
 
-      if (scope.loading) {
+        if (scope.loading) {
+          return false;
+        }
+        $timeout(function() {
+          scope.error = null;
+          scope.loading = true;
+        });
+        if (this.user[password].value !== user[password_confirmation]) {
+          scope.error = 'password is not same';
+          return handleError(scope, error, attrs.reset_errors);
+        }
+        //reset password request
+        authFactory.resetPassword({
+          newPassword: this.user[password].value
+        }, function(error, result) {
+          if (error) {
+            $timeout(function() {
+              scope.error = error;
+              scope.loading = false;
+            });
+            return handleError(scope, error, attrs.reset_errors);
+          } else {
+            $timeout(function() {
+              scope.loading = false;
+            });
+          }
+        });
         return false;
-      }
-      $timeout(function() {
-        scope.error = null;
-        scope.loading = true;
-      });
-      //reset password request
+      };
+      element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
     }
   };
   //request reset password directive
@@ -729,10 +762,8 @@ angular.module('Shu.auth', []);
               });
             }
           });
-
           return false;
         };
-
         element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
       }
     }

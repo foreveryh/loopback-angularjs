@@ -35,6 +35,21 @@ module.exports = function(user) {
     });
   }
 
+  user.setPassword = function(newPassword, cb) {
+    console.log(newPassword);
+    cb(null, 'test');
+  }
+
+  User.beforeRemote('setPassword', function(ctx, next){
+    console.log('========ctx.req========');
+    console.log(ctx.req);
+    console.log('========ctx.res========');
+    console.log(ctx.res);
+    console.log('========ctx========');
+    console.log(ctx);
+    next();
+  });
+
   user.remoteMethod(
     'signup', {
       description: 'Sign up a user with username/email and password',
@@ -52,6 +67,27 @@ module.exports = function(user) {
         root: true,
         description: 'The response body contains properties of the AccessToken created on login.\n' +
           '  - `user` - `{User}` - Data of the currently logged in user. (`include=user`)\n\n'
+      },
+      http: {
+        verb: 'post'
+      }
+    },
+    'setPassword', {
+      description: 'Set password for user with access token',
+      accepts: [{
+        arg: 'credentials',
+        type: 'object',
+        required: true,
+        http: {
+          source: 'body'
+        }
+      }],
+      returns: {
+        arg: 'user',
+        type: 'object',
+        root: true,
+        description: 'The response body contains properties of a user.\n' +
+          '  - `user` - `{User}` - Data of the user owned the access token.\n\n'
       },
       http: {
         verb: 'post'
@@ -91,19 +127,25 @@ module.exports = function(user) {
 
   //send password reset link when requested
   user.on('resetPasswordRequest', function(info) {
-    console.log(info.email); // the email of the requested user
+    console.log(info); // the email of the requested user
     console.log(info.accessToken.id); // the temp access token to allow password reset
-    var url = 'http://' + config.host + ':' + config.port + '/reset-password';
-    var html = 'Click <a href="' + url + '?access_token=' + info.accessToken.id + '">here</a> to reset your password';
-    console.log("reset password requested");
-    user.app.models.Email.send({
-      to: info.email,
-      from: info.email,
-      subject: 'Password reset',
-      html: html
-    }, function(err) {
-      if (err) return console.log('> error sending password reset email');
-      console.log('> sending password reset email to:', info.email);
+    info.url = 'http://' + config.host + ':' + config.port + '/reset-password';
+    var ejs = require('ejs'),
+      fs = require('fs'),
+      template = path.resolve(__dirname, '../../server/views/password_reset.ejs');
+
+    fs.readFile(template, 'utf-8', function(err, data) {
+      if (err) throw err;
+      var html = ejs.render(data, info);
+      user.app.models.Email.send({
+        to: info.email,
+        from: info.email,
+        subject: 'Password reset',
+        html: html
+      }, function(err) {
+        if (err) return console.log('> error sending password reset email');
+        console.log('> sending password reset email to:', info.email);
+      });
     });
   });
 };
