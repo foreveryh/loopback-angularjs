@@ -643,7 +643,7 @@ angular.module('Shu.auth', []);
               }
             }
           }
-
+          console.log(object);
           // Sign up
           authFactory.signup(object, function(error, result) {
 

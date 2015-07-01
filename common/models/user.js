@@ -39,12 +39,34 @@ module.exports = function(user) {
     console.log(password);
     cb(null, 'test');
   }
-
-  user.beforeRemote('setPassword', function(ctx, next) {
-    console.log('========ctx.req.body========');
-    console.log(ctx.req.body);
-    console.log('========ctx.req.auth========');
+  user.beforeRemote('setPassword',function(ctx, instance, next) {
+    // Retrieve the access token used in this request
+    console.log("before");
+    console.log(instance);
     console.log(ctx.req.accessToken);
+    if (ctx.req.accessToken != null) return next();
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    var AccessTokenModel = app.models.AccessToken;
+    AccessTokenModel.findForRequest(ctx.req, function(err, token) {
+      console.log(err);
+      if (err) return next(err);
+      if (!token) return next(); // No need to throw an error here
+      console.log(token);
+    });
+    next();
+  });
+  user.afterRemote('setPassword', function(ctx, next) {
+    // Retrieve the access token used in this request
+    console.log("after");
+    console.log(ctx.req.accessToken);
+    if (ctx.req.accessToken != null) return next();
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    var AccessTokenModel = app.models.AccessToken;
+    AccessTokenModel.findForRequest(ctx.req, function(err, token) {
+      if (err) return next(err);
+      if (!token) return next(); // No need to throw an error here
+      console.log(token);
+    });
     next();
   });
 
