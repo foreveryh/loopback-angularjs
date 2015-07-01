@@ -1,6 +1,5 @@
 var config = require('../../server/config.json');
 var path = require('path');
-
 module.exports = function(user) {
   /**
    * Sign up a user by with the given `credentials`.
@@ -34,41 +33,23 @@ module.exports = function(user) {
     });
   }
 
-  user.setPassword = function(password, cb) {
+  user.setPassword = function(req, cb) {
+    console.log(req);
     console.log('=============================');
-    console.log(password);
-    cb(null, 'test');
-  }
-  user.beforeRemote('setPassword',function(ctx, instance, next) {
-    // Retrieve the access token used in this request
-    console.log("before");
-    console.log(instance);
-    console.log(ctx.req.accessToken);
-    if (ctx.req.accessToken != null) return next();
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    var AccessTokenModel = app.models.AccessToken;
-    AccessTokenModel.findForRequest(ctx.req, function(err, token) {
+    //option 1. auto retrieve the access token 
+    if (req.accessToken != null){
+      console.log("option 1!");
+      console.log(req.accessToken);
+      //cb(null, req.accessToken);
+    }
+    //option 2. user method findForRequest
+    var AccessTokenModel = user.app.models.AccessToken;
+    AccessTokenModel.findForRequest(req, function(err, token) {
+      console.log("option 2!");
       console.log(err);
-      if (err) return next(err);
-      if (!token) return next(); // No need to throw an error here
       console.log(token);
     });
-    next();
-  });
-  user.afterRemote('setPassword', function(ctx, next) {
-    // Retrieve the access token used in this request
-    console.log("after");
-    console.log(ctx.req.accessToken);
-    if (ctx.req.accessToken != null) return next();
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    var AccessTokenModel = app.models.AccessToken;
-    AccessTokenModel.findForRequest(ctx.req, function(err, token) {
-      if (err) return next(err);
-      if (!token) return next(); // No need to throw an error here
-      console.log(token);
-    });
-    next();
-  });
+  }
 
   user.remoteMethod(
     'signup', {
@@ -101,7 +82,7 @@ module.exports = function(user) {
         type: 'object',
         required: true,
         http: {
-          source: 'body'
+          source: 'req'
         }
       }],
       returns: {
