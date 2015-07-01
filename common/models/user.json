@@ -15,6 +15,11 @@
     "principalId": "$everyone",
     "permission": "ALLOW",
     "property": "signup"
+  },{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW",
+    "property": "setPassword"
   }],
   "methods": []
 }

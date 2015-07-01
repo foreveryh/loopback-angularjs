@@ -463,7 +463,7 @@ angular.module('Shu.auth', []);
           });
       }
       //Todo
-    function resetPassword(passwordToken, newPassword, callback) {
+    function resetPassword(newPassword, callback) {
       var that = this;
       this.reset();
       User.setPassword(newPassword,
@@ -694,13 +694,17 @@ angular.module('Shu.auth', []);
           scope.error = null;
           scope.loading = true;
         });
-        if (this.user[password].value !== user[password_confirmation]) {
+        console.log(this.access_token.value);
+        console.log(this.user_password.value);
+        console.log(this.user_password_confirmation.value);
+        if (this.user_password.value !== user_password_confirmation.value) {
           scope.error = 'password is not same';
           return handleError(scope, error, attrs.reset_errors);
         }
         //reset password request
         authFactory.resetPassword({
-          newPassword: this.user[password].value
+          access_token: this.access_token.value,
+          password: this.user_password.value
         }, function(error, result) {
           if (error) {
             $timeout(function() {

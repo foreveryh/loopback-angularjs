@@ -19,9 +19,15 @@ angular.module('Shu.user').config(function($stateProvider) {
     templateUrl: 'states/user/request_reset_password.html',
     data: {public: true}
   }).state('account.reset_password',{
-    url: '/reset_password',
+    url: '/reset_password?access_token',
     templateUrl: 'states/user/reset_password.html',
-    data: {public: false}
+    data: {public: true},
+    controller: function($stateParams, $scope){
+      console.log($stateParams);
+      if ($stateParams.access_token){
+        $scope.accessToken = $stateParams.access_token;
+      }
+    } 
   });
 });
 angular.module('Shu.user').controller(function() {

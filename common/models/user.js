@@ -6,7 +6,7 @@ module.exports = function(user) {
    * Sign up a user by with the given `credentials`.
    *
    * ```js
-   * user.register({email: 'email@abc.com', username: 'foo', password: 'bar'}, function (err, token) {
+   * user.signup({email: 'email@abc.com', username: 'foo', password: 'bar'}, function (err, token) {
    * console.log(token.id);
    * });
    * ```
@@ -18,7 +18,6 @@ module.exports = function(user) {
    */
 
   user.signup = function(credentials, cb) {
-
     user.create(credentials, function(err, instance) {
       if (!err) {
         user.login(credentials, 'user', function(err, token) {
@@ -35,18 +34,17 @@ module.exports = function(user) {
     });
   }
 
-  user.setPassword = function(newPassword, cb) {
-    console.log(newPassword);
+  user.setPassword = function(password, cb) {
+    console.log('=============================');
+    console.log(password);
     cb(null, 'test');
   }
 
-  User.beforeRemote('setPassword', function(ctx, next){
-    console.log('========ctx.req========');
-    console.log(ctx.req);
-    console.log('========ctx.res========');
-    console.log(ctx.res);
-    console.log('========ctx========');
-    console.log(ctx);
+  user.beforeRemote('setPassword', function(ctx, next) {
+    console.log('========ctx.req.body========');
+    console.log(ctx.req.body);
+    console.log('========ctx.req.auth========');
+    console.log(ctx.req.accessToken);
     next();
   });
 
@@ -71,11 +69,13 @@ module.exports = function(user) {
       http: {
         verb: 'post'
       }
-    },
+    }
+  );
+  user.remoteMethod(
     'setPassword', {
-      description: 'Set password for user with access token',
+      description: 'Set password for user with given access token',
       accepts: [{
-        arg: 'credentials',
+        arg: 'password',
         type: 'object',
         required: true,
         http: {
@@ -92,8 +92,7 @@ module.exports = function(user) {
       http: {
         verb: 'post'
       }
-    }
-  );
+    });
   //send verification email after registration
   // user.afterRemote('create', function(context, user) {
   //   console.log('> user.afterRemote triggered');
