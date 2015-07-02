@@ -34,10 +34,9 @@ module.exports = function(user) {
   }
 
   user.setPassword = function(req, cb) {
-    console.log(req);
-    console.log('=============================');
+    
     //option 1. auto retrieve the access token 
-    if (req.accessToken != null){
+    if (req.accessToken != null) {
       console.log("option 1!");
       console.log(req.accessToken);
       //cb(null, req.accessToken);
@@ -45,9 +44,15 @@ module.exports = function(user) {
     //option 2. user method findForRequest
     var AccessTokenModel = user.app.models.AccessToken;
     AccessTokenModel.findForRequest(req, function(err, token) {
-      console.log("option 2!");
-      console.log(err);
-      console.log(token);
+      if (err) cb(err);
+      User.findById(req.accessToken.userId, function(err, user) {
+        if (err) return cb(err);
+        user.updateAttribute('password', req.body.password, function(err, user) {
+          if (err) return cb(err);
+          console.log('> password reset processed successfully');
+          cb(null, user);
+        });
+      });
     });
   }
 

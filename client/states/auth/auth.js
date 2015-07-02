@@ -469,7 +469,7 @@ angular.module('Shu.auth', []);
       User.setPassword(newPassword,
         function(result) {
           $log.info(result);
-          callback && callback(null, result);
+          that.authenticationRequiredHandler();
         },
         function(error) {
           $log.warn(error);
