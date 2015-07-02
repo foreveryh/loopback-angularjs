@@ -9,7 +9,7 @@ angular.module('Shu.auth', []);
 
   // Function to detect if a route is public or not
   var isPublic = function(route) {
-    return (route && (route.public == true || route.login == true || route.verify_email == true || route.set_password == true));
+    return (route && (route.public == true || route.login == true || route.verify_email == true));
   };
 
   //Auth factory
@@ -258,7 +258,7 @@ angular.module('Shu.auth', []);
           angular.extend(states[state].resolve, authResolver);
 
           // Found the login state
-          if (states[state].data && states[state].login) {
+          if (states[state].data && states[state].data.login) {
             loginRoute = state;
           }
         }

@@ -22,19 +22,18 @@ module.exports = function(user) {
         user.login(credentials, 'user', function(err, token) {
           if (!err) {
             cb(null, token);
-            console.log(token);
           } else {
-            cb(err, null);
+            cb(err);
           }
         });
       } else {
-        cb(err, null);
+        cb(err);
       }
     });
   }
 
   user.setPassword = function(req, cb) {
-    
+
     //option 1. auto retrieve the access token 
     if (req.accessToken != null) {
       console.log("option 1!");
@@ -44,15 +43,19 @@ module.exports = function(user) {
     //option 2. user method findForRequest
     var AccessTokenModel = user.app.models.AccessToken;
     AccessTokenModel.findForRequest(req, function(err, token) {
-      if (err) cb(err);
-      User.findById(req.accessToken.userId, function(err, user) {
-        if (err) return cb(err);
-        user.updateAttribute('password', req.body.password, function(err, user) {
+      if (!err) {
+        if (typeof token === 'undefined') return cb('TOKEN UNDEFINED');
+        user.findById(token.userId, function(err, user) {
           if (err) return cb(err);
-          console.log('> password reset processed successfully');
-          cb(null, user);
+          user.updateAttribute('password', req.body.password, function(err, user) {
+            if (err) return cb(err);
+            console.log('> password reset processed successfully');
+            cb(null, user);
+          });
         });
-      });
+      } else {
+        cb(err);
+      }
     });
   }
 
@@ -136,7 +139,7 @@ module.exports = function(user) {
   user.on('resetPasswordRequest', function(info) {
     console.log(info); // the email of the requested user
     console.log(info.accessToken.id); // the temp access token to allow password reset
-    info.url = 'http://' + config.host + ':' + config.port + '/reset-password';
+    info.url = 'http://' + config.host + ':' + config.port + '/#/account/reset_password';
     var ejs = require('ejs'),
       fs = require('fs'),
       template = path.resolve(__dirname, '../../server/views/password_reset.ejs');

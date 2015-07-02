@@ -9,7 +9,7 @@ angular.module('Shu.user').config(function($stateProvider) {
   }).state('account.login', {
     url: '/login',
     templateUrl: 'states/user/login.html',
-    data: {public: true, login: true}
+    data: {login: true}
   }).state('account.sign_up', {
     url: '/sign_up',
     templateUrl: 'states/user/sign_up.html',
