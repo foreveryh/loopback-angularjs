@@ -9,14 +9,14 @@ angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate'
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
         listClass: 'thumbnails',
-        data: {public: true}
+        data: {public: false}
       })
       .state('hottest', {
         url: '/hottest',
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
         listClass: 'top-notes ranking',
-        data: {public: true}
+        data: {public: false}
       });
   })
   .factory('homeShared', function(Article) {

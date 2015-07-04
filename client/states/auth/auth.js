@@ -22,7 +22,6 @@ angular.module('Shu.auth', []);
   function authFactory($rootScope, $location, $injector, $log, $timeout, User) {
     var user = {};
     var options = null;
-    var token = null;
     var status = {
       authorized: false,
       authenticated: false
@@ -176,7 +175,7 @@ angular.module('Shu.auth', []);
       status: function() {
         return status;
       },
-      //reset session
+      // reset session
       reset: resetSession,
       // Activate the session (set token, load user, trigger event)
       activate: activateSession,
@@ -219,8 +218,8 @@ angular.module('Shu.auth', []);
       var authResolver = {
         auth: function($q, user) {
           if ($state) {
-            //Question: what's this self?
             var state = states[this.self.name];
+            console.log("state name:" + state);
           }
 
           if (isPublic($route ? $route.current.$$route : state) == false) {
@@ -279,10 +278,9 @@ angular.module('Shu.auth', []);
           }
         }
       }
-      //Todo: If a token is present, use that for authentication
-      if (token) {
-        this.activate(token);
-      }
+      //look for a cached user & activate session 
+      this.activate(user);
+
       // Listen for route changes
       if ($state) {
         $rootScope.$on('$stateChangeStart', function(ev, toState, toParams) {
@@ -325,7 +323,6 @@ angular.module('Shu.auth', []);
     }
 
     function resetSession() {
-      token = null;
       status.authorized = false;
       status.authenticated = false;
 
@@ -343,34 +340,28 @@ angular.module('Shu.auth', []);
       }
     }
 
-    function activateSession(accessToken, callback) {
+    function activateSession(currentUser, callback) {
       var that = this;
-      if (accessToken && accessToken.id) {
-        //Ignored: session token has been saved in LoopBackAuth.
-        token = accessToken.id;
-        status.authorized = true;
-        status.authenticated = true;
-        $rootScope.user.authorized = true;
-        $rootScope.user.authenticated = true;
-      } else {
-        callback && callback("Got accessToken Faild", null);
-      }
-      // Load the logged in user
-      var cachedUser = User.getCachedCurrent();
-      if (cachedUser) {
-        angular.extend(user, cachedUser);
-        callback && callback(null, user);
-        // Check access to the current route/state again, now that session is activated
-        if ($state) {
-          checkAccessToState($state.current, $state.params);
-        } else if ($route) {
-          checkAccessToRoute($route.current);
-        }
-        $rootScope.$broadcast('user.login');
-      } else {
-        that.reset();
-      }
+      status.authorized = true;
+      status.authenticated = true;
+      $rootScope.user.authorized = true;
+      $rootScope.user.authenticated = true;
 
+      //Load the logged in user
+      this.loadUser(function(error, result) {
+        if (!error) {
+          callback && callback(error, result);
+          // Check access to the current route/state again, now that session is activated
+          if ($state) {
+            checkAccessToState($state.current, $state.params);
+          } else if ($route) {
+            checkAccessToRoute($route.current);
+          }
+          $rootScope.$broadcast('user.login');
+        } else {
+          that.reset();
+        }
+      });
     }
 
     function signup(credentials, callback) {
@@ -386,8 +377,8 @@ angular.module('Shu.auth', []);
         }
 
         User.signup(credentials,
-          function(result) {
-            $log.info(result);
+          function(user) {
+            that.activate(user);
             that.authenticationSuccessHandler();
           },
           function(error) {
@@ -415,20 +406,15 @@ angular.module('Shu.auth', []);
 
     function login(credentials, callback) {
         var that = this;
-        this.reset();
+        that.reset();
 
         User.login(credentials,
-          function(result) {
-            if (result) {
-              //Todo: if Email not verified
-              if (false) {
-
-              } else {
-                that.activate(result, callback);
-                // Invoke the authenticationSuccessHandler handler
-                that.authenticationSuccessHandler();
-              }
-            }
+          //logged in & get user back
+          function(user) {
+            //Todo: if Email not verified
+            that.activate(user);
+            // Invoke the authenticationSuccessHandler handler
+            that.authenticationSuccessHandler();
           },
           function(error) {
             callback && callback(error, null);
@@ -515,8 +501,8 @@ angular.module('Shu.auth', []);
 
     function loadUser(callback) {
       var that = this;
-      result = User.getCachedCurrent();
-      if (!result) {
+      var cachedUser = User.getCachedCurrent();
+      if (!cachedUser) {
         User.getCurrent(
           function(result) {
             $timeout(function() {
@@ -525,11 +511,11 @@ angular.module('Shu.auth', []);
             });
           },
           function(error) {
-            callback && callback(error, null);
+            callback && callback(error);
           });
       } else {
-        angular.extend(user, result);
-        callback && callback(null, user);
+        angular.extend(user, cachedUser);
+        callback && callback(null, cachedUser);
       }
     }
 
