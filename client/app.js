@@ -41,7 +41,9 @@ angular.module('Shu').config(function($stateProvider, modalStateProvider, $urlRo
 
 angular.module('Shu').run(function($rootScope, authFactory) {
   // Initiate the user service
-  authFactory.init();
+  authFactory.init({
+    defaultRoute: 'hottest'
+  });
   $rootScope.safeApply = function(fn) {
     var phase = $rootScope.$$phase;
     if (phase === '$apply' || phase === '$digest') {

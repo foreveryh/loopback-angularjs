@@ -17,9 +17,9 @@ angular.module('Shu.auth', []);
     .module('Shu.auth')
     .factory('authFactory', authFactory);
 
-  authFactory.$inject = ['$rootScope', '$location', '$injector', '$log', '$timeout', 'User'];
+  authFactory.$inject = ['$rootScope', '$location', '$injector', '$log', '$timeout', '$q', 'User'];
 
-  function authFactory($rootScope, $location, $injector, $log, $timeout, User) {
+  function authFactory($rootScope, $location, $injector, $log, $timeout, $q, User) {
     var user = {};
     var options = null;
     var status = {
@@ -216,29 +216,26 @@ angular.module('Shu.auth', []);
     function initializeService(config) {
       var that = this;
       var authResolver = {
-        auth: function($q, user) {
+        auth: function($q, authFactory) {      
           if ($state) {
             var state = states[this.self.name];
-            console.log("state name:" + state);
           }
-
+          console.log(state);
           if (isPublic($route ? $route.current.$$route : state) == false) {
             var deferred = $q.defer();
-
             try {
-              user.getCurrentUser().then(function() {
+              authFactory.getCurrentUser().then(function() {
                 if ($route ? checkAccessToRoute($route.current) : checkAccessToState(state)) {
                   deferred.resolve();
                 } else {
                   deferred.reject();
                 }
-              }, function() {
+              }, function(err) {
                 deferred.reject();
               });
             } catch (e) {
               deferred.reject(e);
             }
-
             return deferred.promise;
           } else {
             return true;
@@ -249,13 +246,12 @@ angular.module('Shu.auth', []);
 
       if ($state) {
         // Set the default state
-        defaultRoute = 'recommend';
+        defaultRoute = options.defaultRoute || '';
 
         for (var state in states) {
           // Add resolver for user and permissions
           states[state].resolve = (states[state].resolve || {});
           angular.extend(states[state].resolve, authResolver);
-
           // Found the login state
           if (states[state].data && states[state].data.login) {
             loginRoute = state;

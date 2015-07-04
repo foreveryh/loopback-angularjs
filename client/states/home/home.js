@@ -9,14 +9,18 @@ angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate'
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
         listClass: 'thumbnails',
-        data: {public: false}
+        data: {
+          public: false
+        }
       })
       .state('hottest', {
         url: '/hottest',
         templateUrl: 'states/home/home.html',
         controller: 'HomeCtrl',
         listClass: 'top-notes ranking',
-        data: {public: false}
+        data: {
+          public: true
+        }
       });
   })
   .factory('homeShared', function(Article) {
@@ -71,17 +75,18 @@ angular.module('Shu.home', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate'
     }
     return sharedData;
   })
-  .controller('HomeCtrl', function($rootScope, $scope, $window, Article, homeShared) {
+  .controller('HomeCtrl',
+    function($rootScope, $scope, $window, Article, homeShared, $state) {
 
-    $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-      $window.document.title = '首页 - 短篇 ';
-      if (fromState.name !== 'recommend' && fromState.name !== 'hottest') {
-        $rootScope.bodylayout = "output reader-day-mode reader-font2";
-      }
-      homeShared.setHomeState(toState.name !== "hottest" ? true : false);
-      $scope.articles = homeShared.getCurrentItems();
+      $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
+        $window.document.title = '首页 - 短篇 ';
+        if (fromState.name !== 'recommend' && fromState.name !== 'hottest') {
+          $rootScope.bodylayout = "output reader-day-mode reader-font2";
+        }
+        homeShared.setHomeState(toState.name !== "hottest" ? true : false);
+        $scope.articles = homeShared.getCurrentItems();
+      });
+      $scope.loadMore = function() {
+        homeShared.fetchMoreData();
+      };
     });
-    $scope.loadMore = function() {
-      homeShared.fetchMoreData();
-    };
-  });
