@@ -4,7 +4,13 @@
   "idInjection": true,
   "properties": {},
   "validations": [],
-  "relations": {},
+  "relations": {
+    "role": {
+      "type": "hasMany",
+      "model": "Role",
+      "foreignKey": "roleId"
+    }
+  },
   "acls": [{
     "principalType": "ROLE",
     "principalId": "$everyone",
@@ -15,7 +21,7 @@
     "principalId": "$everyone",
     "permission": "ALLOW",
     "property": "signup"
-  },{
+  }, {
     "principalType": "ROLE",
     "principalId": "$everyone",
     "permission": "ALLOW",
