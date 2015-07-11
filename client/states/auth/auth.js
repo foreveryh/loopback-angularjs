@@ -31,6 +31,10 @@ angular.module('Shu.auth', []);
     var loginRoute = null;
     var states = {};
 
+    //ACL
+    var accessLevel = routingConfig.accessLevels;
+    var userRoles = routingConfig.userRoles;
+
     // Check if either ng-route or ui-router is present
     if ($injector.has) {
       var $route = $injector.has('$route') ? $injector.get('$route') : null;
