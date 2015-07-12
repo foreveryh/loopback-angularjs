@@ -3,6 +3,7 @@
 // (function() {
 //   angular.module('Shu.auth', []);
 // })();
+'use strict';
 angular.module('Shu.auth', []);
 (function() {
   'use strict';
@@ -220,7 +221,7 @@ angular.module('Shu.auth', []);
     function initializeService(config) {
       var that = this;
       var authResolver = {
-        auth: function($q, authFactory) {      
+        auth: function($q, authFactory) {
           if ($state) {
             var state = states[this.self.name];
           }
@@ -346,7 +347,8 @@ angular.module('Shu.auth', []);
       status.authenticated = true;
       $rootScope.user.authorized = true;
       $rootScope.user.authenticated = true;
-
+      console.log("Activate Session");
+      console.log(currentUser);
       //Load the logged in user
       this.loadUser(function(error, result) {
         if (!error) {
@@ -505,6 +507,8 @@ angular.module('Shu.auth', []);
       if (!cachedUser) {
         User.getCurrent(
           function(result) {
+            console.log("Get current user result");
+            console.log(result);
             $timeout(function() {
               angular.extend(user, result);
               callback && callback(null, result);
