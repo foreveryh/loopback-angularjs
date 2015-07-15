@@ -2,10 +2,28 @@ var config = require('../../server/config.json');
 var path = require('path');
 module.exports = function(user) {
 
+  /* for test */
   user.observe('access', function logQuery(ctx, next) {
     console.log('Accessing %s matching %s', ctx.Model.modelName, ctx.query.where);
     console.log(ctx.query);
     next();
+  });
+
+  user.afterRemote('findById', function(ctx, instance, next) {
+    console.log("After remoteMethod");
+    var RoleModel = user.app.models.Role;
+    var RoleMappingModel = user.app.models.RoleMapping;
+    RoleModel.getRoles({
+      principalType: RoleMappingModel.USER,
+      principalId: instance.id
+    }, function(err, roles) {
+      if(!err){
+        instance['roles'] = roles;
+        next();
+      }else {
+        next(err);
+      }
+    });
   });
   /**
    * Sign up a user by with the given `credentials`.

@@ -4,16 +4,6 @@
   "idInjection": true,
   "properties": {},
   "validations": [],
-  "relations": {
-    "role": {
-      "type": "hasMany",
-      "model": "Role",
-      "foreignKey": "roleId"
-    }
-  },
-  "scope": {
-    "include": "role"
-  },
   "acls": [{
     "principalType": "ROLE",
     "principalId": "$everyone",
