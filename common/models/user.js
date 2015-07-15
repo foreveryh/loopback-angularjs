@@ -1,6 +1,13 @@
 var config = require('../../server/config.json');
 var path = require('path');
 module.exports = function(user) {
+
+  user.observe('access', function logQuery(ctx, next) {
+    console.log('Accessing %s matching %s', ctx.Model.modelName, ctx.query.where);
+    ctx.query['include'] = 'role';
+    console.log(ctx.query);
+    next();
+  });
   /**
    * Sign up a user by with the given `credentials`.
    *
