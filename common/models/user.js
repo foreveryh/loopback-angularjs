@@ -4,7 +4,6 @@ module.exports = function(user) {
 
   user.observe('access', function logQuery(ctx, next) {
     console.log('Accessing %s matching %s', ctx.Model.modelName, ctx.query.where);
-    ctx.query['include'] = 'role';
     console.log(ctx.query);
     next();
   });

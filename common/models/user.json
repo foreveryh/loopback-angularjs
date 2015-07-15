@@ -11,6 +11,9 @@
       "foreignKey": "roleId"
     }
   },
+  "scope": {
+    "include": "role"
+  },
   "acls": [{
     "principalType": "ROLE",
     "principalId": "$everyone",
