@@ -1,4 +1,5 @@
 var config = require('../../server/config.json');
+var userRoles = require('../../client/states/auth/routingConfig').userRoles;
 var path = require('path');
 module.exports = function(user) {
 
@@ -17,10 +18,15 @@ module.exports = function(user) {
       principalType: RoleMappingModel.USER,
       principalId: instance.id
     }, function(err, roles) {
-      if(!err){
-        instance['roles'] = roles;
+      if (!err) {
+        console.log(roles);
+        if (roles.length){
+          instance['role'] = userRoles[roles.pop()];
+          console.log(instance['role']);
+        }
         next();
-      }else {
+      } else {
+        console.log(err);
         next(err);
       }
     });

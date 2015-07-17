@@ -790,8 +790,8 @@ angular.module('Shu.auth', []);
         userRole, accessLevel;
       $scope.accessLevels = authFactory.accessLevels;
       $rootScope.$watch('user', function(user) {
-        if (user.roles) {
-          userRole = user.roles;
+        if (user.role) {
+          userRole = user.role;
         }
         updateCSS();
       }, true);
