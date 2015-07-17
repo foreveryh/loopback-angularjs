@@ -82,8 +82,8 @@ angular.module('Shu.auth', []);
         if ((!state.data || (state.data && isPublic(state.data) == false)) && status.authenticated == false) {
           service.authenticationRequiredHandler(state, stateParams);
           return false;
-        } else if (state.data && state.data.hasPermission && user.permissions) {
-          if (!service.hasPermission(state.data.hasPermission)) {
+        } else if (state.data && state.data.access) {
+          if (!service.authorize(state.data.access)) {
             service.accessDeniedHandler(user, state, stateParams);
             return false;
           }
@@ -351,8 +351,6 @@ angular.module('Shu.auth', []);
       status.authenticated = true;
       $rootScope.user.authorized = true;
       $rootScope.user.authenticated = true;
-      console.log("Activate Session");
-      console.log(currentUser);
       //Load the logged in user
       this.loadUser(function(error, result) {
         if (!error) {
@@ -550,8 +548,10 @@ angular.module('Shu.auth', []);
 
     function authorizeAL(accessLevel, userRole) {
       if (userRole === undefined) {
-        userRole = this.current.roles;
+        userRole = this.current.role ? this.current.role : userRoles.$everyone ;
       }
+      console.log(accessLevel.bitMask);
+      console.log(userRole.bitMask);
       return accessLevel.bitMask & userRole.bitMask;
     }
   }

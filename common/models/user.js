@@ -21,7 +21,7 @@ module.exports = function(user) {
       if (!err) {
         console.log(roles);
         if (roles.length){
-          instance['role'] = userRoles[roles.pop()];
+          instance['role'] = userRoles[roles.shift()];
           console.log(instance['role']);
         }
         next();
