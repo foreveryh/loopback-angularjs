@@ -33,7 +33,7 @@ angular.module('Shu.auth', []);
     var states = {};
 
     //ACL
-    var accessLevel = routingConfig.accessLevels;
+    var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
 
     // Check if either ng-route or ui-router is present
@@ -203,7 +203,11 @@ angular.module('Shu.auth', []);
       // Load the logged in user
       loadUser: loadUser,
       // Load the logged in user with a promise
-      getCurrentUser: getCurrentUser
+      getCurrentUser: getCurrentUser,
+      // Authorize user role & access permission
+      authorize: authorizeAL,
+      accessLevels: accessLevels,
+      userRoles: userRoles
     };
 
     // Extend the current user with hasPermission() and hasFeature()
@@ -367,28 +371,28 @@ angular.module('Shu.auth', []);
     }
 
     function signup(credentials, callback) {
-        var that = this;
-        this.reset();
+      var that = this;
+      this.reset();
 
-        if (!credentials.password) {
-          callback && callback({
-            name: 'MISSING_PASSWORD',
-            message: "Please enter a password."
-          }, null);
-          return;
-        }
-
-        User.signup(credentials,
-          function(user) {
-            that.activate(user);
-            that.authenticationSuccessHandler();
-          },
-          function(error) {
-            $log.error(error);
-            callback && callback(error, null);
-          });
+      if (!credentials.password) {
+        callback && callback({
+          name: 'MISSING_PASSWORD',
+          message: "Please enter a password."
+        }, null);
+        return;
       }
-      //Todo
+
+      User.signup(credentials,
+        function(user) {
+          that.activate(user);
+          that.authenticationSuccessHandler();
+        },
+        function(error) {
+          $log.error(error);
+          callback && callback(error, null);
+        });
+    }
+    //Todo
     function verifyEmail(callback) {
       var that = this;
       var params = {
@@ -407,50 +411,50 @@ angular.module('Shu.auth', []);
     }
 
     function login(credentials, callback) {
-        var that = this;
-        that.reset();
+      var that = this;
+      that.reset();
 
-        User.login(credentials,
-          //logged in & get user back
-          function(user) {
-            //Todo: if Email not verified
-            that.activate(user);
-            // Invoke the authenticationSuccessHandler handler
-            that.authenticationSuccessHandler();
-          },
-          function(error) {
-            callback && callback(error, null);
-          }
-        );
-      }
-      //Todo
+      User.login(credentials,
+        //logged in & get user back
+        function(user) {
+          //Todo: if Email not verified
+          that.activate(user);
+          // Invoke the authenticationSuccessHandler handler
+          that.authenticationSuccessHandler();
+        },
+        function(error) {
+          callback && callback(error, null);
+        }
+      );
+    }
+    //Todo
     function logout(callback) {
-        var that = this;
+      var that = this;
 
-        User.logout(
-          function(result) {
-            that.reset();
-            callback && callback(null, result);
-          },
-          function(error) {
-            callback && callback(error, null);
-          });
-      }
-      //Todo
+      User.logout(
+        function(result) {
+          that.reset();
+          callback && callback(null, result);
+        },
+        function(error) {
+          callback && callback(error, null);
+        });
+    }
+    //Todo
     function requestResetPassword(user, callback) {
-        var that = this;
-        this.reset();
-        User.resetPassword(user,
-          function(result) {
-            $log.info(result);
-            callback && callback(null, result);
-          },
-          function(error) {
-            $log.warn(error);
-            callback && callback(error, null);
-          });
-      }
-      //Todo
+      var that = this;
+      this.reset();
+      User.resetPassword(user,
+        function(result) {
+          $log.info(result);
+          callback && callback(null, result);
+        },
+        function(error) {
+          $log.warn(error);
+          callback && callback(error, null);
+        });
+    }
+    //Todo
     function resetPassword(newPassword, callback) {
       var that = this;
       this.reset();
@@ -543,8 +547,14 @@ angular.module('Shu.auth', []);
 
       return deferred.promise;
     }
-  }
 
+    function authorizeAL(accessLevel, userRole) {
+      if (userRole === undefined) {
+        userRole = this.current.roles;
+      }
+      return accessLevel.bitMask & userRole.bitMask;
+    }
+  }
   ////Directives
   // Login directive 
   angular
@@ -554,47 +564,47 @@ angular.module('Shu.auth', []);
   uLogin.$inject = ['$rootScope', '$timeout', 'authFactory'];
 
   function uLogin($rootScope, $timeout, authFactory) {
-      var directive = {
-        restrict: 'A',
-        link: linkFunc
-      };
-      return directive;
+    var directive = {
+      restrict: 'A',
+      link: linkFunc
+    };
+    return directive;
 
-      function linkFunc(scope, element, attrs) {
-        var evHandler = function(e) {
-          e.preventDefault();
+    function linkFunc(scope, element, attrs) {
+      var evHandler = function(e) {
+        e.preventDefault();
 
-          if (scope.loading) {
-            return false;
-          }
-          $timeout(function() {
-            scope.error = null;
-            scope.loading = true;
-          });
-
-          authFactory.login({
-            email: this.email.value,
-            password: this.password.value
-          }, function(error, result) {
-            if (error) {
-              $timeout(function() {
-                scope.error = error;
-                scope.loading = false;
-              });
-              return handleError(scope, error, attrs.uaError);
-            } else {
-              $timeout(function() {
-                scope.loading = false;
-              });
-            }
-          });
-
+        if (scope.loading) {
           return false;
-        };
-        element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
-      }
+        }
+        $timeout(function() {
+          scope.error = null;
+          scope.loading = true;
+        });
+
+        authFactory.login({
+          email: this.email.value,
+          password: this.password.value
+        }, function(error, result) {
+          if (error) {
+            $timeout(function() {
+              scope.error = error;
+              scope.loading = false;
+            });
+            return handleError(scope, error, attrs.uaError);
+          } else {
+            $timeout(function() {
+              scope.loading = false;
+            });
+          }
+        });
+
+        return false;
+      };
+      element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
     }
-    // Signup directive
+  }
+  // Signup directive
   angular
     .module('Shu.auth')
     .directive('uSignup', uSignup);
@@ -602,64 +612,64 @@ angular.module('Shu.auth', []);
   uSignup.$inject = ['$rootScope', '$timeout', 'authFactory'];
 
   function uSignup($rootScope, $timeout, authFactory) {
-      var directive = {
-        restrict: 'A',
-        link: linkFunc
-      };
-      return directive;
+    var directive = {
+      restrict: 'A',
+      link: linkFunc
+    };
+    return directive;
 
-      function linkFunc(scope, element, attrs) {
-        var evHandler = function(e) {
-          e.preventDefault();
+    function linkFunc(scope, element, attrs) {
+      var evHandler = function(e) {
+        e.preventDefault();
 
-          if (scope.loading) {
-            return false;
-          }
-
-          $timeout(function() {
-            scope.error = null;
-            scope.loading = true;
-          });
-          // Create the sign up object
-          var object = {};
-          for (var i = 0; i < this.elements.length; ++i) {
-            if (this.elements[i].name) {
-              var scopes = this.elements[i].name.split('.');
-              if (scopes.length > 1) {
-                object[scopes[0]] = object[scopes[0]] || {};
-                object[scopes[0]][scopes[1]] = this.elements[i].value;
-              } else {
-                object[this.elements[i].name] = this.elements[i].value;
-              }
-            }
-          }
-          console.log(object);
-          // Sign up
-          authFactory.signup(object, function(error, result) {
-
-            if (error) {
-              if (error.name != 'EMAIL_NOT_VERIFIED') {
-                $timeout(function() {
-                  scope.error = error;
-                  scope.loading = false;
-                });
-                return handleError(scope, error, attrs.signup_errors);
-              } else {
-                $timeout(function() {
-                  scope.verificationEmailSent = true;
-                  scope.loading = false;
-                });
-              }
-            }
-          });
-
+        if (scope.loading) {
           return false;
-        };
+        }
 
-        element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
-      }
+        $timeout(function() {
+          scope.error = null;
+          scope.loading = true;
+        });
+        // Create the sign up object
+        var object = {};
+        for (var i = 0; i < this.elements.length; ++i) {
+          if (this.elements[i].name) {
+            var scopes = this.elements[i].name.split('.');
+            if (scopes.length > 1) {
+              object[scopes[0]] = object[scopes[0]] || {};
+              object[scopes[0]][scopes[1]] = this.elements[i].value;
+            } else {
+              object[this.elements[i].name] = this.elements[i].value;
+            }
+          }
+        }
+        console.log(object);
+        // Sign up
+        authFactory.signup(object, function(error, result) {
+
+          if (error) {
+            if (error.name != 'EMAIL_NOT_VERIFIED') {
+              $timeout(function() {
+                scope.error = error;
+                scope.loading = false;
+              });
+              return handleError(scope, error, attrs.signup_errors);
+            } else {
+              $timeout(function() {
+                scope.verificationEmailSent = true;
+                scope.loading = false;
+              });
+            }
+          }
+        });
+
+        return false;
+      };
+
+      element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
     }
-    //reset password directvie 
+  }
+  //reset password directvie 
   angular
     .module('Shu.auth')
     .directive('uResetPassword', uResetPassword);
@@ -721,47 +731,91 @@ angular.module('Shu.auth', []);
   uRequestResetPassword.$inject = ['$rootScope', '$timeout', 'authFactory'];
 
   function uRequestResetPassword($rootScope, $timeout, authFactory) {
-      var directive = {
-        restrict: 'A',
-        link: linkFunc
-      };
-      return directive;
+    var directive = {
+      restrict: 'A',
+      link: linkFunc
+    };
+    return directive;
 
-      function linkFunc(scope, element, attrs) {
-        var evHandler = function(e) {
-          e.preventDefault();
+    function linkFunc(scope, element, attrs) {
+      var evHandler = function(e) {
+        e.preventDefault();
 
-          if (scope.loading) {
-            return false;
-          }
-
-          $timeout(function() {
-            scope.error = null;
-            scope.loading = true;
-          });
-
-          authFactory.requestResetPassword({
-            email: this.email.value
-          }, function(error, result) {
-            if (error) {
-              $timeout(function() {
-                scope.error = error;
-                scope.loading = false;
-              });
-              return handleError(scope, error, attrs.reset_errors);
-            } else {
-              $timeout(function() {
-                scope.emailSent = true;
-                scope.loading = false;
-              });
-            }
-          });
+        if (scope.loading) {
           return false;
+        }
+
+        $timeout(function() {
+          scope.error = null;
+          scope.loading = true;
+        });
+
+        authFactory.requestResetPassword({
+          email: this.email.value
+        }, function(error, result) {
+          if (error) {
+            $timeout(function() {
+              scope.error = error;
+              scope.loading = false;
+            });
+            return handleError(scope, error, attrs.reset_errors);
+          } else {
+            $timeout(function() {
+              scope.emailSent = true;
+              scope.loading = false;
+            });
+          }
+        });
+        return false;
+      };
+      element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
+    }
+  }
+  //access permission directive
+  angular
+    .module('Shu.auth')
+    .directive('uAccessLevel', uAccessLevel);
+
+  uAccessLevel.$inject = ['$rootScope', 'authFactory'];
+
+  function uAccessLevel($rootScope, authFactory) {
+    var directive = {
+      restrict: 'A',
+      link: linkFunc
+    };
+    return directive;
+
+    function linkFunc($scope, element, attrs) {
+      var prevDisp = element.css('display'),
+        userRole, accessLevel;
+      $scope.accessLevels = authFactory.accessLevels;
+      $rootScope.$watch('user', function(user) {
+        if (user.roles) {
+          userRole = user.roles;
+        }
+        updateCSS();
+      }, true);
+
+      attrs.$observe('uAccessLevel', function(al) {
+        if (al) {
+          console.log(al);
+          accessLevel = $scope.$eval(al);
+          console.log(accessLevel);
         };
-        element.on ? element.on('submit', evHandler) : element.bind('submit', evHandler);
+        updateCSS();
+      });
+
+      function updateCSS() {
+        if (userRole && accessLevel) {
+          if (!authFactory.authorize(accessLevel, userRole))
+            element.css('display', 'none');
+          else
+            element.css('display', prevDisp);
+        }
       }
     }
-    // Directive error handler
+  }
+  // Directive error handler
   var handleError = function(scope, error, elementId) {
     if (!error) {
       return;

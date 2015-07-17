@@ -14,7 +14,7 @@
       </ul>
     </div>
   </div>
-  <div class="navbar-user" ng-if="!$root.user.authenticated">
+  <div class="navbar-user" u-access-level="accessLevels.user">
     <a class="login" data-toggle="modal" ui-sref='account.sign_up'>
       <i class="fa fa-user"></i> 注册
     </a>

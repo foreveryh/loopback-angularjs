@@ -9,9 +9,9 @@
      * the memory footprint for an integer
      */
     roles: [
-      'everyone',
-      'owner',
-      'admin'
+      '$everyone',
+      '$authenticated',
+      '$admin'
     ],
 
     /*
@@ -24,9 +24,9 @@
      */
     accessLevels: {
       'public': "*",
-      'anon': ['public'],
-      'user': ['user', 'admin'],
-      'admin': ['admin']
+      'anon': ['$everyone'],
+      'user': ['$authenticated', '$admin'],
+      'admin': ['$admin']
     }
 
   }
