@@ -14,13 +14,55 @@
       </ul>
     </div>
   </div>
-  <div class="navbar-user" u-access-level="accessLevels.user">
+  <div class="navbar-user" u-access-level="accessLevels.anon">
     <a class="login" data-toggle="modal" ui-sref='account.sign_up'>
       <i class="fa fa-user"></i> 注册
     </a>
     <a class="login" data-toggle="modal" ui-sref='account.login'>
       <i class="fa fa-sign-in"></i> 登录
     </a> <a class="daytime set-view-mode pull-right" href="javascript:void(0)"><i class="fa fa-moon-o"></i></a>
+  </div>
+  <div class="navbar-user" u-access-level="accessLevels.user">
+    <a class="user avatar" data-toggle="dropdown">
+      <img src="http://static.jianshu.io/assets/default_avatar-c6a8dff3e37e304f672f3cf7813319fa.png" alt="Default avatar"> <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dLabel">
+      <li>
+        <a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a>
+      </li>
+      <li>
+        <a target="_blank" href="/users/08445b8f17f9"><i class="fa fa-user"></i> 我的主页</a>
+      </li>
+      <li>
+        <a href="/favourites">
+          <i class="fa fa-heart"></i> 我喜欢的
+        </a>
+      </li>
+      <li>
+        <a href="/bookmarks">
+          <i class="fa fa-bookmark"></i> 我的收藏
+        </a>
+      </li>
+      <li>
+        <a href="/notifications">
+          <i class="fa fa-bell"></i> 提醒
+        </a>
+      </li>
+      <li><a href="/settings"><i class="fa fa-cogs"></i> 设置</a></li>
+      <li class="dropdown-submenu">
+        <a tabindex="-1" href="#"><i class="fa fa-question-circle"></i> 帮助</a>
+        <ul class="dropdown-menu">
+          <li><a href="http://www.jianshu.com/notebooks/547/latest" target="_blank">帮助中心</a></li>
+          <li><a target="_blank" href="/contact">联系我们</a></li>
+        </ul>
+      </li>
+      <li>
+        <a rel="nofollow" data-method="DELETE" href="/sign_out">
+          <i class="fa fa-sign-out"></i> 登出
+        </a>
+      </li>
+    </ul>
+    <a class="daytime set-view-mode pull-right" href="javascript:void(0)"><i class="fa fa-moon-o"></i></a>
   </div>
   <div class="navbar navbar-jianshu expanded">
     <div class="dropdown">
